@@ -15,28 +15,133 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="#DA4848">
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="头像"
+                    android:textColor="#393939"
+                    android:gravity="center|left"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"/>
+                <ImageView
+                    android:layout_width="62dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@drawable/tempheadimg"
+                    android:layout_marginRight="5dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
             </LinearLayout>
+            <include layout="@layout/line_linearlayout"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#5248DA">
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="昵称"
+                    android:textColor="#393939"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="小菜鸡"
+                    android:gravity="center_vertical|right"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
             </LinearLayout>
+            <include layout="@layout/line_linearlayout"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#AEDA48">
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="图享号"
+                    android:textColor="#393939"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="1901420313"
+                    android:gravity="center_vertical|right"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
             </LinearLayout>
+            <include layout="@layout/line_linearlayout"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#DA8248">
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="性别"
+                    android:textColor="#393939"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="男"
+                    android:gravity="center_vertical|right"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
             </LinearLayout>
+            <include layout="@layout/line_linearlayout"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#673AB7">
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="个性签名"
+                    android:textColor="#393939"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Slago Inc"
+                    android:gravity="center_vertical|right"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

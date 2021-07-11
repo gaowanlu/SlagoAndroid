@@ -1,15 +1,20 @@
 package com.example.bigworks.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bigworks.MainActivity;
 import com.example.bigworks.R;
+import com.example.bigworks.persondata.PersonDataPageActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,13 +68,13 @@ public class homepage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_homepage, container, false);
-        getActivity().findViewById(R.id.homepage_persondata).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(),"个人信息",Toast.LENGTH_SHORT).show();
-            }
-        });
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
     }
 
 }
