@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_titlebar"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="#ffffff" >
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal|center"
+        android:singleLine="true"
+        android:text="标题栏"
+        android:textColor="#333333"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button_backward"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="#0066cc"
+        android:drawableLeft="@drawable/abc_vector_test"
+        android:drawablePadding="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:text="返回"
+        android:textColor="#ffffffff"
+        android:textSize="18dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_forward"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/arrow_right"
+        android:drawablePadding="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:text="提交"
+        android:textColor="#ffffffff"
+        android:textSize="18dp"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#0066cc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true">
+    </LinearLayout>
+
+</RelativeLayout>
