@@ -12,16 +12,17 @@ public class PersonDataPageActivity extends AppCompatActivity {
     private TextView back;
     private void initElement(){
         //返回按钮back=(TextView)
-        findViewById(R.id.layout_titlebar).findViewById(R.id.titlebar_combar_back);
+        back=findViewById(R.id.layout_titlebar).findViewById(R.id.titlebar_combar_back);
     }
     private void binActionForElement(){
-//        back.setClickable(true);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                    finish();
-//            }
-//        });
+        back.setClickable(true);//设置为textview可点击的
+        //绑定字体，作为返回上级按钮
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    finish();
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
