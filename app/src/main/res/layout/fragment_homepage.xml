@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.homepage">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- TODO: Update blank fragment layout -->
+<!--    头像昵称区域-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:background="#ffffff"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="13dp">
+
+        <ImageView
+            android:id="@+id/homepage_headimg"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tempheadimg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/homepage_headimg"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/homepage_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="高万禄"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@id/homepage_name"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="0 关注 0 粉丝 0 喜欢"
+                android:gravity="center"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    选择项区域-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/homepage_person" />
+
+            <TextView
+                android:id="@+id/homepage_persondata"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="个人信息"
+                android:textColor="#393939"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#707070"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="10dp"
+            android:background="#707070"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/ts_picture" />
+
+            <TextView
+                android:id="@+id/homepage_post"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="帖子"
+                android:textColor="#393939"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#707070"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="5px">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ts_planet" />
+
+            <TextView
+                android:id="@+id/homepage_achive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="成就"
+                android:textColor="#393939"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#707070"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="5px">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ts_star_2" />
+
+            <TextView
+                android:id="@+id/homepage_more"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="更多"
+                android:textColor="#393939"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#707070"></LinearLayout>
+    </LinearLayout>
+</FrameLayout>

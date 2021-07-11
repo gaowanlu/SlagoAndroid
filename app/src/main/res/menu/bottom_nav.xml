@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_about"
+        android:icon="@drawable/about_gray"
+        android:title="关注"
+        ></item>
+    <item
+        android:id="@+id/bottom_nav_find"
+        android:icon="@drawable/find_gray"
+        android:title="发现"
+        ></item>
+   <item
+    android:id="@+id/bottom_nav_home"
+    android:icon="@drawable/home_gray"
+    android:title="我的"
+    ></item>
+</menu>

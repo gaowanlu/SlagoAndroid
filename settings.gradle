@@ -1,0 +1,2 @@
+rootProject.name = "BigWorks"
+include ':app'
