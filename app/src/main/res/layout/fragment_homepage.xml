@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.homepage">
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    tools:context=".fragment.HomeFragment">
     <!-- TODO: Update blank fragment layout -->
 <!--    头像昵称区域-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +19,8 @@
 
         <ImageView
             android:id="@+id/homepage_headimg"
-            android:layout_width="80dp"
+            android:layout_width="60dp"
+            android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
             android:src="@drawable/tempheadimg"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +41,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="高万禄"
-                android:textSize="18sp"
+                android:textColor="#707070"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 />
@@ -53,6 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="0 关注 0 粉丝 0 喜欢"
                 android:gravity="center"
+                android:textSize="12sp"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -75,7 +76,7 @@
             android:layout_height="64dp">
 
             <ImageView
-                android:layout_width="35dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
@@ -90,7 +91,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="个人信息"
-                android:textColor="#393939"
+                android:textColor="#707070"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -100,23 +101,14 @@
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#707070"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:background="#707070"></LinearLayout>
+        <include layout="@layout/line_linearlayout"></include>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="64dp">
 
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:layout_marginLeft="12dp"
@@ -130,7 +122,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="帖子"
-                android:textColor="#393939"
+                android:textColor="#707070"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -140,10 +132,7 @@
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#707070"></LinearLayout>
+        <include layout="@layout/line_linearlayout"></include>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,7 +140,7 @@
             android:layout_marginTop="5px">
 
             <ImageView
-                android:layout_width="35dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
@@ -165,7 +154,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="成就"
-                android:textColor="#393939"
+                android:textColor="#707070"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -175,10 +164,7 @@
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#707070"></LinearLayout>
+        <include layout="@layout/line_linearlayout"></include>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -186,7 +172,7 @@
             android:layout_marginTop="5px">
 
             <ImageView
-                android:layout_width="35dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
@@ -200,7 +186,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="更多"
-                android:textColor="#393939"
+                android:textColor="#707070"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -210,9 +196,5 @@
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#707070"></LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -1,15 +1,12 @@
 package com.example.bigworks;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.bigworks.fragment.homepage;
+import com.example.bigworks.fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
     private Fragment find;//发现页面
     private void initElement(){
         bnv_menu = (BottomNavigationView) findViewById(R.id.bnv_menu);//底部docker
-        find=new HomeFragment("发现");
-        about=new HomeFragment("关注");
-        home=new HomeFragment("我的");
+        find=new HomeFragment();
+        about=new HomeFragment();
+        home=new HomeFragment();
     }
     private void bindBottomNavAction(){
         bnv_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

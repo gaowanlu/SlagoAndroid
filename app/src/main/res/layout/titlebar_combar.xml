@@ -19,30 +19,37 @@
         android:paddingLeft="5dp"
         android:textSize="18dp"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/blue_left_arrow"
-            />
-        <TextView
-            android:id="@+id/titlebar_combar_back"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="返回"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:textColor="#0066cc"
-            tools:ignore="InvalidId" />
+            android:layout_height="wrap_content"
+            android:id="@+id/titlebar_combar_back"
+            >
+            <ImageView
+                android:layout_width="21dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/blue_left_arrow"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="返回"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="#0066cc"
+                tools:ignore="InvalidId" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
         <TextView
+            android:id="@+id/titlebar_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal|center"
         android:text="标题栏"
         android:textColor="#333333"
-        android:textSize="20dp" />
+        android:textSize="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

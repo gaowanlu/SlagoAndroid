@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--学习来源于博客:https://www.jianshu.com/p/224d188c5a46-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <translate
+        android:fromXDelta="0%p"
+        android:toXDelta="-100%p"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:duration="1000"
+        />
+</set>
