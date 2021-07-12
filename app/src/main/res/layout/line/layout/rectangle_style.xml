@@ -7,7 +7,7 @@
     >
 
     <TextView
-        android:id="@+id/rectangles_style_text_name"
+        android:id="@+id/rectangles_style_public_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="图享号"
@@ -17,6 +17,7 @@
         android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/rectangles_style_personal_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
