@@ -25,7 +25,6 @@ public class HomeFragment extends Fragment {
         return fragmentName;
     }
 
-
     @Override
     public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_homepage,container,false);
@@ -49,5 +48,4 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binActionForElement();
     }
-
 }
