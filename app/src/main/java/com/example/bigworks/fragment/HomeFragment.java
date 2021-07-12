@@ -62,5 +62,4 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binActionForElement();
     }
-
 }
