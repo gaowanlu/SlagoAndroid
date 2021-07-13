@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="false">
+        <shape>
+            <!-- 填充的颜色,这里是按钮的背景色 -->
+            <solid android:color="#F2F2F2" />
+
+            <!-- 设置按钮的四个角为弧形 -->
+            <!-- android:radius 弧形的半径 -->
+            <corners android:radius="50dip" />
+            <!-- 这里是没有被点击边框的颜色 -->
+            <stroke android:width="2px" android:color="#FB7299" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+
+            <!-- 填充的颜色 -->
+            <solid android:color="#F2F2F2" />
+
+            <!-- 设置按钮的四个角为弧形 -->
+            <!-- android:radius 弧形的半径 -->
+            <corners android:radius="50dip" />
+            <!-- 这里是被点击后边框的颜色 -->
+            <stroke android:width="2px" android:color="#BC627B" />
+        </shape>
+    </item>
+
+</selector>
