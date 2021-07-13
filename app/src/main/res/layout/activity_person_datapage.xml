@@ -37,6 +37,7 @@
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/arrow_right"
+                    android:layout_marginRight="10dp"
                     />
             </LinearLayout>
             <include layout="@layout/line_linearlayout"/>

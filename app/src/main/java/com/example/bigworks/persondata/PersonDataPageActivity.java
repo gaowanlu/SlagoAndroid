@@ -1,5 +1,6 @@
 package com.example.bigworks.persondata;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bigworks.R;
+import com.example.bigworks.achievement.AchievementPageActivity;
 
 public class PersonDataPageActivity extends AppCompatActivity {
     private View back;
@@ -29,14 +31,15 @@ public class PersonDataPageActivity extends AppCompatActivity {
 
         TextView sex = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_public_text);
         TextView mySex = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_personal_text);
-        number.setText("性别");
+        sex.setText("性别");
         mySex.setText("男");
 
         TextView signature = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_public_text);
         TextView mySignature = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_personal_text);
-        number.setText("个性签名");
-        mySignature.setText("Slago Inc");
+        signature.setText("个性签名");
+        mySignature.setText("Hello world!");
     }
+
     private void binActionForElement(){
         //设置标题栏文字
         titlebar_title.setText("个人信息");
@@ -48,7 +51,41 @@ public class PersonDataPageActivity extends AppCompatActivity {
                 finish();//结束活动
             }
         });
+
+        //昵称按钮跳转
+        TextView textView = PersonDataPageActivity.this.findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_personal_text);
+        textView.setClickable(true);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(PersonDataPageActivity.this, MyName.class);
+                startActivity(intent);
+            }
+        });
+
+        //性别按钮跳转
+        textView = PersonDataPageActivity.this.findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_personal_text);
+        textView.setClickable(true);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(PersonDataPageActivity.this, MySexActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //个性签名按钮跳转
+        textView = PersonDataPageActivity.this.findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_personal_text);
+        textView.setClickable(true);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(PersonDataPageActivity.this, PersonalSignatureActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
