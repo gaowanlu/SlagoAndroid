@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BigWorks">
+
         <activity android:name=".persondata.MySexActivity"></activity>
         <activity android:name=".persondata.PersonalSignatureActivity" />
         <activity android:name=".persondata.MyName" />
+        <activity android:name=".postpage.personalPostPage"></activity>
         <activity android:name=".more.MorePageActivity" />
         <activity android:name=".achievement.AchievementPageActivity" />
         <activity android:name=".persondata.PersonDataPageActivity" />
