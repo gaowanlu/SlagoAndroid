@@ -17,6 +17,7 @@ import com.example.bigworks.R;
 import com.example.bigworks.achievement.AchievementPageActivity;
 import com.example.bigworks.more.MorePageActivity;
 import com.example.bigworks.persondata.PersonDataPageActivity;
+import com.example.bigworks.postpage.personalPostPage;
 
 public class HomeFragment extends Fragment {
     @Override
@@ -52,6 +53,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(getContext(), MorePageActivity.class);
+                startActivity(intent);
+            }
+        });
+        //帖子页面跳转
+        textView=mainActivity.findViewById(R.id.homepage_post);
+        textView.setClickable(true);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), personalPostPage.class);
                 startActivity(intent);
             }
         });
