@@ -71,7 +71,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp">
+            android:layout_height="54dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -109,7 +109,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="54dp"
             >
             <ImageView
                 android:layout_width="25dp"
@@ -140,7 +140,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="54dp"
             android:layout_marginTop="5px">
 
             <ImageView
@@ -172,7 +172,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="54dp"
             android:layout_marginTop="5px">
 
             <ImageView

@@ -124,12 +124,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginBottom="10dp"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="作品 66"
             android:textSize="18sp"
@@ -138,19 +139,13 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="喜欢 26"
             android:textSize="18sp"
             android:textColor="#000000"
             />
     </LinearLayout>
-    <View
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:background="#F1F1F1"
-        android:layout_marginTop="282dp"
-        ></View>
 </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
