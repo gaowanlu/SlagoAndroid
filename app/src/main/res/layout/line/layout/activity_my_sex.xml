@@ -18,9 +18,7 @@
 
             <include layout="@layout/line_linearlayout"/>
 
-            <include
-                android:id="@+id/rectangles_my_sex"
-                layout="@layout/rectangle_style" />
+            <include layout="@layout/scrollselector"/>
 
             <include layout="@layout/line_linearlayout"/>
 
