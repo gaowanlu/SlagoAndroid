@@ -53,7 +53,7 @@
                 android:layout_marginRight="30dp"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:textColor="#B9AE5674"
+                android:textColor="#fafafa"
                 android:layout_marginTop="200dp"
                 android:layout_marginLeft="40dp"
                 android:text="Email:heizuboriyo@gmail.com">
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
                 android:text="退出登录"
-                android:textColor="#B29BD7E6"
+                android:textColor="#fafafa"
                 android:textStyle="bold"
                 android:gravity="right"
                 android:layout_marginTop="400dp"

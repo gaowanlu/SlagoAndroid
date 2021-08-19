@@ -27,24 +27,25 @@
     android:textColor="#fafafa"
     />
     <EditText
+        android:id="@+id/login_inputid"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/login_bt_shape"
         android:hint="账号"
-        android:gravity="center"
-        />
+        android:gravity="center" />
     <EditText
+        android:id="@+id/login_inputpwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/login_bt_shape"
         android:layout_marginTop="14dp"
         android:inputType="textPassword"
         android:hint="密码"
-        android:gravity="center"
-        />
+        android:gravity="center" />
 
     <Button
+        android:id="@+id/login_button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
