@@ -38,7 +38,8 @@ public class MorePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //进入登录界面并，只剩登录一个活动
-                Intent intent= new Intent(MorePageActivity.this, LoginActivity.class);
+                Intent intent= new Intent(MorePageActivity.this, LoginActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
                 startActivity(intent);
             }
         });
