@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">BigWorks</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="API_METHOD">http://</string>
+    <string name="SERVER_IP">61.171.51.135</string>
+    <string name="SERVER_PORT">:5555/</string>
+    <string name="API_ROUTER">apis/</string>
+    <string name="URL_MIP">http://61.171.51.135:5555/</string>
 </resources>

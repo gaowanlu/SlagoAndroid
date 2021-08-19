@@ -3,6 +3,8 @@ package com.example.bigworks.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,9 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bigworks.MainActivity;
 import com.example.bigworks.R;
 import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.json.SlagoService_Login;
+import com.example.bigworks.more.MorePageActivity;
 import com.google.gson.Gson;
 
 import org.litepal.LitePal;
@@ -40,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     //Hander
     private Handler handler;
     //初始化handler
+    @SuppressLint("HandlerLeak")
     private void initHandler(){
         handler=new Handler(){
             @Override
@@ -47,7 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                 super.handleMessage(msg);
                 switch (msg.what){
                     case 1:
-                        Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(LoginActivity.this, MainActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         break;
                     case 2:
                         Toast.makeText(LoginActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
@@ -56,6 +63,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
     }
+    //APIS
+    private String loginURL(){
+        return (String)this.getResources().getText(R.string.API_METHOD)+
+                (String)this.getResources().getText(R.string.SERVER_IP)+
+                (String)this.getResources().getText(R.string.SERVER_PORT)+
+                "SlagoService_Login";
+    }
+
     //获得组件
     private void initElement(){
         loginButton=(Button)findViewById(R.id.login_button);
@@ -87,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                     .add("id",id)
                     .add("password",pwd).build();
             Request request=new Request.Builder()
-                    .url("http://61.171.51.135:5555/SlagoService_Login")
+                    .url(loginURL())
                     .post(requestBody).build();
             new Thread(()->{
                 try {
@@ -108,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                         userData.setUserid(id);
                         userData.setSlagoSession(sessionID);
                         userData.save();
-                        //Toast提示
+                        //跳转到MainActivity
                         Message message=new Message();
                         message.what=1;
                         handler.sendMessage(message);
