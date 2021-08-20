@@ -1,10 +1,13 @@
 package com.example.bigworks.utils;
 
+import com.example.bigworks.SlagoDB.UserData;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-public class UserData {
+//为UserData表服务
+public class UserDataUtils {
     public static List<com.example.bigworks.SlagoDB.UserData> getAllUserData(){
         return DataSupport.findAll(com.example.bigworks.SlagoDB.UserData.class);
     }
