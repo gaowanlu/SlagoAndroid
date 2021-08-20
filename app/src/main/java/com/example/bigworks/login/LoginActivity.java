@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.bigworks.MainActivity;
 import com.example.bigworks.R;
 import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.http.APIData;
 import com.example.bigworks.json.SlagoService_Login;
 import com.example.bigworks.more.MorePageActivity;
 import com.google.gson.Gson;
@@ -65,10 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     //APIS
     private String loginURL(){
-        return (String)this.getResources().getText(R.string.API_METHOD)+
-                (String)this.getResources().getText(R.string.SERVER_IP)+
-                (String)this.getResources().getText(R.string.SERVER_PORT)+
-                "SlagoService_Login";
+        return APIData.URL_MIP + "SlagoService_Login";
     }
 
     //获得组件

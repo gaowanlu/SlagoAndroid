@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.example.bigworks.fragment.AboutFragment;
 import com.example.bigworks.fragment.FindFragment;
 import com.example.bigworks.fragment.HomeFragment;
+import com.example.bigworks.http.APIData;
 import com.example.bigworks.http.Utils;
 import com.example.bigworks.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
     });
     //APIS
     private String AuthenticationURL(){
-        return (String)this.getResources().getText(R.string.URL_MIP)+
-                "SlagoService_Authentication";
+        return APIData.URL_MIP +"SlagoService_Authentication";
     }
     //身份验证，没有身份信息或者令牌不对则，退出登录
     private void Authentication(){
