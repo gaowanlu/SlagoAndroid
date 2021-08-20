@@ -1,29 +1,17 @@
 package com.example.bigworks.http;
 
-import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.utils.UserDataUtils;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.List;
-
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class Utils {
-    private static String APICookie(){
+    public static String APICookie(){
         //检测UserData表中的信息
-        String id="";
-        String SlagoSession="";
-        List<UserData> users= DataSupport.findAll(UserData.class);
-        for( UserData user:users){
-            id=user.getUserid();
-            SlagoSession=user.getSlagoSession();
-            break;
-        }
+        String id= UserDataUtils.getUserid();
+        String SlagoSession= UserDataUtils.getSlagoSession();
         //返回Cookie
-        //id=123456; SlagoSession=7MhAxGPYTMNOBDqUzwDVNZKdt6Grz9OgijWgHubhmJY5J8vYQrpSBPzLa5JckHa0AiBQNAV52mxBUGt0bq4NshZuaMMvJODvCzBH1xHWpOpwq38wz8vmNSKIhlJJ4
         return "id="+id+"; "+"SlagoSession="+SlagoSession;
     }
     public static Request SessionRequest(String URL){

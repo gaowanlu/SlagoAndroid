@@ -22,7 +22,6 @@
             android:layout_width="60dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/tempheadimg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,18 +39,19 @@
                 android:layout_height="40dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="高万禄"
+                android:text="   "
                 android:textColor="#707070"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 />
             <TextView
+                android:id="@+id/homepage_aboutfanslike"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 app:layout_constraintTop_toBottomOf="@id/homepage_name"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="0 关注 0 粉丝 0 喜欢"
+                android:text="  关注   粉丝   喜欢"
                 android:gravity="center"
                 android:textSize="12sp"
                 />
