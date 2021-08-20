@@ -1,12 +1,7 @@
 package com.example.bigworks.http;
 
-import com.example.bigworks.utils.UserData;
+import com.example.bigworks.utils.UserDataUtils;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.List;
-
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -14,8 +9,8 @@ import okhttp3.RequestBody;
 public class Utils {
     public static String APICookie(){
         //检测UserData表中的信息
-        String id= UserData.getUserid();
-        String SlagoSession=UserData.getSlagoSession();
+        String id= UserDataUtils.getUserid();
+        String SlagoSession= UserDataUtils.getSlagoSession();
         //返回Cookie
         return "id="+id+"; "+"SlagoSession="+SlagoSession;
     }
