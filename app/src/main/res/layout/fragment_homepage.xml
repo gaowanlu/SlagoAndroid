@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
-    <!-- TODO: Update blank fragment layout -->
 <!--    头像昵称区域-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,13 +17,16 @@
         android:layout_marginTop="13dp">
 
         <ImageView
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:id="@+id/homepage_headimg"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -40,7 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="   "
-                android:textColor="#707070"
+                android:textColor="#1d1d1f"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
@@ -54,6 +56,7 @@
                 android:text="  关注   粉丝   喜欢"
                 android:gravity="center"
                 android:textSize="12sp"
+                android:textColor="#1d1d1f"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -78,7 +81,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/homepage_person" />
+                android:src="@drawable/homepage_person"
+                />
 
             <TextView
                 android:id="@+id/homepage_persondata"
@@ -88,9 +92,9 @@
                 android:layout_gravity="right"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:paddingLeft="20sp"
+                android:paddingLeft="18sp"
                 android:text="个人信息"
-                android:textColor="#707070"
+                android:textColor="#1d1d1f"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -126,9 +130,9 @@
                 android:layout_gravity="right"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:paddingLeft="20sp"
+                android:paddingLeft="22sp"
                 android:text="帖子"
-                android:textColor="#707070"
+                android:textColor="#1d1d1f"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -159,9 +163,9 @@
                 android:layout_gravity="right"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:paddingLeft="20sp"
+                android:paddingLeft="17sp"
                 android:text="成就"
-                android:textColor="#707070"
+                android:textColor="#1d1d1f"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -192,9 +196,9 @@
                 android:layout_gravity="right"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:paddingLeft="20sp"
+                android:paddingLeft="17sp"
                 android:text="更多"
-                android:textColor="#707070"
+                android:textColor="#1d1d1f"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -203,6 +207,5 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
-
     </LinearLayout>
 </FrameLayout>
