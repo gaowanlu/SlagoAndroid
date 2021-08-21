@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bigworks.R;
 import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.achievement.AchievementPageActivity;
@@ -145,6 +147,7 @@ public class HomeFragment extends Fragment {
         GlideUrl glideUrl=ImageLoad.getGlideURL(APIData.URL_MIPR+"getUserHeadImg"+"?id="+ UserDataUtils.getUserid());
         //更新到视图
         Glide.with(getContext()).load(glideUrl)
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(headimg);
         UserData userData=UserDataUtils.getAllUserData().get(0);
