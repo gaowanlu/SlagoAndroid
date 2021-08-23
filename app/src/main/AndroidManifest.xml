@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bigworks">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -10,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BigWorks"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".login.LoginActivity"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".uploadpost.UploadPostActivity"></activity>
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".persondata.MySexActivity" />
         <activity android:name=".persondata.PersonalSignatureActivity" />
         <activity android:name=".persondata.MyName" />
