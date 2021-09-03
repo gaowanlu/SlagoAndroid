@@ -1,20 +1,43 @@
 package com.example.bigworks.persondata;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.example.bigworks.R;
 import com.example.bigworks.achievement.AchievementPageActivity;
+import com.example.bigworks.utils.ScreenSizeUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class PersonDataPageActivity extends AppCompatActivity {
     private View back;
     private TextView titlebar_title;
+    public static final int TAKE_PHOTO = 1;
+    private ImageView picture;
+    private Uri imageUri;
+    Button takePhoto;
+
     private void initElement(){
         //返回按钮back=(View)
         back=findViewById(R.id.layout_titlebar).findViewById(R.id.titlebar_combar_back);
@@ -84,12 +107,83 @@ public class PersonDataPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //头像按钮跳转
+        ImageView imageView = findViewById(R.id.set_my_image);
+        imageView.setClickable(true);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //底部对话框 头像选择方式： 1.拍照 2.相册
+                Dialog dialog = new Dialog(PersonDataPageActivity.this, 0);
+                View view = View.inflate(PersonDataPageActivity.this, R.layout.activity_image, null);
+                dialog.setContentView(view);
+                dialog.setCanceledOnTouchOutside(true);
+                //initPhoto();
+                //设置对话框的占比
+                view.setMinimumHeight((int) (ScreenSizeUtils.getInstance(PersonDataPageActivity.this).getScreenHeight() * 0.21f));
+                Window dialogWindow = dialog.getWindow();
+                WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+                lp.width = (int) (ScreenSizeUtils.getInstance(PersonDataPageActivity.this).getScreenWidth());
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp.gravity = Gravity.BOTTOM;
+                dialogWindow.setAttributes(lp);
+                dialog.show();
+            }
+        });
+    }
+
+    private void initPhoto(){
+        takePhoto = (Button) findViewById(R.id.image_photo);
+        //Log.d("chen", "!!!" + takePhoto);
+        takePhoto.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+                try{
+                    if(outputImage.exists()){
+                        outputImage.delete();
+                    }
+                    outputImage.createNewFile();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                if(Build.VERSION.SDK_INT >= 24){
+                    imageUri = FileProvider.getUriForFile(PersonDataPageActivity.this, "com.example.bigworks", outputImage);
+                }else{
+                    imageUri = Uri.fromFile(outputImage);
+                }
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(intent, TAKE_PHOTO);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        picture = (ImageView) findViewById(R.id.set_my_image);
+                        picture.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_datapage);
+        Log.d("chen", "!!! " + (Button) findViewById(R.id.image_cancel));
         initElement();
         binActionForElement();
     }

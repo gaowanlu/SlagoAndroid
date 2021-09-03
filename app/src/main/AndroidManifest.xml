@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bigworks">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -12,6 +13,17 @@
         android:theme="@style/Theme.BigWorks"
         android:usesCleartextTraffic="true"
         >
+
+        <provider
+            android:authorities="com.example.bigworks"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
         <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".persondata.MySexActivity" />
         <activity android:name=".persondata.PersonalSignatureActivity" />
