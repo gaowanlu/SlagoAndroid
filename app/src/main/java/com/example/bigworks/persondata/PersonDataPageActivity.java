@@ -147,6 +147,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
     }
 
+    //对话框相机
     private void initImagePhoto(){
         takePhoto = (Button) dialog.findViewById(R.id.image_photo);
         takePhoto.setOnClickListener(new View.OnClickListener(){
@@ -172,6 +173,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
     }
 
+    //对话框相册
     private void inintImageAlbum(){
         chooseFromAlbum = (Button) dialog.findViewById(R.id.image_album);
         chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +188,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
     }
 
+    //对话框取消
     private void imageCancel(){
         cancel = (Button) dialog.findViewById(R.id.image_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {

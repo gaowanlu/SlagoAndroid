@@ -20,8 +20,8 @@ public class MyName extends AppCompatActivity {
         //获取标题栏标题
         titlebar_title=findViewById(R.id.titlebar_title);
 
-        TextView name = (TextView) findViewById(R.id.rectangles_my_number).findViewById(R.id.rectangles_style_public_text);
-        TextView myName = (TextView) findViewById(R.id.rectangles_my_number).findViewById(R.id.rectangles_style_personal_text);
+        TextView name = (TextView) findViewById(R.id.rectangles_my_number).findViewById(R.id.rectangles_public_edit_text);
+        TextView myName = (TextView) findViewById(R.id.rectangles_my_number).findViewById(R.id.rectangles_personal_edit_text);
         name.setText("昵称");
         myName.setText("小菜鸟");
     }
