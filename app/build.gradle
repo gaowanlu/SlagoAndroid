@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
     implementation 'org.litepal.android:core:1.4.1'
+    compile 'com.zhouyou:easyrecyclerview:1.0.6'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -27,6 +27,8 @@ import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.achievement.AchievementPageActivity;
 import com.example.bigworks.http.APIData;
 import com.example.bigworks.http.ImageLoad;
+import com.example.bigworks.http.UserData.Http_getLikeAboutFans;
+import com.example.bigworks.http.UserData.Http_getUserName;
 import com.example.bigworks.http.Utils;
 import com.example.bigworks.json.getLikeAboutFans;
 import com.example.bigworks.json.getUserName;
@@ -46,9 +48,9 @@ public class HomeFragment extends Fragment {
     private ImageView headimg;//头像
     private TextView username;//用户昵称
     private TextView aboutfanslike;
-    //退出登录句柄
+
     Handler HANDLER=new Handler((Message msg) -> {
-        UserData userData=UserDataUtils.getAllUserData().get(0);
+        UserData userData=UserDataUtils.getAllUserData().get(0);//获取用户信息
         if(null==userData){ return false;}
         switch (msg.what){
             case 1:
@@ -61,37 +63,20 @@ public class HomeFragment extends Fragment {
         return true;
     });
     private  void refreshData(){
-        OkHttpClient client=new OkHttpClient();
-        //排队请求数据
-        Request nameRq= Utils.SessionRequest(APIData.URL_MIPR+"getUserName?id="+ UserDataUtils.getUserid());
-        Request likeaboutfansRq=Utils.SessionRequest(APIData.URL_MIPR+"getLikeAboutFans?id="+ UserDataUtils.getUserid());
-        Gson gson=new Gson();
+        //获取昵称
         new Thread(()->{
-            try{
-                Response nameRp = client.newCall(nameRq).execute();
-                getUserName getUserName_=gson.fromJson(nameRp.body().string(),getUserName.class);
-                //更新数据库
-                UserData userData=new UserData();
-                userData.setName(getUserName_.name);
-                userData.updateAll("userid = ?",UserDataUtils.getUserid());
-                //渲染昵称
-                Message message=new Message();message.what=1;
-                HANDLER.sendMessage(message);
-            }catch (IOException e){e.printStackTrace();}
+            Http_getUserName.fetch(UserDataUtils.getUserid());
+            Message message=new Message();
+            message.what=1;
+            HANDLER.sendMessage(message);
         }).start();
+        //获取喜欢 关注 粉丝数量
         new Thread(()->{
-            try{
-                Response likeaboutfansRp=client.newCall(likeaboutfansRq).execute();
-                getLikeAboutFans getLikeAboutFans_=gson.fromJson(likeaboutfansRp.body().string(),getLikeAboutFans.class);
-                UserData userData=new UserData();
-                userData.setLikeNum(getLikeAboutFans_.likeNum);
-                userData.setAboutNum(getLikeAboutFans_.aboutNum);
-                userData.setFansNum(getLikeAboutFans_.fansNum);
-                userData.updateAll("userid = ?",UserDataUtils.getUserid());
-                //渲染like_about_fans
-                Message message=new Message();message.what=2;
-                HANDLER.sendMessage(message);
-            }catch (IOException e){e.printStackTrace();}
+            Http_getLikeAboutFans.fetch(UserDataUtils.getUserid());
+            //渲染like_about_fans
+            Message message=new Message();
+            message.what=2;
+            HANDLER.sendMessage(message);
         }).start();
     }
     @Override
@@ -149,6 +134,7 @@ public class HomeFragment extends Fragment {
         Glide.with(getContext()).load(glideUrl)
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.headimg_loading)
                 .into(headimg);
         UserData userData=UserDataUtils.getAllUserData().get(0);
         if(null!=userData){
