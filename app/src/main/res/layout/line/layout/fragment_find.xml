@@ -66,9 +66,12 @@
             android:orientation="vertical"
             android:background="#f8f8f8"
             >
-            <include layout="@layout/component_post"></include>
-            <include layout="@layout/component_post"></include>
-            <include layout="@layout/component_post"></include>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/find_recyclerview"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 
