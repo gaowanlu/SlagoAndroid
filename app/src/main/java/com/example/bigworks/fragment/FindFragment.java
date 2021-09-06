@@ -13,14 +13,21 @@ import android.view.ViewGroup;
 import com.example.bigworks.R;
 import com.example.bigworks.recyclerView.Adapter.Post;
 import com.example.bigworks.recyclerView.Adapter.PostAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindFragment extends Fragment {
+    private View mview;
     private RecyclerView postlist;
     private List<Post> postlistData=new ArrayList<>();
-
+    private SmartRefreshLayout refreshLayout;
+    private int page;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +36,17 @@ public class FindFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_find, container, false);
+        if(mview==null) {
+            mview= inflater.inflate(R.layout.fragment_find, container, false);
+            initElement(mview);
+            initList();
+        }
+        return mview;
     }
 
     @Override
     public void onViewCreated( View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initElement();
-        initList();
     }
 
     //初始化recylerview
@@ -57,13 +67,34 @@ public class FindFragment extends Fragment {
         for(int i=0;i<10;i++){
             Post post=new Post();
             post.headimg=img;
-            post.content=content;
+            post.content=content+Integer.toString(i);
             postlistData.add(post);
         }
     }
     //获得view节点
-    private void initElement() {
-        postlist=getActivity().findViewById(R.id.find_recyclerview);
+    private void initElement(View view) {
+        postlist=view.findViewById(R.id.find_recyclerview);
+        refreshLayout=view.findViewById(R.id.find_refreshLayout);
+        bindEvent();
+    }
+
+    private void bindEvent() {
+        refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
+            page = 1;
+            //重新加载数据
+            //initList();
+            //3秒以后关闭刷新的视图
+            refreshlayout.finishRefresh(1000);
+        });
+
+        //SmartRefreshLayout控件的加载
+        refreshLayout.setOnLoadMoreListener((RefreshLayout refreshlayout) ->{
+            page++;
+            //重新加载数据
+            //initList();
+            //3秒以后关闭加载的视图
+            refreshlayout.finishLoadMore(1000);
+        });
     }
 
 }
