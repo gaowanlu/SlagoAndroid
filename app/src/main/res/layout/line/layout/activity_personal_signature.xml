@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical" >
 
     <include layout="@layout/titlebar_combar" />
 
@@ -18,9 +17,15 @@
 
             <include layout="@layout/line_linearlayout"/>
 
-            <include
-                android:id="@+id/rectangles_personal_signature"
-                layout="@layout/rectangle_style" />
+            <EditText
+                android:id="@+id/set_my_signature"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:gravity="top"
+                android:background="@null"
+                android:textColor="#393939"
+                android:text="文本" />
+
 
             <include layout="@layout/line_linearlayout"/>
 
@@ -28,8 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:orientation="horizontal"
-                android:gravity="right"
-                >
+                android:gravity="right" >
                 <!--android:onClick="ClickToTurn"-->
                 <Button
                     android:id="@+id/bt_name"
@@ -39,8 +43,7 @@
                     android:layout_gravity="right|center_vertical"
                     android:text="保存"
                     android:layout_marginRight="10dp"
-                    android:gravity="center"
-                    />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>

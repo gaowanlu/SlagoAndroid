@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bigworks.R;
@@ -18,9 +19,7 @@ public class PersonalSignatureActivity extends AppCompatActivity {
         //获取标题栏标题
         titlebar_title = findViewById(R.id.titlebar_title);
 
-        TextView signature = (TextView) findViewById(R.id.rectangles_personal_signature).findViewById(R.id.rectangles_style_public_text);
-        TextView mySignature = (TextView) findViewById(R.id.rectangles_personal_signature).findViewById(R.id.rectangles_style_personal_text);
-        signature.setText("个性签名");
+        EditText mySignature = (EditText) findViewById(R.id.set_my_signature);
         mySignature.setText("Hello World!");
     }
 
