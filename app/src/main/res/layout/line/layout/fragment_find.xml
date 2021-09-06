@@ -55,21 +55,21 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--    瀑布流-->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        >
-        <LinearLayout
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#f8f8f8"
+            android:layout_height="match_parent"
+            android:id="@+id/find_refreshLayout"
+            app:srlPrimaryColor="#fafafa"
+            app:srlAccentColor="#0066cc"
+            app:srlHeaderHeight="5dp"
+            android:layout_marginTop="60dp"
             >
-            <include layout="@layout/component_post"></include>
-            <include layout="@layout/component_post"></include>
-            <include layout="@layout/component_post"></include>
-        </LinearLayout>
-    </ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/find_recyclerview"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </FrameLayout>

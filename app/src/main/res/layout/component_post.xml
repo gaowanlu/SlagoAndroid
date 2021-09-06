@@ -47,6 +47,7 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 <!--    帖子问题信息可有可无-->
     <TextView
+        android:id="@+id/component_post_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="雨街"
