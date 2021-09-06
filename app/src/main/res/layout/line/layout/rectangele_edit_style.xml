@@ -6,7 +6,7 @@
     android:layout_height="50dp" >
 
     <TextView
-        android:id="@+id/rectangles_style_public_text"
+        android:id="@+id/rectangles_public_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="文本"
@@ -15,24 +15,18 @@
         android:layout_marginLeft="16dp"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/rectangles_style_personal_text"
+    <EditText
+        android:id="@+id/rectangles_personal_edit_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:singleLine="true"
+        android:background="@null"
+        android:textColor="#393939"
         android:text="文本"
         android:gravity="center_vertical|right" />
 
-<!--    <EditText-->
-<!--            android:id="@+id/rectangles_style_personal_text"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="文本"-->
-<!--            android:gravity="center_vertical|right" />-->
-
     <ImageView
-        android:id="@+id/rectangles_arrow_right"
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:src="@drawable/arrow_right"

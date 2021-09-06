@@ -20,7 +20,7 @@
 
             <include
                 android:id="@+id/rectangles_my_number"
-                layout="@layout/rectangle_style" />
+                layout="@layout/rectangele_edit_style" />
 
             <include layout="@layout/line_linearlayout"/>
 
