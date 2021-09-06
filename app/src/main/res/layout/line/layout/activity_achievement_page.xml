@@ -70,6 +70,7 @@
                 android:layout_gravity="right"
                 />
             <TextView
+                android:id="@+id/achievement_page_fansnum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 粉丝"
@@ -80,6 +81,7 @@
                 android:layout_marginLeft="70dp"
                 />
             <TextView
+                android:id="@+id/achievement_page_likenum"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"

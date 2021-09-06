@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
-    android:layout_marginTop="20dp"
+    android:layout_margin="10dp"
     >
 <!--个人信息部分-->
     <LinearLayout
@@ -30,6 +30,7 @@
         android:paddingBottom="20dp"
         >
         <ImageView
+            android:id="@+id/personal_post_page_headimg"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -39,9 +40,10 @@
             />
 <!--        昵称-->
         <TextView
+            android:id="@+id/personal_post_page_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Slago Team"
+            android:text="username"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#707070"
@@ -50,10 +52,11 @@
             />
 <!--        个性签名-->
         <TextView
+            android:id="@+id/personal_post_page_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:text="加油吧 小伙子"
+            android:text="profile"
             android:layout_marginTop="5dp"
             android:textColor="#707070"
             />
@@ -72,6 +75,7 @@
                 android:text="关注"
                 />
             <TextView
+                android:id="@+id/personal_post_page_aboutnum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -85,9 +89,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="#474747"
                 android:text="粉丝"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30dp"
                 />
             <TextView
+                android:id="@+id/personal_post_page_fansnum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -95,22 +100,6 @@
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"
                 android:text="2000"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#474747"
-                android:text="收藏"
-                android:layout_marginLeft="10dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:text="25"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -128,6 +117,7 @@
         android:layout_marginBottom="10dp"
         >
         <TextView
+            android:id="@+id/personal_post_page_postnum"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -137,6 +127,7 @@
             android:textColor="#000000"
             />
         <TextView
+            android:id="@+id/personal_post_page_likenum"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
