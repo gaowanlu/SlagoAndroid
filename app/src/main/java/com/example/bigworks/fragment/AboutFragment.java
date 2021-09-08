@@ -1,11 +1,14 @@
 package com.example.bigworks.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.bigworks.R;
+
 import com.example.bigworks.recyclerView.Adapter.Post;
 import com.example.bigworks.recyclerView.Adapter.PostAdapter;
 import com.example.bigworks.uploadpost.UploadPostActivity;
@@ -29,12 +33,11 @@ public class AboutFragment extends Fragment {
     private RecyclerView postlist;
     private List<Post> postlistData=new ArrayList<>();
     private int page;
-
     private void binActionForElement(View view){
         uploadpostbutton=view.findViewById(R.id.fragment_about_upload);
+        //发帖子按钮点击事件
         uploadpostbutton.setOnClickListener(v->{
-            /*跳转到发帖子页面*/
-            Intent intent= new Intent(getContext(), UploadPostActivity.class);
+            Intent intent= new Intent(getActivity(), UploadPostActivity.class);
             startActivity(intent);
         });
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
@@ -69,6 +72,7 @@ public class AboutFragment extends Fragment {
             //为内部组件绑定事件
             binActionForElement(mview);
             initList();
+            //mGlide= Glide.with(getContext());
         }
         return mview;
     }
@@ -107,3 +111,4 @@ public class AboutFragment extends Fragment {
     }
 
 }
+

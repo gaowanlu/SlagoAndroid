@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
             <Button
+                android:id="@+id/upload_post_button"
                 android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:text="分享"
