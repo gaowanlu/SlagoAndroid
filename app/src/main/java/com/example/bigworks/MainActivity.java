@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +20,7 @@ import com.example.bigworks.http.APIData;
 import com.example.bigworks.http.Utils;
 import com.example.bigworks.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.IOException;
 
@@ -98,6 +100,4 @@ public class MainActivity extends AppCompatActivity {
             default:getSupportFragmentManager().beginTransaction().replace(R.id.IndexContainer,find).commitNow();
         }
     }
-
-
 }

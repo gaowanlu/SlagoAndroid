@@ -5,4 +5,13 @@
 * Slago [原生js]
 * SlagoReact [React.js]
 
+### 感谢开源工具  
+* LoadingView  
+* EasyPhotos——https://github.com/HuanTanSheng/EasyPhotos/  
+* Luban  
+* EasyXRecyclerView  
+* LitePal  
+* uCrop  
+
+
 
