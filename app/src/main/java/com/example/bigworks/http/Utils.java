@@ -1,6 +1,11 @@
 package com.example.bigworks.http;
 
+import android.content.ContentResolver;
+import android.net.Uri;
+
 import com.example.bigworks.utils.UserDataUtils;
+
+import java.io.File;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,4 +33,5 @@ public class Utils {
                 .post(requestBody).build();
         return request;
     }
+
 }

@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.BoringLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bigworks.R;
+import com.example.bigworks.http.UserData.Http_setHeadImg;
 import com.example.bigworks.utils.GlideEngine;
 import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.callback.SelectCallback;
@@ -40,7 +45,7 @@ public class UploadPostActivity extends AppCompatActivity {
         shareButton.setOnClickListener(v->{
                         EasyPhotos.createAlbum(this, true, false, GlideEngine.getInstance())
                     .setFileProviderAuthority("com.example.bigworks.fileprovider")
-                    .setCount(6)
+                    .setCount(1)
                     .start(new SelectCallback() {
             @Override
             public void onResult(ArrayList<Photo> photos, boolean isOriginal) {
@@ -52,9 +57,12 @@ public class UploadPostActivity extends AppCompatActivity {
                             Uri destinationUri = Uri.fromFile(new File(getExternalCacheDir(), "uCrop.jpg"));
                             //使用ucrop进行图片裁剪
                             UCrop.Options options = new UCrop.Options();
+                            options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
                             //设置裁剪图片可操作的手势
                             options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
                             options.setToolbarTitle("裁剪图像");
+
+
                             UCrop.of(selectedPhotoList.get(0).uri, destinationUri)
                                 .withAspectRatio(1, 1)
                                 .withMaxResultSize(2000, 2000)
@@ -82,7 +90,13 @@ public class UploadPostActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            final Uri resultUri = UCrop.getOutput(data);
+            final Uri uri = UCrop.getOutput(data);
+            Log.e("PATH",uri.getPath());
+            File imgfile=new File(uri.getPath());
+            new Thread(()->{
+                boolean result=Http_setHeadImg.push(imgfile);
+                Log.e("RESULT", Boolean.toString(result));
+            }).start();
         } else if (resultCode == UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
         }
