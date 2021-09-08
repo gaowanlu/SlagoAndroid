@@ -40,6 +40,8 @@
             app:layout_constraintStart_toStartOf="parent"
             ></View>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <!--    瀑布流-->
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:layout_width="match_parent"

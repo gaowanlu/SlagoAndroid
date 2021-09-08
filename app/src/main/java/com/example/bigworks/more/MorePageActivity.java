@@ -3,12 +3,23 @@ package com.example.bigworks.more;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bigworks.R;
 import com.example.bigworks.login.LoginActivity;
+import com.example.bigworks.utils.GlideEngine;
+import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.callback.SelectCallback;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
+import com.yalantis.ucrop.UCrop;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class MorePageActivity extends AppCompatActivity {
     private View back;
