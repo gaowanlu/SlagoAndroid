@@ -11,8 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bigworks.R;
+import com.example.bigworks.http.UserData.Http_getUserName;
+import com.example.bigworks.http.UserData.Http_getUserProfile;
+import com.example.bigworks.http.UserData.Http_getUserSex;
+import com.example.bigworks.http.UserData.Http_setUserName;
+import com.example.bigworks.http.UserData.Http_setUserProfile;
+import com.example.bigworks.http.UserData.Http_setUserSex;
 import com.example.bigworks.login.LoginActivity;
 import com.example.bigworks.utils.GlideEngine;
+import com.example.bigworks.utils.UserDataUtils;
 import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.callback.SelectCallback;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
@@ -33,6 +40,16 @@ public class MorePageActivity extends AppCompatActivity {
         //退出登录控件
         logout=findViewById(R.id.morepage_logout);
     }
+    private void httpTest(){
+//        new Thread(()->{
+//            Log.e("setUserName:", Boolean.toString(Http_setUserName.push("1234")));
+//            Log.e("setUserProfile", Boolean.toString(Http_setUserProfile.push("hello world")));
+//            Log.e("setUserSex", Boolean.toString(Http_setUserSex.push("男")));
+//            Log.e("getUserName:", Http_getUserName.fetch(UserDataUtils.getUserid()));
+//            Log.e("getUserProfile", Http_getUserProfile.fetch(UserDataUtils.getUserid()));
+//            Log.e("getUserSex", Http_getUserSex.fetch(UserDataUtils.getUserid()));
+//        }).start();
+    }
     private void bindActionForElement(){
         //设置标题栏文字
         titlebar_title.setText("更多");
@@ -47,6 +64,7 @@ public class MorePageActivity extends AppCompatActivity {
                 Intent intent= new Intent(MorePageActivity.this, LoginActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
                 startActivity(intent);
+            //httpTest();
         });
     }
     @Override
