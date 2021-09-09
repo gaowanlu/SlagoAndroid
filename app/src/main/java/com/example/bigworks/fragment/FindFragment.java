@@ -38,8 +38,6 @@ public class FindFragment extends Fragment {
     private SmartRefreshLayout refreshLayout;
     private RefreshLayout refreshlayout;//顶部
     Handler HANDLER=new Handler((Message msg) -> {
-        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
-        if(null==userData){ return false;}
         switch (msg.what){
             case 1:
                 postAdapter.notifyDataSetChanged();
