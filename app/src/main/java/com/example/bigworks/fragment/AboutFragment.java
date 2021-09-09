@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import com.example.bigworks.R;
 
 import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.http.Post.Http_getAboutPosts;
 import com.example.bigworks.http.Post.Http_getFindPosts;
 import com.example.bigworks.http.Post.Http_getPostData;
 import com.example.bigworks.json.getPostData;
@@ -118,7 +119,7 @@ public class AboutFragment extends Fragment {
     private void reloadPost(){
         new Thread(()->{
             //获取推荐postids
-            List<String> postids= Http_getFindPosts.fetch();
+            List<String> postids= Http_getAboutPosts.fetch();
             postlistData.clear();
             for(int i=0;i<postids.size();i++){
                 String postid=postids.get(i);

@@ -65,6 +65,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
         Post post=mPostList.get(position);
+        if(post==null||post.imgs==null){return;}
         //设置view节点的内容 从post中取
         holder.headimg.setImageResource(post.headimg);
         holder.content.setText(post.content);
@@ -83,11 +84,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 .placeholder(R.drawable.headimg_loading)
                 .into(holder.headimg);
         //显示帖子第一张图片
-        GlideUrl postimgUrl= ImageLoad.getGlideURL(APIData.URL_MIPR+"getPostImg"+"?id="+ post.postid);
-        Glide.with(holder.itemView.getContext()).load(postimgUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.postimg_loading)
-                .into(holder.showImg);
+        if(post.imgs.size()>0) {
+            GlideUrl postimgUrl = ImageLoad.getGlideURL(APIData.URL_MIPR + "getPostImg" + "?id=" + post.imgs.get(0));
+            Glide.with(holder.itemView.getContext()).load(postimgUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.postimg_loading)
+                    .into(holder.showImg);
+        }
     }
 
     @Override
