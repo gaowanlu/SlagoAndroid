@@ -12,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -30,49 +32,140 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bigworks.R;
+import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.achievement.AchievementPageActivity;
+import com.example.bigworks.http.APIData;
+import com.example.bigworks.http.ImageLoad;
+import com.example.bigworks.http.UserData.Http_getUserName;
+import com.example.bigworks.http.UserData.Http_getUserProfile;
+import com.example.bigworks.http.UserData.Http_getUserSex;
+import com.example.bigworks.http.UserData.Http_setHeadImg;
+import com.example.bigworks.http.UserData.Http_setUserName;
 import com.example.bigworks.utils.ScreenSizeUtils;
+import com.example.bigworks.utils.UserDataUtils;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import static org.litepal.LitePalApplication.getContext;
 
 public class PersonDataPageActivity extends AppCompatActivity {
     private View back;
     private TextView titlebar_title;
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
+    public static final int CROP_PHOTO = 3;
     private ImageView picture;
     private Uri imageUri;
     private Button takePhoto;
     private Button chooseFromAlbum;
     private Button cancel;
     private Dialog dialog;
+    private TextView textView;
+
+    private TextView name;
+    private TextView myName;
+    private TextView number;
+    private TextView myNumber;
+    private TextView sex;
+    private TextView mySex;
+    private TextView signature;
+    private TextView mySignature;
+    private ImageView imageView;
+
+
+    Handler HANDLER=new Handler((Message msg) -> {
+        UserData userData=UserDataUtils.getAllUserData().get(0);//获取用户信息
+        if(null==userData){ return false;}
+        switch (msg.what){
+            case 1:
+                myName.setText(userData.getName());
+                break;
+            case 2:
+                myNumber.setText(userData.getUserid());
+                break;
+            case 3:
+                mySex.setText(userData.getSex());
+                break;
+            case 4:
+                mySignature.setText(userData.getProfile());
+                break;
+            default:;
+        }
+        return true;
+    });
 
     private void initElement(){
         //返回按钮back=(View)
         back=findViewById(R.id.layout_titlebar).findViewById(R.id.titlebar_combar_back);
         titlebar_title=findViewById(R.id.titlebar_title);
-        TextView name = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_public_text);
-        TextView myName = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_personal_text);
+
+        UserData userData=UserDataUtils.getAllUserData().get(0);//获取用户信息
+        imageView = findViewById(R.id.set_my_image);
+        //加载头像
+        GlideUrl glideUrl= ImageLoad.getGlideURL(APIData.URL_MIPR+"getUserHeadImg"+"?id="+ UserDataUtils.getUserid());
+        //更新到视图
+        Glide.with(getContext()).load(glideUrl)
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.headimg_loading)
+                .into(imageView);
+
+        name = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_public_text);
+        myName = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_personal_text);
         name.setText("昵称");
-        myName.setText("小菜鸟");
+        myName.setText(userData.getName());
+        //更新昵称
+        new Thread(()->{
+            Http_getUserName.fetch(UserDataUtils.getUserid());
+            Message message=new Message();
+            message.what=1;
+            HANDLER.sendMessage(message);
+        }).start();
 
-        TextView number = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_number).findViewById(R.id.rectangles_style_public_text);
-        TextView myNumber = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_number).findViewById(R.id.rectangles_style_personal_text);
+        number = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_number).findViewById(R.id.rectangles_style_public_text);
+        myNumber = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_number).findViewById(R.id.rectangles_style_personal_text);
         number.setText("图享号");
-        myNumber.setText("1901420313");
+        myNumber.setText(userData.getUserid());
+        //更新账号
+        new Thread(()->{
+            Http_getUserName.fetch(UserDataUtils.getUserid());
+            Message message=new Message();
+            message.what=2;
+            HANDLER.sendMessage(message);
+        }).start();
 
-        TextView sex = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_public_text);
-        TextView mySex = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_personal_text);
+        sex = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_public_text);
+        mySex = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_sex).findViewById(R.id.rectangles_style_personal_text);
         sex.setText("性别");
-        mySex.setText("男");
+        mySex.setText(userData.getSex());
+        //获取性别
+        new Thread(()->{
+            Http_getUserSex.fetch(UserDataUtils.getUserid());
+            Message message=new Message();
+            message.what=3;
+            HANDLER.sendMessage(message);
+        }).start();
 
-        TextView signature = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_public_text);
-        TextView mySignature = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_personal_text);
+        signature = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_public_text);
+        mySignature = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_signature).findViewById(R.id.rectangles_style_personal_text);
         signature.setText("个性签名");
-        mySignature.setText("Hello world!");
+        mySignature.setText(userData.getProfile());
+        //更新个性签名
+        new Thread(()->{
+            Http_getUserProfile.fetch(UserDataUtils.getUserid());
+            Message message=new Message();
+            message.what=4;
+            HANDLER.sendMessage(message);
+        }).start();
     }
 
     private void binActionForElement(){
@@ -88,7 +181,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
 
         //昵称按钮跳转
-        TextView textView = PersonDataPageActivity.this.findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_personal_text);
+        textView = PersonDataPageActivity.this.findViewById(R.id.rectangles_name).findViewById(R.id.rectangles_style_personal_text);
         textView.setClickable(true);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +214,6 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
 
         //头像按钮跳转
-        ImageView imageView = findViewById(R.id.set_my_image);
         imageView.setClickable(true);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +233,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
                 dialogWindow.setAttributes(lp);
                 dialog.show();
                 initImagePhoto();
-                inintImageAlbum();
+                initImageAlbum();
                 imageCancel();
             }
         });
@@ -162,7 +254,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(Build.VERSION.SDK_INT >= 24){
-                    imageUri = FileProvider.getUriForFile(PersonDataPageActivity.this, "com.example.bigworks", outputImage);
+                    imageUri = FileProvider.getUriForFile(PersonDataPageActivity.this, "com.example.bigworks.fileprovider", outputImage);
                 }else{
                     imageUri = Uri.fromFile(outputImage);
                 }
@@ -174,7 +266,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
     }
 
     //对话框相册
-    private void inintImageAlbum(){
+    private void initImageAlbum(){
         chooseFromAlbum = (Button) dialog.findViewById(R.id.image_album);
         chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,16 +365,19 @@ public class PersonDataPageActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("A", "in");
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                        picture = (ImageView) findViewById(R.id.set_my_image);
-                        picture.setImageBitmap(bitmap);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    Intent intent = new Intent("com.android.camera.action.CROP");
+                    // 注意一定要添加该项权限，否则会提示无法裁剪
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+                    intent.setDataAndType(imageUri, "image/*");
+                    intent.putExtra("crop", true);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, CROP_PHOTO);
                 }
                 dialog.dismiss();
                 break;
@@ -296,9 +391,30 @@ public class PersonDataPageActivity extends AppCompatActivity {
                 }
                 dialog.dismiss();
                 break;
+            case CROP_PHOTO:
+                if(resultCode == RESULT_OK){
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        picture = (ImageView) findViewById(R.id.set_my_image);
+                        picture.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    }
+                }
+                dialog.dismiss();
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //重新获取数据的
+        setContentView(R.layout.activity_person_datapage);
+        initElement();
+        binActionForElement();
     }
 
     @Override

@@ -37,9 +37,7 @@ public class UserData extends DataSupport {
         this.name = name;
     }
 
-    public String getSex() {
-        return sex;
-    }
+    public String getSex() { return sex; }
 
     public void setSex(String sex) {
         this.sex = sex;

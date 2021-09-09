@@ -36,7 +36,7 @@
                 android:gravity="right" >
                 <!--android:onClick="ClickToTurn"-->
                 <Button
-                    android:id="@+id/bt_name"
+                    android:id="@+id/bt_signature"
                     android:layout_width="80dp"
                     android:layout_height="40dp"
                     android:background="@drawable/bt_shape"
