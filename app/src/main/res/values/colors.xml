@@ -7,4 +7,22 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    EasyPhoto-->
+    <!--前景色-->
+    <color name="easy_photos_fg_primary">#3e4145</color>
+    <color name="easy_photos_fg_primary_dark">#9b9b9b</color>
+    <color name="easy_photos_fg_accent">#0066cc</color>
+
+    <!--背景色-->
+    <color name="easy_photos_bg_primary">#f9f9f9</color>
+
+    <!--操作栏颜色-->
+    <color name="easy_photos_bar_primary">#FFFFFF</color>
+    <color name="easy_photos_bar_primary_dark">#f9f9f9</color>
+    <color name="easy_photos_bar_primary_translation">#b4ffffff</color>
+
+    <!--状态栏-->
+    <color name="easy_photos_status_bar">#FFFFFF</color>
+
 </resources>

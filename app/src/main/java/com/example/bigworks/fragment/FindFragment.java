@@ -6,13 +6,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bigworks.R;
+import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.http.Post.Http_getFindPosts;
+import com.example.bigworks.http.Post.Http_getPostData;
+import com.example.bigworks.json.getPostData;
 import com.example.bigworks.recyclerView.Adapter.Post;
 import com.example.bigworks.recyclerView.Adapter.PostAdapter;
+import com.example.bigworks.utils.UserDataUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -25,9 +33,25 @@ import java.util.List;
 public class FindFragment extends Fragment {
     private View mview;
     private RecyclerView postlist;
+    private PostAdapter postAdapter;
     private List<Post> postlistData=new ArrayList<>();
     private SmartRefreshLayout refreshLayout;
-    private int page;
+    private RefreshLayout refreshlayout;//顶部
+    Handler HANDLER=new Handler((Message msg) -> {
+        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
+        if(null==userData){ return false;}
+        switch (msg.what){
+            case 1:
+                postAdapter.notifyDataSetChanged();
+                if(refreshlayout!=null)
+                    refreshlayout.finishRefresh(0);
+                break;
+            default:;
+        }
+        return true;
+    });
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,26 +75,14 @@ public class FindFragment extends Fragment {
 
     //初始化recylerview
     private void initList() {
-        //初始化列表数据
-        initListData();
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         postlist.setLayoutManager(layoutManager);
-        PostAdapter postAdapter=new PostAdapter(postlistData);
+        postAdapter=new PostAdapter(postlistData);
         postlist.setAdapter(postAdapter);
-
+        //初始化列表数据
+        reloadPost();
     }
 
-    //获取list数据
-    private void initListData() {
-        int img=R.drawable.tempheadimg;
-        String content="find 你好！加油！ 吧hi奥🤦‍♀️";
-        for(int i=0;i<10;i++){
-            Post post=new Post();
-            post.headimg=img;
-            post.content=content+Integer.toString(i);
-            postlistData.add(post);
-        }
-    }
     //获得view节点
     private void initElement(View view) {
         postlist=view.findViewById(R.id.find_recyclerview);
@@ -78,18 +90,54 @@ public class FindFragment extends Fragment {
         bindEvent();
     }
 
+    private void reloadPost(){
+        new Thread(()->{
+            //获取推荐postids
+            List<String> postids= Http_getFindPosts.fetch();
+            postlistData.clear();
+            for(int i=0;i<postids.size();i++){
+                String postid=postids.get(i);
+                new Thread(()->{
+                    Log.e("postid",postid);
+                    loadingPostData(postid);
+                }).start();
+            }
+        }).start();
+    }
+
+    private void loadingPostData(String postid){
+        getPostData data= Http_getPostData.fetch(postid);
+        Post post=new Post();
+        post.content=data.posttext;
+        post.headimg=R.drawable.tempheadimg;
+        post.collectioned=data.collectioned;
+        post.liked=data.liked;
+        post.collectionNum=data.collectionNum;
+        post.likeNum=data.likeNum;
+        post.userid=data.userid;
+        post.imgs=data.imgs;
+        post.postdate=data.postdate;
+        post.commentNum=data.commentNum;
+        post.postid=postid;
+        postlistData.add(post);
+        Message message=new Message();
+        message.what=1;
+        HANDLER.sendMessage(message);
+    }
+
+    private void addPost(){
+
+    }
+
     private void bindEvent() {
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
-            page = 1;
+            this.refreshlayout=refreshlayout;
             //重新加载数据
-            //initList();
-            //3秒以后关闭刷新的视图
-            refreshlayout.finishRefresh(1000);
+            reloadPost();
         });
 
         //SmartRefreshLayout控件的加载
         refreshLayout.setOnLoadMoreListener((RefreshLayout refreshlayout) ->{
-            page++;
             //重新加载数据
             //initList();
             //3秒以后关闭加载的视图

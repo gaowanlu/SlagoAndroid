@@ -16,16 +16,17 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/component_post_headimg"
-        android:src="@drawable/tempheadimg"
+        android:src="@drawable/headimg_loading"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="5sp"
         />
     <TextView
+        android:id="@+id/component_post_userid"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="陆游Lina"
+        android:text=""
         android:textColor="#1d1d1f"
         android:textSize="14sp"
         android:paddingLeft="10sp"
@@ -66,11 +67,12 @@
         android:paddingRight="3sp"
         >
         <ImageView
+            android:id="@+id/component_post_showImg"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/getpostimg"
+            android:src="@drawable/postimg_loading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -92,11 +94,12 @@
             android:src="@drawable/component_post_collection"
             />
         <TextView
+            android:id="@+id/component_post_collectionNum"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="#1d1d1f"
-            android:text="4"
+            android:text=""
             android:textSize="15dp"
             android:paddingLeft="10dp"
             />
@@ -107,11 +110,12 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
+            android:id="@+id/component_post_commentNum"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="#1d1d1f"
-            android:text="69"
+            android:text=""
             android:textSize="15dp"
             android:paddingLeft="10dp"
             />
@@ -122,11 +126,12 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
+            android:id="@+id/component_post_likeNum"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="#1d1d1f"
-            android:text="154"
+            android:text=""
             android:textSize="15dp"
             android:paddingLeft="10dp"
             />

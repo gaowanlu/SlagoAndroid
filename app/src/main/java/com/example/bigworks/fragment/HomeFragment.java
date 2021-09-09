@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         }
         return true;
     });
-    private  void refreshData(){
+    private void refreshData(){
         //获取昵称
         new Thread(()->{
             Http_getUserName.fetch(UserDataUtils.getUserid());
@@ -150,6 +150,15 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //为内部组件绑定事件
         binActionForElement();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //刷新所需数据重新请求
+        new Thread(()->{
+            refreshData();
+        }).start();
     }
 
     @Override

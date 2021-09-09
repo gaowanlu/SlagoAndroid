@@ -80,7 +80,9 @@ public class personalPostPage extends AppCompatActivity {
         });
     }
     private void dataToView(){
-        //加载头像
+        exeHandler(1);
+        exeHandler(2);
+        exeHandler(3);
         //加载头像
         GlideUrl glideUrl= ImageLoad.getGlideURL(APIData.URL_MIPR+"getUserHeadImg"+"?id="+ UserDataUtils.getUserid());
         //更新到视图
