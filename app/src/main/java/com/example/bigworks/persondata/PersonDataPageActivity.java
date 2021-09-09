@@ -47,6 +47,7 @@ import com.example.bigworks.http.UserData.Http_getUserProfile;
 import com.example.bigworks.http.UserData.Http_getUserSex;
 import com.example.bigworks.http.UserData.Http_setHeadImg;
 import com.example.bigworks.http.UserData.Http_setUserName;
+import com.example.bigworks.utils.ImageModify;
 import com.example.bigworks.utils.ScreenSizeUtils;
 import com.example.bigworks.utils.UserDataUtils;
 import com.yalantis.ucrop.UCrop;
@@ -80,6 +81,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
     private TextView signature;
     private TextView mySignature;
     private ImageView imageView;
+    private ImageModify img = new ImageModify();;
 
 
     Handler HANDLER=new Handler((Message msg) -> {
@@ -232,140 +234,17 @@ public class PersonDataPageActivity extends AppCompatActivity {
                 lp.gravity = Gravity.BOTTOM;
                 dialogWindow.setAttributes(lp);
                 dialog.show();
-                initImagePhoto();
-                initImageAlbum();
-                imageCancel();
+                img.initImagePhoto(PersonDataPageActivity.this, dialog);
+                img.initImageAlbum(PersonDataPageActivity.this, dialog);
+                img.imageCancel(dialog);
             }
         });
-    }
-
-    //对话框相机
-    private void initImagePhoto(){
-        takePhoto = (Button) dialog.findViewById(R.id.image_photo);
-        takePhoto.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
-                try{
-                    if(outputImage.exists()){
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-                if(Build.VERSION.SDK_INT >= 24){
-                    imageUri = FileProvider.getUriForFile(PersonDataPageActivity.this, "com.example.bigworks.fileprovider", outputImage);
-                }else{
-                    imageUri = Uri.fromFile(outputImage);
-                }
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, TAKE_PHOTO);
-            }
-        });
-    }
-
-    //对话框相册
-    private void initImageAlbum(){
-        chooseFromAlbum = (Button) dialog.findViewById(R.id.image_album);
-        chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ContextCompat.checkSelfPermission(PersonDataPageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(PersonDataPageActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                }else{
-                    openAlbum();
-                }
-            }
-        });
-    }
-
-    //对话框取消
-    private void imageCancel(){
-        cancel = (Button) dialog.findViewById(R.id.image_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-    }
-
-    private void openAlbum(){
-        Intent intent = new Intent("android.intent.action.GET_CONTENT");
-        intent.setType("image/*");
-        startActivityForResult(intent, CHOOSE_PHOTO);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        switch (requestCode){
-            case 1:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    openAlbum();
-                }else{
-                    Toast.makeText(this, "You denide the permission",Toast.LENGTH_SHORT).show();
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    @TargetApi(19)
-    private void handleImageOnKitKat(Intent data){
-        String imagePath = null;
-        Uri uri = data.getData();
-        if(DocumentsContract.isDocumentUri(this, uri)){
-            String docId = DocumentsContract.getDocumentId(uri);
-            if("com.android.providers.media.documents".equals(uri.getAuthority())){
-                String id = docId.split(":")[1];
-                String selection = MediaStore.Images.Media._ID + "=" + id;
-                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-            }else if("com.android.providers.downloads.documents".equals(uri.getAuthority())){
-                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
-                imagePath = getImagePath(contentUri, null);
-            }
-        }else if("content".equalsIgnoreCase(uri.getScheme())){
-            imagePath = getImagePath(uri, null);
-        }else if("file".equalsIgnoreCase(uri.getScheme())){
-            imagePath = uri.getPath();
-        }
-        displayImage(imagePath);
-    }
-
-    private void handleImageBeforeKitkat(Intent data){
-        Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
-        displayImage(imagePath);
-    }
-
-    private String getImagePath(Uri uri, String selection){
-        String path = null;
-        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-        if(cursor != null){
-            if(cursor.moveToFirst()){
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-            }
-            cursor.close();
-        }
-        return path;
-    }
-
-    private void displayImage(String imagePath){
-        if(imagePath != null){
-            Bitmap bitmap = BitmapFactory.decodeFile((imagePath));
-            picture = (ImageView) findViewById(R.id.set_my_image);
-            picture.setImageBitmap(bitmap);
-        }else{
-            Toast.makeText(this, "faild to get image", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("A", "in");
+        Log.d("!!!", "in");
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
@@ -384,9 +263,9 @@ public class PersonDataPageActivity extends AppCompatActivity {
             case CHOOSE_PHOTO:
                 if(resultCode == RESULT_OK){
                     if(Build.VERSION.SDK_INT >= 19){
-                        handleImageOnKitKat(data);
+                        img.handleImageOnKitKat(data);
                     }else{
-                        handleImageBeforeKitkat(data);
+                        img.handleImageBeforeKitkat(data);
                     }
                 }
                 dialog.dismiss();
