@@ -1,11 +1,12 @@
-package com.example.bigworks.recyclerView.Adapter;
+package com.example.bigworks.json;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Post {
-    public int headimg;
-    public String content;
+public class getPostData {
+    public int status;
     public String userid;
+    public String posttext;
     public String postdate;
     public List<String> imgs;
     public int likeNum;
@@ -13,5 +14,4 @@ public class Post {
     public int commentNum;
     public boolean liked;
     public boolean collectioned;
-    public String postid;
 }
