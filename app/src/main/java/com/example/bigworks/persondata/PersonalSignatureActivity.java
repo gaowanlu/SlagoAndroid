@@ -4,13 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bigworks.R;
+import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.http.UserData.Http_setUserName;
+import com.example.bigworks.http.UserData.Http_setUserProfile;
+import com.example.bigworks.utils.UserDataUtils;
 
 public class PersonalSignatureActivity extends AppCompatActivity {
     private View back;
     private TextView titlebar_title;
+    private EditText mySignature;
+    private Button signatureButton;
 
     private void initElement() {
         //返回按钮back=(TextView)
@@ -18,10 +26,9 @@ public class PersonalSignatureActivity extends AppCompatActivity {
         //获取标题栏标题
         titlebar_title = findViewById(R.id.titlebar_title);
 
-        TextView signature = (TextView) findViewById(R.id.rectangles_personal_signature).findViewById(R.id.rectangles_style_public_text);
-        TextView mySignature = (TextView) findViewById(R.id.rectangles_personal_signature).findViewById(R.id.rectangles_style_personal_text);
-        signature.setText("个性签名");
-        mySignature.setText("Hello World!");
+        mySignature = (EditText) findViewById(R.id.set_my_signature);
+        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
+        mySignature.setText(userData.getProfile());
     }
 
     private void bindActionForElement() {
@@ -37,11 +44,26 @@ public class PersonalSignatureActivity extends AppCompatActivity {
         });
     }
 
+    private void saveButton(){
+        signatureButton = (Button) findViewById(R.id.bt_signature);
+        signatureButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String editSignature = mySignature.getText().toString();
+                new Thread(()->{
+                    Http_setUserProfile.push(editSignature);
+                }).start();
+                finish();//结束活动
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_signature);
         initElement();
         bindActionForElement();
+        saveButton();
     }
 }
