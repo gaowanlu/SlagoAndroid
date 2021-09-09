@@ -27,9 +27,9 @@
                 android:resource="@xml/file_paths"/>
         </provider>
 
-        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.LoginActivity" />
 
-        <activity android:name=".uploadpost.UploadPostActivity"></activity>
+        <activity android:name=".uploadpost.UploadPostActivity" />
 
         <activity android:name=".persondata.MySexActivity" />
       
