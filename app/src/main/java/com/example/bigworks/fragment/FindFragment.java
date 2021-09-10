@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Handler;
 import android.os.Message;
@@ -38,8 +39,6 @@ public class FindFragment extends Fragment {
     private SmartRefreshLayout refreshLayout;
     private RefreshLayout refreshlayout;//顶部
     Handler HANDLER=new Handler((Message msg) -> {
-        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
-        if(null==userData){ return false;}
         switch (msg.what){
             case 1:
                 postAdapter.notifyDataSetChanged();
@@ -76,7 +75,9 @@ public class FindFragment extends Fragment {
     //初始化recylerview
     private void initList() {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
-        postlist.setLayoutManager(layoutManager);
+        StaggeredGridLayoutManager layoutManager1=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        postlist.setLayoutManager(layoutManager1);
+
         postAdapter=new PostAdapter(postlistData);
         postlist.setAdapter(postAdapter);
         //初始化列表数据

@@ -17,6 +17,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
@@ -28,10 +29,11 @@
                     android:layout_marginLeft="16dp"
                     android:textSize="16sp"/>
                 <ImageView
+                    android:adjustViewBounds="true"
                     android:id="@+id/set_my_image"
                     android:layout_width="62dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center"
                     android:src="@drawable/tempheadimg"
                     android:layout_marginRight="6dp"/>
                 <ImageView

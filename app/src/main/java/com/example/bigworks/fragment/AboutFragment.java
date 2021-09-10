@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import com.example.bigworks.R;
 
 import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.http.Post.Http_getAboutPosts;
 import com.example.bigworks.http.Post.Http_getFindPosts;
 import com.example.bigworks.http.Post.Http_getPostData;
 import com.example.bigworks.json.getPostData;
@@ -108,7 +110,8 @@ public class AboutFragment extends Fragment {
     //初始化recylerview
     private void initList() {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
-        postlist.setLayoutManager(layoutManager);
+        StaggeredGridLayoutManager layoutManager1=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        postlist.setLayoutManager(layoutManager1);
         postAdapter=new PostAdapter(postlistData);
         postlist.setAdapter(postAdapter);
         //初始化列表数据
@@ -118,7 +121,7 @@ public class AboutFragment extends Fragment {
     private void reloadPost(){
         new Thread(()->{
             //获取推荐postids
-            List<String> postids= Http_getFindPosts.fetch();
+            List<String> postids= Http_getAboutPosts.fetch();
             postlistData.clear();
             for(int i=0;i<postids.size();i++){
                 String postid=postids.get(i);

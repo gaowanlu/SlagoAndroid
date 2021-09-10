@@ -21,10 +21,13 @@
                 android:id="@+id/set_my_signature"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="top"
                 android:background="@null"
                 android:textColor="#393939"
-                android:text="文本" />
+                android:text="文本"
+                android:textSize="18dp"/>
 
 
             <include layout="@layout/line_linearlayout"/>
