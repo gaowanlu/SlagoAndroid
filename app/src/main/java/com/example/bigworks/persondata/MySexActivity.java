@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bigworks.R;
+import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.http.UserData.Http_setUserName;
 import com.example.bigworks.http.UserData.Http_setUserSex;
+import com.example.bigworks.utils.UserDataUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +34,22 @@ public class MySexActivity extends AppCompatActivity {
     //初始化滑动选择性别
     private void initScrollSelector() {
         setMySex = (PickerView) findViewById(R.id.set_my_sex);
+        UserData userData = UserDataUtils.getAllUserData().get(0);//获取用户信息
         List<String> setSex = new ArrayList<String>();
-        setSex.add("女");
-        setSex.add("男");
-        setSex.add("保密");
+        String[] sexArry = new String[]{"男", "女", "保密"};
+
+        for(int i = 0; i < 3; i++){
+            if(sexArry[i].equals(userData.getSex())){
+                String temp = sexArry[1];
+                sexArry[i] = temp;
+                sexArry[1] = userData.getSex();
+                break;
+            }
+        }
+
+        for(int i = 0; i < 3; i++){
+            setSex.add(sexArry[i]);
+        }
         setMySex.setData(setSex);
         setMySex.setOnSelectListener(new PickerView.onSelectListener() {
             @Override
