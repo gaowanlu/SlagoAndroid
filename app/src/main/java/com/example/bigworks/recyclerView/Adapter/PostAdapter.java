@@ -88,7 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
         //显示文字缩略内容
-        String content_r="";
+        String content_r=post.content;
         if(post.content.length()>10) {
             content_r=post.content.substring(0,7)+"...";
         }
