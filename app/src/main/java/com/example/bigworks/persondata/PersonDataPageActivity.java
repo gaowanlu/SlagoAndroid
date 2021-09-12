@@ -70,7 +70,6 @@ public class PersonDataPageActivity extends AppCompatActivity {
     public static final int CHOOSE_PHOTO = 2;
     public static final int CROP_PHOTO = 3;
     private int Last_Choose = 0;
-    private ImageView picture;
     private Dialog dialog;
     private TextView textView;
 
@@ -277,9 +276,15 @@ public class PersonDataPageActivity extends AppCompatActivity {
                         }
                     }
                     else if(Last_Choose == CHOOSE_PHOTO){
-                        Uri uri = (Uri) data.getData();
-                        String s = ImageUtils.getImagePath(PersonDataPageActivity.this, uri);
-                        imgfile = new File(s);
+                        try {
+                            Uri uri = (Uri) data.getData();
+                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                            imgfile = img.getFile(bitmap);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+//                        String s = ImageUtils.getImagePath(PersonDataPageActivity.this, uri);
+//                        imgfile = new File(s);
                     }
 
                     File file = imgfile;
@@ -287,6 +292,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
                         boolean result=Http_setHeadImg.push(file);
                         Log.e("RESULT", Boolean.toString(result));
                     }).start();
+                    this.onResume();
                 }
                 dialog.dismiss();
                 break;

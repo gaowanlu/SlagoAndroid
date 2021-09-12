@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Handler;
 import android.os.Message;
@@ -36,15 +37,16 @@ public class FindFragment extends Fragment {
     private PostAdapter postAdapter;
     private List<Post> postlistData=new ArrayList<>();
     private SmartRefreshLayout refreshLayout;
-    private RefreshLayout refreshlayout;//顶部
+    private RefreshLayout refreshlayouttop;//顶部
+    private RefreshLayout refreshlayoutbootom;//底部加载更多
     Handler HANDLER=new Handler((Message msg) -> {
-        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
-        if(null==userData){ return false;}
         switch (msg.what){
             case 1:
                 postAdapter.notifyDataSetChanged();
-                if(refreshlayout!=null)
-                    refreshlayout.finishRefresh(0);
+                if(refreshlayouttop!=null)
+                    refreshlayouttop.finishRefresh(0);
+                if(refreshlayoutbootom!=null)
+                    refreshlayoutbootom.finishLoadMore(0);
                 break;
             default:;
         }
@@ -76,11 +78,13 @@ public class FindFragment extends Fragment {
     //初始化recylerview
     private void initList() {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
-        postlist.setLayoutManager(layoutManager);
+        StaggeredGridLayoutManager layoutManager1=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        postlist.setLayoutManager(layoutManager1);
+
         postAdapter=new PostAdapter(postlistData);
         postlist.setAdapter(postAdapter);
         //初始化列表数据
-        reloadPost();
+        refreshLayout.autoRefresh();
     }
 
     //获得view节点
@@ -90,19 +94,36 @@ public class FindFragment extends Fragment {
         bindEvent();
     }
 
-    private void reloadPost(){
+    private void reloadPost(boolean clear){
         new Thread(()->{
             //获取推荐postids
             List<String> postids= Http_getFindPosts.fetch();
-            postlistData.clear();
+            if(clear) {
+                postlistData.clear();
+            }
             for(int i=0;i<postids.size();i++){
                 String postid=postids.get(i);
-                new Thread(()->{
-                    Log.e("postid",postid);
+                Log.e("postid",postid);
+                if(checkExist(postid)==false) {
                     loadingPostData(postid);
-                }).start();
+                }
             }
+            Message message=new Message();
+            message.what=1;
+            HANDLER.sendMessage(message);
         }).start();
+    }
+
+    //检查帖子是否已经存在
+    private boolean checkExist(String postid){
+        if(postlistData==null||postlistData.size()==0){return false;}
+        boolean flag=false;
+        for(int i=0;i<postlistData.size();i++){
+            if(postid.equals(postlistData.get(i).postid)){
+                flag=true;
+            }
+        }
+        return flag;
     }
 
     private void loadingPostData(String postid){
@@ -120,9 +141,6 @@ public class FindFragment extends Fragment {
         post.commentNum=data.commentNum;
         post.postid=postid;
         postlistData.add(post);
-        Message message=new Message();
-        message.what=1;
-        HANDLER.sendMessage(message);
     }
 
     private void addPost(){
@@ -131,17 +149,16 @@ public class FindFragment extends Fragment {
 
     private void bindEvent() {
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
-            this.refreshlayout=refreshlayout;
+            this.refreshlayouttop=refreshlayout;
             //重新加载数据
-            reloadPost();
+            reloadPost(true);
         });
 
         //SmartRefreshLayout控件的加载
         refreshLayout.setOnLoadMoreListener((RefreshLayout refreshlayout) ->{
-            //重新加载数据
-            //initList();
-            //3秒以后关闭加载的视图
-            refreshlayout.finishLoadMore(1000);
+            this.refreshlayoutbootom=refreshlayout;
+            //加载数据并处理重复项
+            reloadPost(false);
         });
     }
 
