@@ -17,8 +17,9 @@
         android:theme="@style/Theme.BigWorks"
         android:usesCleartextTraffic="true"
         >
+
         <provider
-            android:authorities="com.example.bigworks.fileprovider"
+            android:authorities="com.example.bigworks.fileProvider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

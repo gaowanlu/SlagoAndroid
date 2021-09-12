@@ -44,7 +44,7 @@ public class UploadPostActivity extends AppCompatActivity {
         titlebar_title.setText("发帖");
         shareButton.setOnClickListener(v->{
             EasyPhotos.createAlbum(this, true, false, GlideEngine.getInstance())
-                    .setFileProviderAuthority("com.example.bigworks.fileprovider")
+                    .setFileProviderAuthority("com.example.bigworks.fileProvider")
                     .setCount(1)
                     .start(new SelectCallback() {
             @Override
@@ -78,15 +78,12 @@ public class UploadPostActivity extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_post);
         initElement();
     }
-
 
     //Ucrop编辑图片后的回调
     @Override
