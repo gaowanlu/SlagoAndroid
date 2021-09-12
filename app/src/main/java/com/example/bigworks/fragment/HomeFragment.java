@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,20 +28,10 @@ import com.example.bigworks.http.APIData;
 import com.example.bigworks.http.ImageLoad;
 import com.example.bigworks.http.UserData.Http_getLikeAboutFans;
 import com.example.bigworks.http.UserData.Http_getUserName;
-import com.example.bigworks.http.Utils;
-import com.example.bigworks.json.getLikeAboutFans;
-import com.example.bigworks.json.getUserName;
 import com.example.bigworks.more.MorePageActivity;
 import com.example.bigworks.persondata.PersonDataPageActivity;
-import com.example.bigworks.postpage.personalPostPage;
+import com.example.bigworks.postpage.UserPeronalActivity;
 import com.example.bigworks.utils.UserDataUtils;
-import com.google.gson.Gson;
-
-import java.io.IOException;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class HomeFragment extends Fragment {
     private ImageView headimg;//头像
@@ -121,7 +110,7 @@ public class HomeFragment extends Fragment {
         textView=mainActivity.findViewById(R.id.homepage_post);
         textView.setClickable(true);
         textView.setOnClickListener(v->{
-                Intent intent= new Intent(getContext(), personalPostPage.class);
+                Intent intent= new Intent(getContext(), UserPeronalActivity.class);
                 startActivity(intent);
         });
     }
