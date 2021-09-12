@@ -25,7 +25,7 @@ import com.example.bigworks.utils.UserDataUtils;
 
 import static org.litepal.LitePalApplication.getContext;
 
-public class personalPostPage extends AppCompatActivity {
+public class UserPeronalActivity extends AppCompatActivity {
     private View back;
     private TextView titlebar_title;
     private ImageView headimg;
