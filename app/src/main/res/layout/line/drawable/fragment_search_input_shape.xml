@@ -10,7 +10,7 @@
             <!-- android:radius 弧形的半径 -->
             <corners android:radius="50dip" />
             <!-- 这里是没有被点击边框的颜色 -->
-            <stroke android:width="2px" android:color="#0066cc" />
+            <stroke android:width="2px" android:color="#3079C1" />
         </shape>
     </item>
 
@@ -24,7 +24,7 @@
             <!-- android:radius 弧形的半径 -->
             <corners android:radius="50dip" />
             <!-- 这里是被点击后边框的颜色 -->
-            <stroke android:width="2px" android:color="#F4E130" />
+            <stroke android:width="2px" android:color="#F36A60" />
         </shape>
     </item>
 

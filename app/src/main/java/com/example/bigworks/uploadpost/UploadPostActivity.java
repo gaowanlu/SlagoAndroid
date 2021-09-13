@@ -44,7 +44,7 @@ public class UploadPostActivity extends AppCompatActivity {
         titlebar_title.setText("发帖");
         shareButton.setOnClickListener(v->{
             EasyPhotos.createAlbum(this, true, false, GlideEngine.getInstance())
-                    .setFileProviderAuthority("com.example.bigworks.fileprovider")
+                    .setFileProviderAuthority("com.example.bigworks.fileProvider")
                     .setCount(1)
                     .start(new SelectCallback() {
             @Override
@@ -61,7 +61,6 @@ public class UploadPostActivity extends AppCompatActivity {
                             //设置裁剪图片可操作的手势
                             options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
                             options.setToolbarTitle("裁剪图像");
-
                             UCrop.of(selectedPhotoList.get(0).uri, destinationUri)
                                 .withAspectRatio(1, 1)
                                 .withMaxResultSize(2000, 2000)
@@ -78,15 +77,12 @@ public class UploadPostActivity extends AppCompatActivity {
         });
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_post);
         initElement();
     }
-
 
     //Ucrop编辑图片后的回调
     @Override

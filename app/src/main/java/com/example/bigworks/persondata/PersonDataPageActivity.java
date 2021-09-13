@@ -47,10 +47,15 @@ import com.example.bigworks.http.UserData.Http_getUserProfile;
 import com.example.bigworks.http.UserData.Http_getUserSex;
 import com.example.bigworks.http.UserData.Http_setHeadImg;
 import com.example.bigworks.http.UserData.Http_setUserName;
+import com.example.bigworks.uploadpost.UploadPostActivity;
 import com.example.bigworks.utils.ImageModify;
 import com.example.bigworks.utils.ScreenSizeUtils;
 import com.example.bigworks.utils.UserDataUtils;
+import com.wildma.pictureselector.ImageUtils;
+import com.wildma.pictureselector.PictureSelectUtils;
+import com.wildma.pictureselector.PictureSelector;
 import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCropActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,11 +69,7 @@ public class PersonDataPageActivity extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
     public static final int CROP_PHOTO = 3;
-    private ImageView picture;
-    private Uri imageUri;
-    private Button takePhoto;
-    private Button chooseFromAlbum;
-    private Button cancel;
+    private int Last_Choose = 0;
     private Dialog dialog;
     private TextView textView;
 
@@ -241,44 +242,85 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
     }
 
+    private void useUCrop(Uri uri){
+        Uri destinationUri = Uri.fromFile(new File(getExternalCacheDir(), "uCrop.jpg"));
+        //使用ucrop进行图片裁剪
+        UCrop.Options options = new UCrop.Options();
+        options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+        //设置裁剪图片可操作的手势
+        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
+        options.setToolbarTitle("裁剪头像");
+        UCrop.of(img.getImageUri(), destinationUri)
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(4000, 4000)
+                .withOptions(options)
+                .start(PersonDataPageActivity.this);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("!!!", "in");
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            final Uri uri = UCrop.getOutput(data);
+            Log.e("PATH",uri.getPath());
+            File imgfile=new File(uri.getPath());
+            new Thread(()->{
+                boolean result=Http_setHeadImg.push(imgfile);
+                Log.e("RESULT", Boolean.toString(result));
+            }).start();
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+        }
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
-                    Intent intent = new Intent("com.android.camera.action.CROP");
-                    // 注意一定要添加该项权限，否则会提示无法裁剪
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-                    intent.setDataAndType(imageUri, "image/*");
-                    intent.putExtra("crop", true);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                    startActivityForResult(intent, CROP_PHOTO);
+                    Log.e("选中图片","");
+                    Last_Choose = TAKE_PHOTO;
+                    dialog.dismiss();
+                    //img.cropPhoto();
+                    useUCrop(img.getImageUri());
                 }
-                dialog.dismiss();
                 break;
             case CHOOSE_PHOTO:
                 if(resultCode == RESULT_OK){
-                    if(Build.VERSION.SDK_INT >= 19){
-                        img.handleImageOnKitKat(data);
-                    }else{
-                        img.handleImageBeforeKitkat(data);
-                    }
+                    Last_Choose = CHOOSE_PHOTO;
+                    img.judgeVersion(data);
+                    dialog.dismiss();
+                    //img.cropPhoto();
+                    useUCrop(img.getImageUri());
                 }
-                dialog.dismiss();
                 break;
             case CROP_PHOTO:
                 if(resultCode == RESULT_OK){
-                    try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                        picture = (ImageView) findViewById(R.id.set_my_image);
-                        picture.setImageBitmap(bitmap);
-                    } catch (FileNotFoundException e){
-                        e.printStackTrace();
+                    Bitmap bitmap = null;
+                    File imgfile = null;
+                    //格式转化
+                    if(Last_Choose == TAKE_PHOTO){
+                        try {
+                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(img.getImageUri()));
+                            imgfile = img.getFile(bitmap);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    else if(Last_Choose == CHOOSE_PHOTO){
+                        try {
+                            Uri uri = (Uri) data.getData();
+                            Log.e("URI",uri.getPath().toString());
+                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(img.getImageUri()));
+                            imgfile = img.getFile(bitmap);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+//                        String s = ImageUtils.getImagePath(PersonDataPageActivity.this, uri);
+//                        imgfile = new File(s);
+                    }
+
+                    File file = imgfile;
+                    new Thread(()->{
+                        boolean result=Http_setHeadImg.push(file);
+                        Log.e("RESULT", Boolean.toString(result));
+                    }).start();
                 }
                 dialog.dismiss();
                 break;
