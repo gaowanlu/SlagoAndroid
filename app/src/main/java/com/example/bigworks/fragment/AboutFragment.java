@@ -1,8 +1,6 @@
 package com.example.bigworks.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,42 +21,6 @@ import com.example.bigworks.R;
 
 import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.http.Post.Http_getAboutPosts;
-import com.example.bigworks.http.Post.Http_getFindPosts;
-import com.example.bigworks.http.Post.Http_getPostData;
-import com.example.bigworks.json.getPostData;
-import com.example.bigworks.recyclerView.Adapter.Post;
-import com.example.bigworks.recyclerView.Adapter.PostAdapter;
-import com.example.bigworks.uploadpost.UploadPostActivity;
-import com.example.bigworks.utils.UserDataUtils;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.example.bigworks.R;
-
-import com.example.bigworks.SlagoDB.UserData;
-import com.example.bigworks.http.Post.Http_getAboutPosts;
-import com.example.bigworks.http.Post.Http_getFindPosts;
 import com.example.bigworks.http.Post.Http_getPostData;
 import com.example.bigworks.json.getPostData;
 import com.example.bigworks.recyclerView.Adapter.Post;

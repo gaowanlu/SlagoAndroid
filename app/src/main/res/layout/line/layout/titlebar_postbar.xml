@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_titlebar"
+    android:id="@+id/titlebar_postbar"
     android:layout_width="match_parent"
     android:layout_height="52dp"
     android:background="#ffffff"
@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/titlebar_combar_back"
+            android:id="@+id/titlebar_post_back"
             >
             <ImageView
                 android:layout_width="21dp"
@@ -41,14 +41,25 @@
 
     </LinearLayout>
 
-        <TextView
-            android:id="@+id/titlebar_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal|center"
-        android:text="标题栏"
-        android:textColor="#333333"
-        android:textSize="16dp" />
+        android:gravity="right|center_vertical">
+        <ImageView
+            android:id="@+id/titlebar_post_heart"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:src="@drawable/heart_fill_black"
+            android:layout_marginRight="30dp"
+            />
+        <ImageView
+            android:id="@+id/titlebar_post_headimg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/headimg_loading"
+            android:layout_marginRight="10dp"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
