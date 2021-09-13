@@ -61,7 +61,6 @@ public class UploadPostActivity extends AppCompatActivity {
                             //设置裁剪图片可操作的手势
                             options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
                             options.setToolbarTitle("裁剪图像");
-
                             UCrop.of(selectedPhotoList.get(0).uri, destinationUri)
                                 .withAspectRatio(1, 1)
                                 .withMaxResultSize(2000, 2000)

@@ -242,30 +242,58 @@ public class PersonDataPageActivity extends AppCompatActivity {
         });
     }
 
+    private void useUCrop(Uri uri){
+        Uri destinationUri = Uri.fromFile(new File(getExternalCacheDir(), "uCrop.jpg"));
+        //使用ucrop进行图片裁剪
+        UCrop.Options options = new UCrop.Options();
+        options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+        //设置裁剪图片可操作的手势
+        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
+        options.setToolbarTitle("裁剪头像");
+        UCrop.of(img.getImageUri(), destinationUri)
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(4000, 4000)
+                .withOptions(options)
+                .start(PersonDataPageActivity.this);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            final Uri uri = UCrop.getOutput(data);
+            Log.e("PATH",uri.getPath());
+            File imgfile=new File(uri.getPath());
+            new Thread(()->{
+                boolean result=Http_setHeadImg.push(imgfile);
+                Log.e("RESULT", Boolean.toString(result));
+            }).start();
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+        }
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
+                    Log.e("选中图片","");
                     Last_Choose = TAKE_PHOTO;
-                    img.cropPhoto();
+                    dialog.dismiss();
+                    //img.cropPhoto();
+                    useUCrop(img.getImageUri());
                 }
-                dialog.dismiss();
                 break;
             case CHOOSE_PHOTO:
                 if(resultCode == RESULT_OK){
                     Last_Choose = CHOOSE_PHOTO;
                     img.judgeVersion(data);
-                    img.cropPhoto();
+                    dialog.dismiss();
+                    //img.cropPhoto();
+                    useUCrop(img.getImageUri());
                 }
-                dialog.dismiss();
                 break;
             case CROP_PHOTO:
                 if(resultCode == RESULT_OK){
                     Bitmap bitmap = null;
                     File imgfile = null;
-
                     //格式转化
                     if(Last_Choose == TAKE_PHOTO){
                         try {
@@ -278,7 +306,8 @@ public class PersonDataPageActivity extends AppCompatActivity {
                     else if(Last_Choose == CHOOSE_PHOTO){
                         try {
                             Uri uri = (Uri) data.getData();
-                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                            Log.e("URI",uri.getPath().toString());
+                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(img.getImageUri()));
                             imgfile = img.getFile(bitmap);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -292,7 +321,6 @@ public class PersonDataPageActivity extends AppCompatActivity {
                         boolean result=Http_setHeadImg.push(file);
                         Log.e("RESULT", Boolean.toString(result));
                     }).start();
-                    this.onResume();
                 }
                 dialog.dismiss();
                 break;
