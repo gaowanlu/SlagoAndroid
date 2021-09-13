@@ -15,18 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bigworks.R;
-import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.http.Post.Http_getFindPosts;
 import com.example.bigworks.http.Post.Http_getPostData;
 import com.example.bigworks.json.getPostData;
 import com.example.bigworks.recyclerView.Adapter.Post;
 import com.example.bigworks.recyclerView.Adapter.PostAdapter;
-import com.example.bigworks.utils.UserDataUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +75,6 @@ public class FindFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         StaggeredGridLayoutManager layoutManager1=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         postlist.setLayoutManager(layoutManager1);
-
         postAdapter=new PostAdapter(postlistData);
         postlist.setAdapter(postAdapter);
         //初始化列表数据
