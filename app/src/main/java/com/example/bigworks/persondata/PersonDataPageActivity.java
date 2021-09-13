@@ -3,6 +3,7 @@ package com.example.bigworks.persondata;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -82,7 +83,8 @@ public class PersonDataPageActivity extends AppCompatActivity {
     private TextView signature;
     private TextView mySignature;
     private ImageView imageView;
-    private ImageModify img = new ImageModify();;
+    private ImageModify img = new ImageModify();
+    private ProgressDialog progressDialog;
 
 
     Handler HANDLER=new Handler((Message msg) -> {
@@ -252,9 +254,30 @@ public class PersonDataPageActivity extends AppCompatActivity {
         options.setToolbarTitle("裁剪头像");
         UCrop.of(img.getImageUri(), destinationUri)
                 .withAspectRatio(1, 1)
-                .withMaxResultSize(4000, 4000)
                 .withOptions(options)
                 .start(PersonDataPageActivity.this);
+    }
+
+    private void uploadHeadImg(File imgfile,ProgressDialog progressDialog){
+        new Thread(()->{
+            try {
+                boolean result = Http_setHeadImg.push(imgfile);
+                Log.e("RESULT", Boolean.toString(result));
+                int sleepTime = 2000;
+                if (result) {
+                    progressDialog.setMessage("设置成功");
+                    sleepTime = 1000;
+                } else {
+                    progressDialog.setMessage("设置失败");
+                }
+                try {
+                    Thread.sleep(sleepTime);//延时
+                } catch (Exception e) {
+                }
+            }catch (Exception e){}finally {
+                progressDialog.dismiss();//去掉dialog
+            }
+        }).start();
     }
 
     @Override
@@ -264,10 +287,12 @@ public class PersonDataPageActivity extends AppCompatActivity {
             final Uri uri = UCrop.getOutput(data);
             Log.e("PATH",uri.getPath());
             File imgfile=new File(uri.getPath());
-            new Thread(()->{
-                boolean result=Http_setHeadImg.push(imgfile);
-                Log.e("RESULT", Boolean.toString(result));
-            }).start();
+            progressDialog=new ProgressDialog(PersonDataPageActivity.this);
+            progressDialog.setTitle("头像修改");
+            progressDialog.setMessage("玩命进行中...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            uploadHeadImg(imgfile,progressDialog);
         } else if (resultCode == UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
         }
