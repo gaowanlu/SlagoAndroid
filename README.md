@@ -11,7 +11,13 @@
 * Luban  
 * EasyXRecyclerView  
 * LitePal  
-* uCrop  
+* uCrop
+* Toasty
+* PictureSelector
+* gson
+
+### 感谢开源项目
+* CommentDialog
 
 
 
