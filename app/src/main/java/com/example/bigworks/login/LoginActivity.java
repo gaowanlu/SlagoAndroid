@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bigworks.MainActivity;
@@ -22,6 +23,9 @@ import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.http.APIData;
 import com.example.bigworks.json.SlagoService_Login;
 import com.example.bigworks.more.MorePageActivity;
+import com.example.bigworks.persondata.MyName;
+import com.example.bigworks.persondata.MySexActivity;
+import com.example.bigworks.persondata.PersonDataPageActivity;
 import com.google.gson.Gson;
 
 import org.litepal.LitePal;
@@ -42,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private EditText inputid;
     private EditText inputpwd;
+    private TextView forgetPwd;
+    private TextView registerAccount;
     //Hander
     private Handler handler;
     //初始化handler
@@ -74,6 +80,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton=(Button)findViewById(R.id.login_button);
         inputid=(EditText)findViewById(R.id.login_inputid);
         inputpwd=(EditText)findViewById(R.id.login_inputpwd);
+        forgetPwd=(TextView)findViewById(R.id.forget_password);
+        registerAccount=(TextView)findViewById(R.id.registered_account);
     }
     //检查输入
     private boolean InputCheck(String id,String pwd){
@@ -133,6 +141,28 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } catch (IOException e) { }
             }).start();
+        });
+
+        //找回密码
+        forgetPwd.setClickable(true);
+        forgetPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"忘记密码了！",Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //注册账号
+        registerAccount.setClickable(true);
+        registerAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"我想要个账号！",Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(LoginActivity.this, RegisteredAccountActivity.class);
+                startActivity(intent);
+            }
         });
     }
     //数据上视图
