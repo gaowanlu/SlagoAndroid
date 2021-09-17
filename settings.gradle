@@ -1,2 +1,2 @@
-rootProject.name = "BigWorks"
+rootProject.name = "Slago"
 include ':app'

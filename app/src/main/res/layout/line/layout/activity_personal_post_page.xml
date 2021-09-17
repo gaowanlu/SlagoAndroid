@@ -19,7 +19,7 @@
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="10dp"
     android:layout_margin="10dp"
     >
 <!--个人信息部分-->
@@ -103,47 +103,45 @@
                 />
         </LinearLayout>
     </LinearLayout>
-    <View
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:background="#F1F1F1"
-        android:layout_marginTop="212dp"
-        ></View>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="230dp"
-        android:layout_marginBottom="10dp"
-        >
-        <TextView
-            android:id="@+id/personal_post_page_postnum"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="作品 66"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            />
-        <TextView
-            android:id="@+id/personal_post_page_likenum"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="喜欢 26"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            />
-    </LinearLayout>
 </androidx.cardview.widget.CardView>
-
+            <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#EFEFEF"
+                android:layout_width="match_parent"
+                android:layout_height="2px"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="50dp">
+                <TextView
+                    android:text="1 我的"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="#1d1d1f"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:text="4k 喜欢"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="#1d1d1f"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#EFEFEF"
+                android:layout_width="match_parent"
+                android:layout_height="2px"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginTop="20dp"
+        app:cardCornerRadius="5dp"
+        android:layout_marginTop="5dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
