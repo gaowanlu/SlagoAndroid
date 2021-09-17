@@ -5,12 +5,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.text.BoringLayout;
 import android.text.TextUtils;
@@ -22,12 +25,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bigworks.R;
+import com.example.bigworks.SlagoDB.UserData;
 import com.example.bigworks.http.Post.Http_uploadPost;
 import com.example.bigworks.http.UserData.Http_setHeadImg;
+import com.example.bigworks.persondata.PersonDataPageActivity;
 import com.example.bigworks.recyclerView.Adapter.ImageAdapter;
 import com.example.bigworks.recyclerView.Adapter.Post;
 import com.example.bigworks.recyclerView.Adapter.UploadImgAdapter;
 import com.example.bigworks.utils.GlideEngine;
+import com.example.bigworks.utils.UserDataUtils;
 import com.huantansheng.easyphotos.EasyPhotos;
 import com.huantansheng.easyphotos.callback.SelectCallback;
 import com.huantansheng.easyphotos.models.album.entity.Photo;
@@ -54,6 +60,20 @@ public class UploadPostActivity extends AppCompatActivity {
     private RecyclerView imglist;
     private EditText contentEdit;
     private File[] imgsfiles=new File[6];
+    private ProgressDialog progressDialog;
+
+    Handler HANDLER=new Handler((Message msg) -> {
+        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
+        if(null==userData){ return false;}
+        switch (msg.what){
+            case 1:
+                Toasty.error(this, "内容上传失败", Toast.LENGTH_SHORT, true).show();
+                break;
+            default:;
+        }
+        return true;
+    });
+
 
     private void initElement(){
         //制空imgsfiles
@@ -72,7 +92,11 @@ public class UploadPostActivity extends AppCompatActivity {
         titlebar_title=findViewById(R.id.titlebar_uploadpost_title);
         titlebar_title.setText("发帖");
         shareButton.setOnClickListener(v->{
-            Toasty.info(this, "我知道你想要发帖", Toast.LENGTH_SHORT, true).show();
+            progressDialog=new ProgressDialog(UploadPostActivity.this);
+            progressDialog.setTitle("头像修改");
+            progressDialog.setMessage("玩命进行中...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             for(int i=0;i<photoList.size();i++) {
                 minilizeImg(i);//压缩图片
             }
@@ -101,15 +125,23 @@ public class UploadPostActivity extends AppCompatActivity {
             types.add(photo.type);//image/jpeg
         }
         new Thread(()->{
-            Log.e("开始上传帖子","上窜------");
-            boolean result=Http_uploadPost.push(content, types, imgsfiles);
-            if(result){
-                finish();//上传成功,退出发帖活动
-            }else{
-                Log.e("上窜失败","上传失败");
+            try {
+                boolean result = Http_uploadPost.push(content, types, imgsfiles);
+                if (result) {
+                    progressDialog.setMessage("上传成功");
+                    Thread.sleep(1000);
+                    finish();//上传成功,退出发帖活动
+                } else {
+                    Message message=new Message();
+                    message.what=1;
+                    HANDLER.sendMessage(message);
+                }
+            }catch (Exception e){}
+            finally {
+                progressDialog.dismiss();
             }
         }).start();
-        Toasty.error(this, "内容上传失败", Toast.LENGTH_SHORT, true).show();
+
     }
 
     private void notificationPhotos(){
@@ -129,8 +161,6 @@ public class UploadPostActivity extends AppCompatActivity {
                 photoList.addAll(photos);
                 for(Photo photo:photoList){
                     Log.e("TYPE",photo.path.toString());
-                    File tempfile=new File(photo.path.toString());
-                    Log.e("CAN",Boolean.toString(tempfile.canWrite()));
                     uris.add(photo.uri);
                 }
                 //图片改变事件
@@ -139,6 +169,7 @@ public class UploadPostActivity extends AppCompatActivity {
             @Override
             public void onCancel() {
                 //没有选中任何图片回调
+                UploadPostActivity.this.finish();
             }
             });
     }
@@ -149,7 +180,7 @@ public class UploadPostActivity extends AppCompatActivity {
         //压缩过得到file,同时要将图片的类型与file进行配对，而图片类型要从uri进行获得
         Luban.with(this)
                 .setTargetDir(getExternalCacheDir().getAbsolutePath())
-                .load(uris.get(i))
+                .load(photoList.get(i).path)
                 .setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
