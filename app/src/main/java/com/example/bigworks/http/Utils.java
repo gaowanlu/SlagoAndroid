@@ -33,5 +33,12 @@ public class Utils {
                 .post(requestBody).build();
         return request;
     }
+    public static Request SessionNoCookie(String URL){
+        OkHttpClient client=new OkHttpClient();
+        Request request=new Request.Builder()
+                .url(URL)
+                .build();
+        return request;
+    }
 
 }
