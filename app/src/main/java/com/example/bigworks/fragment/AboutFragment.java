@@ -20,6 +20,10 @@ import android.widget.ImageView;
 import com.example.bigworks.R;
 
 import com.example.bigworks.SlagoDB.UserData;
+import com.example.bigworks.http.AccountSecurity.Http_changePwd;
+import com.example.bigworks.http.AccountSecurity.Http_checkUser;
+import com.example.bigworks.http.AccountSecurity.Http_registerNewCount;
+import com.example.bigworks.http.AccountSecurity.Http_sendVerificationCode;
 import com.example.bigworks.http.Post.Http_getAboutPosts;
 import com.example.bigworks.http.Post.Http_getPostData;
 import com.example.bigworks.json.getPostData;
@@ -31,6 +35,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class AboutFragment extends Fragment {
