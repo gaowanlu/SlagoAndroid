@@ -1,5 +1,7 @@
 package com.example.bigworks.http.UserData;
 
+import android.util.Log;
+
 import com.example.bigworks.http.APIData;
 import com.example.bigworks.http.Utils;
 import com.example.bigworks.json.Status_sResult_s;
@@ -16,6 +18,7 @@ import okhttp3.Response;
 
 public class Http_setHeadImg {
     public static boolean push(File file){
+        Log.e("头像",file.getPath());
         boolean back=false;
         try{
             OkHttpClient client=new OkHttpClient();

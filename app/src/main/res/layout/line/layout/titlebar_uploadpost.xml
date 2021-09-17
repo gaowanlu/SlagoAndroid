@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/titlebar_combar_back"
+            android:id="@+id/titlebar_uploadpost_combar_back"
             >
             <ImageView
                 android:layout_width="21dp"
@@ -37,19 +37,26 @@
                 android:textColor="#0066cc"
                 tools:ignore="InvalidId" />
         </LinearLayout>
-
-
     </LinearLayout>
 
-    <TextView
-            android:id="@+id/titlebar_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center"
-            android:text="标题栏"
-            android:textColor="#333333"
-            android:textSize="16dp" />
 
+    <TextView
+        android:id="@+id/titlebar_uploadpost_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center"
+        android:text="标题栏"
+        android:textColor="#333333"
+        android:textSize="16dp" />
+    <Button
+        android:id="@+id/upload_post_button"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:text="分享"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

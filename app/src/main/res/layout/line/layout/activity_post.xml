@@ -8,11 +8,63 @@
     tools:context=".postpage.PostActivity">
 
     <include layout="@layout/titlebar_postbar"></include>
-
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/post_recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
-
+<!--    日期喜欢收藏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EFEFEF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+        <TextView
+            android:id="@+id/post_dateText"
+            android:text="     - - "
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/post_likeCollectionText"
+            android:text="0 喜欢 0 收藏"
+            android:layout_weight="1"
+            android:paddingRight="5dp"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical|right"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+<!--    文字内容-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/post_username"
+            android:paddingLeft="5dp"
+            android:textColor="#0066cc"
+            android:text="1901420313:"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:padding="5dp"
+            android:textColor="#1d1d1f"
+            android:id="@+id/post_contentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
+    </ScrollView>
 </LinearLayout>

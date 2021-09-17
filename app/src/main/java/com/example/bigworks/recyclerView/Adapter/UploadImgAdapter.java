@@ -1,11 +1,10 @@
 package com.example.bigworks.recyclerView.Adapter;
 
-import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,16 +15,16 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.example.bigworks.R;
 import com.example.bigworks.http.APIData;
 import com.example.bigworks.http.ImageLoad;
-import com.example.bigworks.postpage.PostActivity;
-import com.example.bigworks.postpage.VisitorActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
-    private List<String> imgids;
+public class UploadImgAdapter extends RecyclerView.Adapter<UploadImgAdapter.ViewHolder> {
+    private List<Uri> imgids;
 
     //constructor
-    public ImageAdapter(List<String> imgids){
+    public UploadImgAdapter(List<Uri> imgids){
         this.imgids=imgids;
     }
 
@@ -36,17 +35,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         //绑定layout
         View view= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.component_image,parent,false);
-        ImageAdapter.ViewHolder holder=new ImageAdapter.ViewHolder(view);
+        ViewHolder holder=new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ImageAdapter.ViewHolder holder, int position) {
-        String imgid=imgids.get(position);
+    public void onBindViewHolder(@NonNull @NotNull UploadImgAdapter.ViewHolder holder, int position) {
+        Uri imgid=imgids.get(position);
         if(imgid==null){return;}
-        GlideUrl postimgUrl = ImageLoad.getGlideURL(APIData.URL_MIPR + "getPostImg" + "?id=" + imgid);
-        Glide.with(holder.itemView.getContext()).load(postimgUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+        Glide.with(holder.itemView.getContext()).load(imgid)
                 .placeholder(R.drawable.postimg_loading)
                 .into(holder.img);
     }
@@ -70,6 +67,4 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
             img=itemView.findViewById(R.id.component_image_img);
         }
     }
-
-
 }

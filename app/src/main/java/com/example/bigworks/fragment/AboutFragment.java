@@ -1,6 +1,7 @@
 package com.example.bigworks.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,10 +21,6 @@ import android.widget.ImageView;
 import com.example.bigworks.R;
 
 import com.example.bigworks.SlagoDB.UserData;
-import com.example.bigworks.http.AccountSecurity.Http_changePwd;
-import com.example.bigworks.http.AccountSecurity.Http_checkUser;
-import com.example.bigworks.http.AccountSecurity.Http_registerNewCount;
-import com.example.bigworks.http.AccountSecurity.Http_sendVerificationCode;
 import com.example.bigworks.http.Post.Http_getAboutPosts;
 import com.example.bigworks.http.Post.Http_getPostData;
 import com.example.bigworks.json.getPostData;
@@ -31,11 +28,11 @@ import com.example.bigworks.recyclerView.Adapter.Post;
 import com.example.bigworks.recyclerView.Adapter.PostAdapter;
 import com.example.bigworks.uploadpost.UploadPostActivity;
 import com.example.bigworks.utils.UserDataUtils;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 public class AboutFragment extends Fragment {
@@ -47,7 +44,8 @@ public class AboutFragment extends Fragment {
     private PostAdapter postAdapter;
     private RefreshLayout refreshlayouttop;
     private RefreshLayout refreshlayoutbootom;//底部加载更多
-
+    private ArrayList<Photo> selectedPhotoList=new ArrayList<>();
+    private List<Uri> selectimgs=new ArrayList<>();
     Handler HANDLER=new Handler((Message msg) -> {
         UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
         if(null==userData){ return false;}
@@ -64,12 +62,16 @@ public class AboutFragment extends Fragment {
         return true;
     });
 
+    private void toUploadActivity(){
+        Intent intent= new Intent(getActivity(), UploadPostActivity.class);
+        startActivity(intent);
+    }
+
     private void binActionForElement(View view){
         uploadpostbutton=view.findViewById(R.id.fragment_about_upload);
         //发帖子按钮点击事件
         uploadpostbutton.setOnClickListener(v->{
-            Intent intent= new Intent(getActivity(), UploadPostActivity.class);
-            startActivity(intent);
+            toUploadActivity();
         });
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
             this.refreshlayouttop=refreshlayout;
@@ -121,24 +123,30 @@ public class AboutFragment extends Fragment {
     private void reloadPost(boolean clear){
         new Thread(()->{
             //获取推荐postids
+            List<Post> tempPosts=new ArrayList<>();
             List<String> postids= Http_getAboutPosts.fetch();
+            for(int i=0;i<postids.size();i++){
+                String postid=postids.get(i);
+                Log.e("postid",postid);
+                if(checkExist(postid)==false) {
+                    Post post=loadingPostData(postid);
+                    tempPosts.add(post);
+                }
+            }
             if(clear) {
                 postlistData.clear();
             }
-            for(int i=0;i<postids.size();i++){
-                String postid=postids.get(i);
-                    Log.e("postid",postid);
-                    if(checkExist(postid)==false) {
-                        loadingPostData(postid);
-                    }
+            for(Post post:tempPosts){
+                postlistData.add(post);
             }
+            tempPosts.clear();
             Message message=new Message();
             message.what=1;
             HANDLER.sendMessage(message);
         }).start();
     }
 
-    private void loadingPostData(String postid){
+    private Post loadingPostData(String postid){
         getPostData data= Http_getPostData.fetch(postid);
         Post post=new Post();
         post.content=data.posttext;
@@ -152,7 +160,7 @@ public class AboutFragment extends Fragment {
         post.postdate=data.postdate;
         post.commentNum=data.commentNum;
         post.postid=postid;
-        postlistData.add(post);//推进
+        return post;
     }
 
 
