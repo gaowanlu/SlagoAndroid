@@ -38,6 +38,7 @@ public class MyName extends AppCompatActivity {
         name.setText("昵称");
         myName.setText(userData.getName());
     }
+
     private void bindActionForElement(){
         //设置标题栏文字
         titlebar_title.setText("昵称");

@@ -91,17 +91,23 @@ public class FindFragment extends Fragment {
     private void reloadPost(boolean clear){
         new Thread(()->{
             //获取推荐postids
+            List<Post> tempPosts=new ArrayList<>();
             List<String> postids= Http_getFindPosts.fetch();
-            if(clear) {
-                postlistData.clear();
-            }
             for(int i=0;i<postids.size();i++){
                 String postid=postids.get(i);
                 Log.e("postid",postid);
                 if(checkExist(postid)==false) {
-                    loadingPostData(postid);
+                    Post post=loadingPostData(postid);
+                    tempPosts.add(post);
                 }
             }
+            if(clear) {
+                postlistData.clear();
+            }
+            for(Post post:tempPosts){
+                postlistData.add(post);
+            }
+            tempPosts.clear();
             Message message=new Message();
             message.what=1;
             HANDLER.sendMessage(message);
@@ -120,7 +126,7 @@ public class FindFragment extends Fragment {
         return flag;
     }
 
-    private void loadingPostData(String postid){
+    private Post loadingPostData(String postid){
         getPostData data= Http_getPostData.fetch(postid);
         Post post=new Post();
         post.content=data.posttext;
@@ -134,7 +140,7 @@ public class FindFragment extends Fragment {
         post.postdate=data.postdate;
         post.commentNum=data.commentNum;
         post.postid=postid;
-        postlistData.add(post);
+        return  post;
     }
 
     private void addPost(){

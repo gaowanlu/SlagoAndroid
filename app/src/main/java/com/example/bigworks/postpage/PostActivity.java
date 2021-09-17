@@ -35,10 +35,13 @@ public class PostActivity extends AppCompatActivity {
     private ImageAdapter imageAdapter;
     private ImageView heartButton;
     private ImageView headimg;
+    private TextView dateText;
+    private TextView likeCollectionText;
+    private  TextView userNameText;
+    private TextView postContentText;
     Handler HANDLER=new Handler((Message msg) -> {
         switch (msg.what){
             case 1:
-
                 break;
             default:;
         }
@@ -59,7 +62,11 @@ public class PostActivity extends AppCompatActivity {
         back=findViewById(R.id.titlebar_postbar).findViewById(R.id.titlebar_post_back);
         headimg=findViewById(R.id.titlebar_postbar).findViewById(R.id.titlebar_post_headimg);
         heartButton=findViewById(R.id.titlebar_postbar).findViewById(R.id.titlebar_post_heart);
+        dateText=findViewById(R.id.post_dateText);
+        likeCollectionText=findViewById(R.id.post_likeCollectionText);
+        userNameText=findViewById(R.id.post_username);
         imglist=findViewById(R.id.post_recyclerView);
+        postContentText=findViewById(R.id.post_contentText);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         imglist.setLayoutManager(layoutManager);
         imageAdapter=new ImageAdapter(postdata.imgs);
@@ -87,6 +94,7 @@ public class PostActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
 
     private void checkHeart(){
         if(postdata.liked) {
@@ -117,8 +125,13 @@ public class PostActivity extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.headimg_loading)
                 .into(headimg);
-        if(postdata.liked){
+        if(postdata.liked){//如果已经点了赞
             heartButton.setImageResource(R.drawable.heart_fill_red);
         }
+        //发布日期以及获赞数量及收藏数量
+        dateText.setText(postdata.postdate);
+        likeCollectionText.setText(postdata.likeNum+" 喜欢 "+postdata.collectionNum+" 收藏 ");
+        userNameText.setText(postdata.userid);
+        postContentText.setText("  "+postdata.content);
     }
 }
