@@ -49,7 +49,7 @@
         android:id="@+id/login_button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="right"
         android:layout_marginTop="40dp"
         android:background="@drawable/login_bt_shape"
         android:gravity="center"
@@ -61,27 +61,28 @@
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:orientation="horizontal"
-         android:layout_gravity="center"
+         android:layout_gravity="left"
          >
          <TextView
              android:id="@+id/forget_password"
-             android:layout_width="200dp"
+             android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="left|center"
-             android:text="忘记密码"
+             android:text="忘记密码? |"
              android:textColor="#fafafa"
              android:textSize="15sp"
-             android:paddingHorizontal="@android:dimen/app_icon_size"/>
+             android:layout_marginLeft="10dp"
+             />
          <TextView
              android:id="@+id/registered_account"
-             android:layout_width="200dp"
+             android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="left|center"
-             android:text="注册账号"
+             android:text=" 注册账号!"
              android:orientation="horizontal"
              android:textColor="#fafafa"
              android:textSize="15sp"
-             android:paddingHorizontal="@android:dimen/app_icon_size"/>
+             />
      </LinearLayout>
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
