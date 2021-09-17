@@ -41,7 +41,7 @@
 
     </LinearLayout>
 
-        <TextView
+    <TextView
             android:id="@+id/titlebar_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,6 +49,7 @@
             android:text="标题栏"
             android:textColor="#333333"
             android:textSize="16dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

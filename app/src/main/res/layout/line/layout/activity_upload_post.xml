@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".uploadpost.UploadPostActivity">
-    <include layout="@layout/titlebar_combar"/>
+    <include layout="@layout/titlebar_uploadpost"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,6 +16,7 @@
             android:orientation="vertical"
             >
             <EditText
+                android:id="@+id/upload_post_content"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:padding="5dp"
@@ -31,19 +32,10 @@
                 android:maxLength="120"
                 />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upload_post_imgs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
-            <Button
-                android:id="@+id/upload_post_button"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:text="分享"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
