@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.bigworks">
+    package="com.example.slago">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,12 +20,12 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.BigWorks"
         android:usesCleartextTraffic="true">
-        <activity android:name=".login.RegisteredAccountActivity"></activity>
-        <activity android:name=".login.ForgetPasswordActivity" />
+        <activity android:name="com.example.slago.login.RegisteredAccountActivity"></activity>
+        <activity android:name="com.example.slago.login.ForgetPasswordActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.bigworks.fileProvider"
+            android:authorities="com.example.slago.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -33,18 +33,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".postpage.VisitorActivity" />
-        <activity android:name=".postpage.PostActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".uploadpost.UploadPostActivity" />
-        <activity android:name=".persondata.MySexActivity" />
-        <activity android:name=".persondata.PersonalSignatureActivity" />
-        <activity android:name=".persondata.MyName" />
-        <activity android:name=".postpage.UserPeronalActivity" />
-        <activity android:name=".more.MorePageActivity" />
-        <activity android:name=".achievement.AchievementPageActivity" />
-        <activity android:name=".persondata.PersonDataPageActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.slago.postpage.VisitorActivity" />
+        <activity android:name="com.example.slago.postpage.PostActivity" />
+        <activity android:name="com.example.slago.login.LoginActivity" />
+        <activity android:name="com.example.slago.uploadpost.UploadPostActivity" />
+        <activity android:name="com.example.slago.persondata.MySexActivity" />
+        <activity android:name="com.example.slago.persondata.PersonalSignatureActivity" />
+        <activity android:name="com.example.slago.persondata.MyName" />
+        <activity android:name="com.example.slago.postpage.UserPeronalActivity" />
+        <activity android:name="com.example.slago.more.MorePageActivity" />
+        <activity android:name="com.example.slago.achievement.AchievementPageActivity" />
+        <activity android:name="com.example.slago.persondata.PersonDataPageActivity" />
+        <activity android:name="com.example.slago.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

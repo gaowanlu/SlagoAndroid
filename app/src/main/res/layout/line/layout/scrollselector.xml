@@ -10,7 +10,7 @@
         android:layout_centerInParent="true"
         android:background="#FFFFFF" >
 
-        <com.example.bigworks.persondata.PickerView
+        <com.example.slago.persondata.PickerView
             android:id="@+id/set_my_sex"
             android:layout_width="wrap_content"
             android:layout_height="100dp" />

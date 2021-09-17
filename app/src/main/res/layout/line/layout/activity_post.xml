@@ -3,29 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".postpage.PostActivity">
-
     <include layout="@layout/titlebar_postbar"></include>
     <ScrollView
-        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/post_recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
 <!--    日期喜欢收藏-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#EFEFEF"
-        android:gravity="center_vertical"
+        android:background="#fafafa"
         android:orientation="horizontal"
         android:layout_height="30dp">
         <TextView
@@ -59,12 +58,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <TextView
-            android:padding="5dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="35dp"
             android:textColor="#1d1d1f"
             android:id="@+id/post_contentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-</LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
