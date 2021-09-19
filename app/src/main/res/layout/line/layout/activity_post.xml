@@ -19,7 +19,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/post_recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
 <!--    日期喜欢收藏-->
@@ -67,6 +67,12 @@
             android:id="@+id/post_contentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/post_commentButton"
+            android:text="查看评论"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
     </LinearLayout>
         </LinearLayout>
     </ScrollView>
