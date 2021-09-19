@@ -1,11 +1,17 @@
 package com.example.slago.postpage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,12 +20,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.fragment.LikePostListFragment;
+import com.example.slago.fragment.MyPostListFragment;
 import com.example.slago.http.APIData;
 import com.example.slago.http.ImageLoad;
 import com.example.slago.http.UserData.Http_getLikeAboutFans;
 import com.example.slago.http.UserData.Http_getUserName;
 import com.example.slago.http.UserData.Http_getUserProfile;
 import com.example.slago.utils.UserDataUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.litepal.LitePalApplication.getContext;
 
@@ -31,6 +42,17 @@ public class UserPeronalActivity extends AppCompatActivity {
     private TextView profile;
     private TextView aboutnum;
     private TextView fansnum;
+    private TextView tabMe;
+    private TextView tabLike;
+
+
+    //我的帖子和我喜欢的帖子进行切换
+    private List<Fragment> fragmentList;
+    private ViewPager2 myViewPager;
+    private TabFragmentPagerAdapter viewPagerAdapter;
+    private Fragment mypostfragment;
+    private Fragment likepostfragment;
+
     //退出登录句柄
     Handler HANDLER=new Handler((Message msg) -> {
         UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
@@ -64,6 +86,19 @@ public class UserPeronalActivity extends AppCompatActivity {
         profile=findViewById(R.id.personal_post_page_profile);
         aboutnum=findViewById(R.id.personal_post_page_aboutnum);
         fansnum=findViewById(R.id.personal_post_page_fansnum);
+        //获得viewPager
+        tabLike=findViewById(R.id.personal_post_page_like);
+        tabMe=findViewById(R.id.personal_post_page_my);
+        myViewPager=findViewById(R.id.personal_post_page_viewPager);
+        //将需要切换的fragment放进list中
+        fragmentList=new ArrayList<>();
+        mypostfragment=new MyPostListFragment();
+        likepostfragment=new LikePostListFragment();
+        fragmentList.add(mypostfragment);
+        fragmentList.add(likepostfragment);
+        viewPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager(),getLifecycle(),fragmentList);
+        myViewPager.setAdapter(viewPagerAdapter);
+        myViewPager.setCurrentItem(0);  //初始化显示第一个页面,即我的帖子
     }
     private void bindActionForElement(){
         //设置标题栏文字
@@ -76,6 +111,14 @@ public class UserPeronalActivity extends AppCompatActivity {
                 finish();//结束活动
             }
         });
+        myViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                changeTable(position);
+            }
+        });
+        initTable();
     }
     private void dataToView(){
         exeHandler(1);
@@ -105,6 +148,28 @@ public class UserPeronalActivity extends AppCompatActivity {
             exeHandler(3);
         }).start();
     }
+
+    private void initTable(){
+        TextView[] all={tabMe,tabLike};
+        for(int i=0;i<all.length;i++){
+            int j=i;
+            all[i].setOnClickListener(v->{
+                myViewPager.setCurrentItem(j);
+            });
+        }
+    }
+
+    private void changeTable(int p){
+        TextView[] all={tabMe,tabLike};
+        for(int i=0;i<all.length;i++){
+            if(i==p){
+                all[i].setTextColor(Color.parseColor("#0066cc"));
+            }else{
+                all[i].setTextColor(Color.parseColor("#707070"));
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
