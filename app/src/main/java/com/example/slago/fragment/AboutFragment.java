@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import com.example.slago.R;
 
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.http.AccountSecurity.Http_sendVerificationCode;
 import com.example.slago.http.Post.Http_getAboutPosts;
 import com.example.slago.http.Post.Http_getPostData;
 import com.example.slago.json.getPostData;
@@ -33,6 +34,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class AboutFragment extends Fragment {
@@ -72,6 +74,10 @@ public class AboutFragment extends Fragment {
         //发帖子按钮点击事件
         uploadpostbutton.setOnClickListener(v->{
             toUploadActivity();
+//            new Thread(()->{
+//                Hashtable<String,Object> back=Http_sendVerificationCode.push("2209120827@qq.com");
+//                Log.e("RESULT",Boolean.toString((Boolean)back.get("result")));
+//            }).start();
         });
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
             this.refreshlayouttop=refreshlayout;
