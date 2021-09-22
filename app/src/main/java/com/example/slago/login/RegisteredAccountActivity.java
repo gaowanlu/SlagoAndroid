@@ -3,6 +3,7 @@ package com.example.slago.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,13 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.slago.R;
+import com.example.slago.http.AccountSecurity.Http_checkUser;
 
 public class RegisteredAccountActivity extends AppCompatActivity {
 
     private View back;
     private TextView titlebar_title;
     private EditText userEmail;
+    private EditText userName;
     private EditText userPassword;
+    private EditText againPassword;
     private Button registeredButton;
 
     private void initElement() {
@@ -25,7 +29,9 @@ public class RegisteredAccountActivity extends AppCompatActivity {
         //获取标题栏标题
         titlebar_title = findViewById(R.id.titlebar_title);
         userEmail = (EditText) findViewById(R.id.import_user_email);
+        userName = (EditText) findViewById(R.id.import_user_name);
         userPassword = (EditText) findViewById(R.id.import_user_password);
+        againPassword = (EditText) findViewById(R.id.again_user_password);
         registeredButton = (Button) findViewById(R.id.registered_button);
     }
 
@@ -44,7 +50,17 @@ public class RegisteredAccountActivity extends AppCompatActivity {
         registeredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RegisteredAccountActivity.this, userEmail.getText().toString() + "\n" + userPassword.getText().toString(), Toast.LENGTH_SHORT).show();
+                Log.d("!!!", "" + Http_checkUser.get("name",userName.getText().toString()));
+                if(Http_checkUser.get("name",userName.getText().toString())){
+                    Toast.makeText(RegisteredAccountActivity.this, "昵称已被使用！", Toast.LENGTH_SHORT).show();
+                }
+//                //判断两次密码是否一致
+//                if(userPassword.getText().toString().equals(againPassword.getText().toString())){
+//                    Toast.makeText(RegisteredAccountActivity.this, "密码确认成功！", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Toast.makeText(RegisteredAccountActivity.this, "密码确认失败！", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
