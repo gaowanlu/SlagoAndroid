@@ -64,9 +64,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void sendEmail(){
-        Hashtable<String,Object> sendVerificationCode = Http_sendVerificationCode.push(userEmail);
-        boolean result2=(Boolean) sendVerificationCode.get("result");//是否发送成功
-        Log.d("!!!", "" + result2);
+        new Thread(){
+            @Override
+            public void run() {
+                Hashtable<String,Object> sendVerificationCode = Http_sendVerificationCode.push(userEmail);
+                boolean result2=(Boolean) sendVerificationCode.get("result");//是否发送成功
+            }
+        }.start();
     }
 
 
