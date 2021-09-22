@@ -15,6 +15,7 @@
 * Toasty
 * PictureSelector
 * gson
+* captcha(滑动块验证)--https://github.com//luozhanming/Captcha
 
 ### 感谢开源项目
 * CommentDialog  
