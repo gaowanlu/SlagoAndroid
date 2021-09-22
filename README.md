@@ -15,9 +15,13 @@
 * Toasty
 * PictureSelector
 * gson
+* captcha(滑动块验证)--https://github.com//luozhanming/Captcha
 
 ### 感谢开源项目
-* CommentDialog
+* CommentDialog  
+
+### 感谢技术博客文章  
+* ViewPager+Fragment实现多个子界面滑动--https://blog.csdn.net/qq_33198758/article/details/82753062  
 
 
 
