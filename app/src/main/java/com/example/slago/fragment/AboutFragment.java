@@ -21,9 +21,11 @@ import android.widget.ImageView;
 import com.example.slago.R;
 
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.http.AccountSecurity.Http_sendVerificationCode;
 import com.example.slago.http.Post.Http_getAboutPosts;
 import com.example.slago.http.Post.Http_getPostData;
 import com.example.slago.json.getPostData;
+import com.example.slago.login.CaptchaActivity;
 import com.example.slago.recyclerView.Adapter.Post;
 import com.example.slago.recyclerView.Adapter.PostAdapter;
 import com.example.slago.uploadpost.UploadPostActivity;
@@ -33,6 +35,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class AboutFragment extends Fragment {
@@ -63,7 +66,8 @@ public class AboutFragment extends Fragment {
     });
 
     private void toUploadActivity(){
-        Intent intent= new Intent(getActivity(), UploadPostActivity.class);
+        //Intent intent= new Intent(getActivity(), UploadPostActivity.class);
+        Intent intent= new Intent(getActivity(), CaptchaActivity.class);
         startActivity(intent);
     }
 
@@ -72,6 +76,10 @@ public class AboutFragment extends Fragment {
         //发帖子按钮点击事件
         uploadpostbutton.setOnClickListener(v->{
             toUploadActivity();
+//            new Thread(()->{
+//                Hashtable<String,Object> back=Http_sendVerificationCode.push("2209120827@qq.com");
+//                Log.e("RESULT",Boolean.toString((Boolean)back.get("result")));
+//            }).start();
         });
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
             this.refreshlayouttop=refreshlayout;
