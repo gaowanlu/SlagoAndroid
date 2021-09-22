@@ -25,6 +25,7 @@ import com.example.slago.http.AccountSecurity.Http_sendVerificationCode;
 import com.example.slago.http.Post.Http_getAboutPosts;
 import com.example.slago.http.Post.Http_getPostData;
 import com.example.slago.json.getPostData;
+import com.example.slago.login.CaptchaActivity;
 import com.example.slago.recyclerView.Adapter.Post;
 import com.example.slago.recyclerView.Adapter.PostAdapter;
 import com.example.slago.uploadpost.UploadPostActivity;
@@ -65,7 +66,8 @@ public class AboutFragment extends Fragment {
     });
 
     private void toUploadActivity(){
-        Intent intent= new Intent(getActivity(), UploadPostActivity.class);
+        //Intent intent= new Intent(getActivity(), UploadPostActivity.class);
+        Intent intent= new Intent(getActivity(), CaptchaActivity.class);
         startActivity(intent);
     }
 
