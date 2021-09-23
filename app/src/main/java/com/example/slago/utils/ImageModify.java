@@ -100,7 +100,7 @@ public class ImageModify {
         }
 
         if(Build.VERSION.SDK_INT >= 24){
-            imageUri = FileProvider.getUriForFile(context, "com.example.bigworks.fileProvider", outputImage);
+            imageUri = FileProvider.getUriForFile(context, "com.example.slago.fileProvider", outputImage);
         }else{
             imageUri = Uri.fromFile(outputImage);
         }

@@ -89,34 +89,58 @@ public class RegisteredAccountActivity extends AppCompatActivity {
         registeredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(){
-                    @Override
-                    public void run() {
-                        if(!Http_checkUser.get("name",userName.getText().toString()) && !Http_checkUser.get("email", userEmail.getText().toString())){
-                            System.out.println(Http_checkUser.get("name",userName.getText().toString()));
-                            //判断两次密码是否一致
-                            if(userPassword.getText().toString().equals(againPassword.getText().toString())){
-                                Toast.makeText(RegisteredAccountActivity.this, "密码确认成功！", Toast.LENGTH_SHORT).show();
-                                Hashtable<String,Object> registerNewCount= Http_registerNewCount.push
-                                        (userEmail.getText().toString(),userPassword.getText().toString(),"erfg",userName.getText().toString());
-                                boolean result1=(Boolean) registerNewCount.get("result");//是否成功
-                                String info1=(String) registerNewCount.get("info");//错误信息
-                                System.out.println(result1+" "+info1);
-                            }
-                            else{
-                                Toast.makeText(RegisteredAccountActivity.this, "密码确认失败！", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
-                            //Toast提示:昵称或电子邮箱已经被存在
-                            Message message=new Message();
-                            message.what=2;
-                            handler.sendMessage(message);
-                        }
-                    }
-                }.start();
+                Intent intent = new Intent(RegisteredAccountActivity.this, CaptchaActivity.class);
+                startActivityForResult(intent,1);
+//                new Thread(){
+//                    @Override
+//                    public void run() {
+//                        if(!Http_checkUser.get("name",userName.getText().toString()) && !Http_checkUser.get("email", userEmail.getText().toString())){
+//                            System.out.println(Http_checkUser.get("name",userName.getText().toString()));
+//                            //判断两次密码是否一致
+//                            if(userPassword.getText().toString().equals(againPassword.getText().toString())){
+//                                Intent intent = new Intent(RegisteredAccountActivity.this, CaptchaActivity.class);
+//                                //通过Intent传递数据到下一个活动
+//                                intent.putExtra("userEmail", userEmail.getText().toString());
+//                                intent.putExtra("userName", userName.getText().toString());
+//                                intent.putExtra("userPassword", userPassword.getText().toString());
+//                                intent.putExtra("nextActivity", "RegisteredAccountActivity.class");
+//                                startActivity(intent);
+////                                Toast.makeText(RegisteredAccountActivity.this, "密码确认成功！", Toast.LENGTH_SHORT).show();
+////                                Hashtable<String,Object> registerNewCount= Http_registerNewCount.push
+////                                        (userEmail.getText().toString(),userPassword.getText().toString(),"erfg",userName.getText().toString());
+////                                boolean result1=(Boolean) registerNewCount.get("result");//是否成功
+////                                String info1=(String) registerNewCount.get("info");//错误信息
+////                                System.out.println(result1+" "+info1);
+//                            }
+//                            else{
+//                                Toast.makeText(RegisteredAccountActivity.this, "密码确认失败！", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                        else{
+//                            //Toast提示:昵称或电子邮箱已经被存在
+//                            Message message=new Message();
+//                            message.what=2;
+//                            handler.sendMessage(message);
+//                        }
+//                    }
+//                }.start();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if(resultCode == 1){
+                    Log.d("!!!", "yes");
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 
     @Override
