@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".postpage.UserPeronalActivity"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/titlebar_combar"></include>
+        <LinearLayout
+            android:layout_marginTop="52dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/component_userdatacard"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/personal_post_page_my"
+                    android:text="我的"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="#707070"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:id="@+id/personal_post_page_like"
+                    android:text="喜欢"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="#707070"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/personal_post_page_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.viewpager2.widget.ViewPager2>
+        </LinearLayout>
+</FrameLayout>

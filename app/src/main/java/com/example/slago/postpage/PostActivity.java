@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,6 +28,8 @@ import com.example.slago.http.Post.Http_unlikePost;
 import com.example.slago.recyclerView.Adapter.ImageAdapter;
 import com.example.slago.recyclerView.Adapter.Post;
 
+import es.dmoral.toasty.Toasty;
+
 public class PostActivity extends AppCompatActivity {
     private View back;
     private Post postdata;
@@ -37,6 +41,7 @@ public class PostActivity extends AppCompatActivity {
     private TextView likeCollectionText;
     private  TextView userNameText;
     private TextView postContentText;
+    private Button commentButton;
     Handler HANDLER=new Handler((Message msg) -> {
         switch (msg.what){
             case 1:
@@ -65,7 +70,14 @@ public class PostActivity extends AppCompatActivity {
         userNameText=findViewById(R.id.post_username);
         imglist=findViewById(R.id.post_recyclerView);
         postContentText=findViewById(R.id.post_contentText);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        commentButton=findViewById(R.id.post_commentButton);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                // 直接禁止垂直滑动
+                return false;
+            }
+        };
         imglist.setLayoutManager(layoutManager);
         imageAdapter=new ImageAdapter(postdata.imgs);
         imglist.setAdapter(imageAdapter);
@@ -90,6 +102,10 @@ public class PostActivity extends AppCompatActivity {
             Intent intent= new Intent(PostActivity.this, VisitorActivity.class);
             intent.putExtra("postdata",postdata);
             startActivity(intent);
+        });
+        //评论按钮
+        commentButton.setOnClickListener(v->{
+            Toasty.success(this, "查看评论", Toast.LENGTH_SHORT, true).show();
         });
     }
 

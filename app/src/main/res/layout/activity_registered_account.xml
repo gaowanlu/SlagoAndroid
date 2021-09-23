@@ -34,7 +34,16 @@
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:singleLine="true"
-            android:hint="填写你的邮箱"
+            android:hint="填写你的电子邮箱"
+            android:textColor="#393939"/>
+
+        <EditText
+            android:id="@+id/import_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:singleLine="true"
+            android:hint="昵称"
             android:textColor="#393939"/>
 
         <EditText
@@ -44,6 +53,15 @@
             android:layout_marginTop="20dp"
             android:singleLine="true"
             android:hint="密码"
+            android:textColor="#393939"/>
+
+        <EditText
+            android:id="@+id/again_user_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:hint="确认密码"
             android:textColor="#393939"/>
 
         <Button
