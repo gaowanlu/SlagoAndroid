@@ -66,8 +66,8 @@ public class AboutFragment extends Fragment {
     });
 
     private void toUploadActivity(){
-        //Intent intent= new Intent(getActivity(), UploadPostActivity.class);
-        Intent intent= new Intent(getActivity(), CaptchaActivity.class);
+        Intent intent= new Intent(getActivity(), UploadPostActivity.class);
+        //Intent intent= new Intent(getActivity(), CaptchaActivity.class);
         startActivity(intent);
     }
 
