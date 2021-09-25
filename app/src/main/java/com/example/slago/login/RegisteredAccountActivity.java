@@ -116,7 +116,7 @@ public class RegisteredAccountActivity extends AppCompatActivity {
                             if(!Http_checkUser.get("name",userName.getText().toString())){
 //                              //判断两次密码是否一致
                                 if(userPassword.getText().toString().equals(againPassword.getText().toString())){
-                                    //Toast提示:注册成功
+                                    //Toast提示:提交注册信息
                                     Message message=new Message();
                                     message.what=1;
                                     handler.sendMessage(message);
