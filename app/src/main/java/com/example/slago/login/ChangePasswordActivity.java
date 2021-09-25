@@ -154,7 +154,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 System.out.println(result+" "+info);
             }
         }.start();
-        Toasty.info(ChangePasswordActivity.this, result+" "+info, Toasty.LENGTH_SHORT).show();
+        //Toasty.info(ChangePasswordActivity.this, result+" "+info, Toasty.LENGTH_SHORT).show();
     }
 
     @Override
