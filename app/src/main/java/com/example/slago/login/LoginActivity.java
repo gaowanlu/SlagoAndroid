@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 super.handleMessage(msg);
                 switch (msg.what){
                     case 1:
+                        //登录成功
                         Intent intent=new Intent(LoginActivity.this, MainActivity.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -114,12 +115,17 @@ public class LoginActivity extends AppCompatActivity {
                         //获取cookie SlagoSession
                         Headers headers=response.headers();
                         List<String> cookies = headers.values("Set-Cookie");
+                        String userid=cookies.get(0);
+                        //获取id
+                        int start=userid.indexOf("=")+1;
+                        int end=userid.indexOf(";");
+                        userid=userid.substring(start,end);
                         String session = cookies.get(1);
                         String sessionID = session.substring(session.indexOf("=")+1, session.indexOf(";"));
                         Log.e("SlagoSession",sessionID);
                         //更新数据库
                         UserData userData=new UserData();
-                        userData.setUserid(id);
+                        userData.setUserid(userid);
                         userData.setSlagoSession(sessionID);
                         userData.save();
                         //跳转到MainActivity
