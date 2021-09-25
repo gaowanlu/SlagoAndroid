@@ -22,7 +22,7 @@ public class Http_changePwd {
             Gson gson=new Gson();
             Response nameRp = client.newCall(nameRq).execute();
             ChangePwd rp=gson.fromJson(nameRp.body().string(), ChangePwd.class);
-            System.out.println(nameRp.body().string());
+            //System.out.println(nameRp.body().string());
             if(rp.result.equals("true")){
                 result=true;
             }else{
