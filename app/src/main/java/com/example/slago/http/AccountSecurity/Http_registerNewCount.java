@@ -20,7 +20,7 @@ public class Http_registerNewCount {
         String info="出现错误、请检查应用版本";
         try{
             OkHttpClient client=new OkHttpClient();
-            Request nameRq= Utils.SessionNoCookie(APIData.URL_MIP+"RegisterNewCount?email="+email+"&password="+password+"&checkCode="+checkCode+"&name="+name);
+            Request nameRq= Utils.SessionNoCookie(APIData.URL_MIP+"RegisterNewCount?email="+email+"&password="+password+"&checkCode="+checkCode+"&name="+name+"&sex=保密");
             Gson gson=new Gson();
             Response nameRp = client.newCall(nameRq).execute();
             RegisterNewCount rp=gson.fromJson(nameRp.body().string(), RegisterNewCount.class);
