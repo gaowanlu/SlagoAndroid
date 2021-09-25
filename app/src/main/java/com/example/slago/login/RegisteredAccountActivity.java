@@ -33,7 +33,7 @@ public class RegisteredAccountActivity extends AppCompatActivity {
     private TextView titlebar_title;
     private EditText userEmail;
     private EditText userName;
-    private EditText userPassword;
+    private EditText newPassword;
     private EditText againPassword;
     private Button registeredButton;
     private TextView getNum;
@@ -51,11 +51,9 @@ public class RegisteredAccountActivity extends AppCompatActivity {
                 switch (msg.what){
                     case 1:
                         Toasty.info(RegisteredAccountActivity.this, "注册成功！", Toasty.LENGTH_SHORT,true).show();
-                        Hashtable<String,Object> registerNewCount= Http_registerNewCount.push
-                                (userEmail.getText().toString(),userPassword.getText().toString(),verifyEmailCode.getText().toString(),userName.getText().toString());
-                        boolean result1=(Boolean) registerNewCount.get("result");//是否成功
-                        String info1=(String) registerNewCount.get("info");//错误信息
-                        System.out.println(result1+" "+info1);
+                        Intent intent= new Intent(RegisteredAccountActivity.this, LoginActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
+                        startActivity(intent);
                         break;
                     case 2:
                         Toasty.error(RegisteredAccountActivity.this, "电子邮箱已经存在！", Toasty.LENGTH_SHORT,true).show();
@@ -66,6 +64,8 @@ public class RegisteredAccountActivity extends AppCompatActivity {
                     case 4:
                         Toasty.error(RegisteredAccountActivity.this, "密码不相同！", Toasty.LENGTH_SHORT,true).show();
                         break;
+                    case 5:
+                        Toasty.error(RegisteredAccountActivity.this, "注册失败！", Toasty.LENGTH_SHORT,true).show();
                     default:
                         break;
                 }
@@ -80,7 +80,7 @@ public class RegisteredAccountActivity extends AppCompatActivity {
         titlebar_title = findViewById(R.id.titlebar_title);
         userEmail = (EditText) findViewById(R.id.import_user_email);
         userName = (EditText) findViewById(R.id.import_user_name);
-        userPassword = (EditText) findViewById(R.id.import_user_password);
+        newPassword = (EditText) findViewById(R.id.import_user_password);
         againPassword = (EditText) findViewById(R.id.again_user_password);
         registeredButton = (Button) findViewById(R.id.registered_button);
         getNum = (TextView) findViewById(R.id.registered_send_num);
@@ -109,17 +109,36 @@ public class RegisteredAccountActivity extends AppCompatActivity {
         registeredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String pwd = newPassword.getText().toString();
+                String email = userEmail.getText().toString();
+                String code = verifyEmailCode.getText().toString();
+                String name = userName.getText().toString();
+                Log.e("!!! ", pwd + " " + email + " " + code + " " + name);
                 new Thread(){
                     @Override
                     public void run() {
-                        if(!Http_checkUser.get("email", userEmail.getText().toString())){
-                            if(!Http_checkUser.get("name",userName.getText().toString())){
-//                              //判断两次密码是否一致
-                                if(userPassword.getText().toString().equals(againPassword.getText().toString())){
-                                    //Toast提示:提交注册信息
+                        if(!Http_checkUser.get("email", email)){
+                            if(!Http_checkUser.get("name", name)){
+                                //判断两次密码是否一致
+                                if(newPassword.getText().toString().equals(againPassword.getText().toString())){
+                                    Hashtable<String,Object> registerNewCount= Http_registerNewCount.push(email,pwd,code,name);
+                                    boolean result1=(Boolean) registerNewCount.get("result");//是否成功
+                                    String info1=(String) registerNewCount.get("info");//错误信息
+                                    System.out.println(result1+" "+info1 + " " +
+                                            userEmail.getText().toString() + "" +
+                                            verifyEmailCode.getText().toString()+  "" +
+                                            userName.getText().toString());
                                     Message message=new Message();
-                                    message.what=1;
+                                    if(result1){
+                                        //Toast提示:注册成功
+                                        message.what=1;
+                                    }
+                                    else{
+                                        //Toast提示:注册失败
+                                        message.what=5;
+                                    }
                                     handler.sendMessage(message);
+
                                 }
                                 else{
                                     //Toast提示:密码不相同
