@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.UserData.Http_setUserProfile;
 import com.example.slago.utils.UserDataUtils;
 
-public class PersonalSignatureActivity extends AppCompatActivity {
+public class PersonalSignatureActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private EditText mySignature;

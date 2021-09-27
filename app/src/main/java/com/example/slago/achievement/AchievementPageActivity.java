@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.UserData.Http_getLikeAboutFans;
 import com.example.slago.utils.UserDataUtils;
 
-public class AchievementPageActivity extends AppCompatActivity {
+public class AchievementPageActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private TextView fansnum;

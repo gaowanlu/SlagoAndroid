@@ -26,6 +26,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.APIData;
 import com.example.slago.http.ImageLoad;
 import com.example.slago.http.UserData.Http_getUserName;
@@ -43,7 +44,7 @@ import java.io.FileNotFoundException;
 
 import static org.litepal.LitePalApplication.getContext;
 
-public class PersonDataPageActivity extends AppCompatActivity {
+public class PersonDataPageActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     public static final int TAKE_PHOTO = 1;

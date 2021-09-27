@@ -8,7 +8,7 @@
 ### 感谢开源工具  
 * LoadingView  
 * EasyPhotos——https://github.com/HuanTanSheng/EasyPhotos/  
-* Luban  
+* Luban  (图片压缩)
 * EasyXRecyclerView  
 * LitePal  
 * uCrop

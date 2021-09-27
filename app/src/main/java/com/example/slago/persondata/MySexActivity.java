@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.UserData.Http_setUserSex;
 import com.example.slago.utils.UserDataUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySexActivity extends AppCompatActivity {
+public class MySexActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private PickerView setMySex;

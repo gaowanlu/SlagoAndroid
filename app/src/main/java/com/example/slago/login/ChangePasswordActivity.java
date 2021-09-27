@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.slago.R;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.AccountSecurity.Http_changePwd;
 import com.example.slago.http.AccountSecurity.Http_sendVerificationCode;
 import com.example.slago.utils.CountDownTimerUtils;
@@ -26,7 +27,7 @@ import es.dmoral.toasty.Toasty;
 
 import static java.sql.Types.NULL;
 
-public class ChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends BaseActivity {
 
     private String userEmail;
     private View back;

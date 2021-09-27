@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.slago.R;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.recyclerView.Adapter.Post;
 
-public class VisitorActivity extends AppCompatActivity {
+public class VisitorActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private TextView temptext;

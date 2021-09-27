@@ -11,12 +11,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.slago.R;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.AccountSecurity.Http_sendVerificationCode;
 import com.luozm.captcha.Captcha;
 
 import java.util.Hashtable;
 
-public class CaptchaActivity extends AppCompatActivity {
+public class CaptchaActivity extends BaseActivity {
     private Captcha captcha;
     private static final int success = 1;
 

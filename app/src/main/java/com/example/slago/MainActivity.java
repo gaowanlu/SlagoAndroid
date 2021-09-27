@@ -10,6 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.fragment.AboutFragment;
 import com.example.slago.fragment.FindFragment;
 import com.example.slago.fragment.HomeFragment;
@@ -24,7 +25,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private BottomNavigationView bnv_menu;//底部docker
     private Fragment home;//我的页面
     private Fragment about;//关注页面

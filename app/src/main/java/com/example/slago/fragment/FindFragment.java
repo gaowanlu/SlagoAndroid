@@ -39,9 +39,9 @@ public class FindFragment extends Fragment {
             case 1:
                 postAdapter.notifyDataSetChanged();
                 if(refreshlayouttop!=null)
-                    refreshlayouttop.finishRefresh(0);
+                    refreshlayouttop.finishRefresh(0);//停止刷新动画
                 if(refreshlayoutbootom!=null)
-                    refreshlayoutbootom.finishLoadMore(0);
+                    refreshlayoutbootom.finishLoadMore(0);//停止刷新动画
                 break;
             default:;
         }

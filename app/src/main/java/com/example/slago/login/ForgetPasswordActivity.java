@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.AccountSecurity.Http_checkUser;
 import com.example.slago.http.AccountSecurity.Http_registerNewCount;
 import com.example.slago.http.UserData.Http_setHeadImg;
@@ -29,7 +30,7 @@ import java.util.Hashtable;
 
 import es.dmoral.toasty.Toasty;
 
-public class ForgetPasswordActivity extends AppCompatActivity {
+public class ForgetPasswordActivity extends BaseActivity {
 
     private View back;
     private TextView titlebar_title;

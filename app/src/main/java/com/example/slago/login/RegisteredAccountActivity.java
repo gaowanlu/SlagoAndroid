@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.slago.MainActivity;
 import com.example.slago.R;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.AccountSecurity.Http_checkUser;
 import com.example.slago.http.AccountSecurity.Http_registerNewCount;
 import com.example.slago.http.AccountSecurity.Http_sendVerificationCode;
@@ -27,7 +28,7 @@ import es.dmoral.toasty.Toasty;
 
 import static java.sql.Types.NULL;
 
-public class RegisteredAccountActivity extends AppCompatActivity {
+public class RegisteredAccountActivity extends BaseActivity {
 
     private View back;
     private TextView titlebar_title;
