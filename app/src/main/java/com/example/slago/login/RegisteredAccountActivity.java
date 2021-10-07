@@ -104,7 +104,6 @@ public class RegisteredAccountActivity extends BaseActivity {
         getNum.setOnClickListener((View)->{
             Intent intent = new Intent(RegisteredAccountActivity.this, CaptchaActivity.class);
             startActivityForResult(intent, NULL);
-
         });
 
         registeredButton.setOnClickListener(new View.OnClickListener() {

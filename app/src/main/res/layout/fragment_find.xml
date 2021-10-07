@@ -24,19 +24,19 @@
         android:textStyle="bold"
         android:baselineAlignBottom="true"
         />
-    <EditText
-        android:layout_width="160dp"
-        android:layout_height="25dp"
-        app:layout_constraintStart_toEndOf="@id/frafment_find_findtext"
-        app:layout_constraintEnd_toStartOf="@id/frafment_find_searchicon"
-        android:background="@drawable/fragment_search_input_shape"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
-        android:overScrollMode="never"
-        android:maxLines="1"
-        android:baselineAlignBottom="true"
-        />
+<!--    <EditText-->
+<!--        android:layout_width="160dp"-->
+<!--        android:layout_height="25dp"-->
+<!--        app:layout_constraintStart_toEndOf="@id/frafment_find_findtext"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/frafment_find_searchicon"-->
+<!--        android:background="@drawable/fragment_search_input_shape"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:gravity="center"-->
+<!--        android:overScrollMode="never"-->
+<!--        android:maxLines="1"-->
+<!--        android:baselineAlignBottom="true"-->
+<!--        />-->
     <ImageView
         android:id="@+id/frafment_find_searchicon"
         android:layout_width="30dp"
