@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.Post.Http_uploadPost;
 import com.example.slago.recyclerView.Adapter.UploadImgAdapter;
 import com.example.slago.utils.GlideEngine;
@@ -34,7 +35,7 @@ import es.dmoral.toasty.Toasty;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class UploadPostActivity extends AppCompatActivity {
+public class UploadPostActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private Button shareButton;

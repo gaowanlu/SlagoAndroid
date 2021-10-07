@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.fragment.LikePostListFragment;
 import com.example.slago.fragment.MyPostListFragment;
 import com.example.slago.http.APIData;
@@ -34,7 +35,7 @@ import java.util.List;
 
 import static org.litepal.LitePalApplication.getContext;
 
-public class UserPeronalActivity extends AppCompatActivity {
+public class UserPeronalActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private ImageView headimg;

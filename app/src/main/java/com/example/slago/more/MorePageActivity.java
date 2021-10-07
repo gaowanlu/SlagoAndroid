@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.slago.R;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.login.LoginActivity;
 
-public class MorePageActivity extends AppCompatActivity {
+public class MorePageActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private TextView logout;

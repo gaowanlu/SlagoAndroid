@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.slago.R;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.APIData;
 import com.example.slago.http.ImageLoad;
 import com.example.slago.http.Post.Http_likePost;
@@ -30,7 +31,7 @@ import com.example.slago.recyclerView.Adapter.Post;
 
 import es.dmoral.toasty.Toasty;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends BaseActivity {
     private View back;
     private Post postdata;
     private RecyclerView imglist;

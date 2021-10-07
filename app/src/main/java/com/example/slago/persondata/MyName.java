@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import com.example.slago.R;
 import com.example.slago.SlagoDB.UserData;
+import com.example.slago.activityCollector.BaseActivity;
 import com.example.slago.http.UserData.Http_setUserName;
 import com.example.slago.utils.UserDataUtils;
 
 
-public class MyName extends AppCompatActivity {
+public class MyName extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private UserData userData;

@@ -17,9 +17,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.slago.R;
 import com.example.slago.http.Post.Http_getFindPosts;
 import com.example.slago.http.Post.Http_getPostData;
+import com.example.slago.http.Post.Http_getUserAllPost;
 import com.example.slago.json.getPostData;
+import com.example.slago.json.getUserPosts;
+import com.example.slago.recyclerView.Adapter.MyPostAdapter;
 import com.example.slago.recyclerView.Adapter.Post;
 import com.example.slago.recyclerView.Adapter.PostAdapter;
+import com.example.slago.utils.UserDataUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -29,11 +33,16 @@ import java.util.List;
 public class MyPostListFragment extends Fragment {
     private View mview;
     private RecyclerView postlist;
-    private PostAdapter postAdapter;
-    private List<Post> postlistData=new ArrayList<>();
+    private MyPostAdapter postAdapter;
+    private List<Post> postlistData=new ArrayList<>();//适配器每个item的数据
     private SmartRefreshLayout refreshLayout;
     private RefreshLayout refreshlayouttop;//顶部
     private RefreshLayout refreshlayoutbootom;//底部加载更多
+
+    /*动态分页读取用户的帖子信息*/
+    private int nowPage=0;
+    private static final int PAGESIZE=10;
+
     Handler HANDLER=new Handler((Message msg) -> {
         switch (msg.what){
             case 1:
@@ -75,7 +84,7 @@ public class MyPostListFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         StaggeredGridLayoutManager layoutManager1=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         postlist.setLayoutManager(layoutManager1);
-        postAdapter=new PostAdapter(postlistData);
+        postAdapter=new MyPostAdapter(postlistData);
         postlist.setAdapter(postAdapter);
         //初始化列表数据
         refreshLayout.autoRefresh();
@@ -88,26 +97,29 @@ public class MyPostListFragment extends Fragment {
         bindEvent();
     }
 
-    private void reloadPost(boolean clear){
+    private void loadPost(boolean clear){
         new Thread(()->{
             //获取推荐postids
             List<Post> tempPosts=new ArrayList<>();
-            List<String> postids= Http_getFindPosts.fetch();
-            for(int i=0;i<postids.size();i++){
-                String postid=postids.get(i);
-                Log.e("postid",postid);
-                if(checkExist(postid)==false) {
-                    Post post=loadingPostData(postid);
-                    tempPosts.add(post);
+            getUserPosts fetchUserPosts= Http_getUserAllPost.fetch(nowPage,PAGESIZE, UserDataUtils.getUserid());
+            if(fetchUserPosts!=null&&fetchUserPosts.list!=null){//获取数据成功
+                nowPage++;//页数递增
+                //打印获取数据测试
+                for(int i=0;i<fetchUserPosts.list.size();i++){
+                    System.out.println("Fetch User Posts  "+fetchUserPosts.list.get(i));
+                    //获取帖子数据
+                    if(checkExist(fetchUserPosts.list.get(i))==false){//列表中不存在,则重新fetch此帖子信息
+                        Post post=loadingPostData(fetchUserPosts.list.get(i));
+                        if(post!=null){
+                            tempPosts.add(post);
+                        }
+                    }
                 }
             }
-            if(clear) {
-                postlistData.clear();
-            }
+            //一次性将tempPosts中的内容添加到列表中去
             for(Post post:tempPosts){
                 postlistData.add(post);
             }
-            tempPosts.clear();
             Message message=new Message();
             message.what=1;
             HANDLER.sendMessage(message);
@@ -151,14 +163,14 @@ public class MyPostListFragment extends Fragment {
         refreshLayout.setOnRefreshListener((RefreshLayout refreshlayout)-> {
             this.refreshlayouttop=refreshlayout;
             //重新加载数据
-            reloadPost(true);
+            loadPost(true);
         });
 
         //SmartRefreshLayout控件的加载
         refreshLayout.setOnLoadMoreListener((RefreshLayout refreshlayout) ->{
             this.refreshlayoutbootom=refreshlayout;
             //加载数据并处理重复项
-            reloadPost(false);
+            loadPost(false);
         });
     }
 }
