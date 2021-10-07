@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
-<TextView
-    android:textSize="50dp"
-    android:textColor="#1d1d1f"
-    android:text="喜欢的帖子的列表"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/likepostlist_refreshLayout"
+        app:srlPrimaryColor="#fafafa"
+        app:srlAccentColor="#0066cc"
+        app:srlHeaderHeight="5dp"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/likepostlist_recyclerview"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>
