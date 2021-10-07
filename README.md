@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/gaowanlu/SlagoAndroid">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://qn-next.xuetangx.com/16336235051875.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">SlagoAndroid</h3>
@@ -49,7 +49,7 @@
 
 本项目基于MIT开源协议开源、我们在开发过程中使用了众多的开源项目中功能以及库和框架等。
 
-<p align="right">(<a href="#top">回到顶部</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
@@ -59,7 +59,7 @@
 #### 关于后台
 后台服务我们也将其进行开源、使用Java Web最基本的Servlet进行开发的后台程序、数据库采用MySQL、数据库连接池采用druid。
 
-<p align="right">(<a href="#top">回到顶部</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
@@ -80,7 +80,7 @@
    ```
 
 
-<p align="right">(<a href="#top">回到顶部</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
@@ -89,7 +89,7 @@
 
 首先在Android Studio加载此项目、等待一切就绪、ReBuild之后在您的模拟器上运行或者打包apk文件
 
-<p align="right">(<a href="#top">回到顶部</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
@@ -111,7 +111,7 @@
 4. 推送到远程分支 (`git push origin feature/AmazingFeature`)
 5. 打开拉取请求
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 ## 感谢  
@@ -137,7 +137,7 @@
 [@chenyuanfly](https://github.com/chenyuanfly)   [@xgqin](https://github.com/xgqin) 
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
@@ -146,18 +146,19 @@
 
 MIT License. 查看 `LICENSE` .
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
 <!-- CONTACT -->
 ## 联系我们
 
-wanlu - - heizuboriyo@gmail.com
+wanlu - - heizuboriyo@gmail.com  
+chenyuanfly - - 2298408812@qq.com  
 
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right"><a href="#top">回到顶部</a></p>
 
 
 
@@ -178,4 +179,4 @@ wanlu - - heizuboriyo@gmail.com
 [license-url]: https://github.com/gaowanlu/SlagoAndroid/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/gaowanlu
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://qn-next.xuetangx.com/16336235078778.png
