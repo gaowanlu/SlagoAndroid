@@ -20,6 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BigWorks"
         android:usesCleartextTraffic="true">
+        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".more.UserAgreementActivity" />
         <activity android:name=".login.CaptchaActivity" />
         <activity android:name=".login.ChangePasswordActivity" />
         <activity android:name=".login.RegisteredAccountActivity" />
