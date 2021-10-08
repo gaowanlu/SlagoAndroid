@@ -15,29 +15,23 @@
             android:orientation="vertical"
             >
             <include layout="@layout/component_userdatacard"></include>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="40dp">
-                <TextView
-                    android:id="@+id/personal_post_page_my"
-                    android:text="我的"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:textColor="#707070"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/personal_post_page_tablayout"
+                    app:tabSelectedTextColor="#4E8BCA"
+                    app:tabTextColor="#707070"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:id="@+id/personal_post_page_like"
-                    android:text="喜欢"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:textColor="#707070"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/personal_post_page_my"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/personal_post_page_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="喜欢" />
+                </com.google.android.material.tabs.TabLayout>
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/personal_post_page_viewPager"
             android:layout_width="match_parent"

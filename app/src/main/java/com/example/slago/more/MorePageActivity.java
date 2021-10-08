@@ -3,6 +3,7 @@ package com.example.slago.more;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ public class MorePageActivity extends BaseActivity {
     private View back;
     private TextView titlebar_title;
     private TextView logout;
+    private TextView github_target;
+    private TextView tiaokuan;
     private void initElement(){
         //返回按钮back=(TextView)
         back=findViewById(R.id.titlebar_combar_back);
@@ -22,6 +25,8 @@ public class MorePageActivity extends BaseActivity {
         titlebar_title=findViewById(R.id.titlebar_title);
         //退出登录控件
         logout=findViewById(R.id.morepage_logout);
+        github_target=findViewById(R.id.github_target);
+        tiaokuan=findViewById(R.id.morepage_user_tiaokuan);
     }
     private void httpTest(){
 //        new Thread(()->{
@@ -43,11 +48,21 @@ public class MorePageActivity extends BaseActivity {
         });
         //绑定退出登录事件
         logout.setOnClickListener(v->{
-                //进入登录界面并，只剩登录一个活动
-                Intent intent= new Intent(MorePageActivity.this, LoginActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
-                startActivity(intent);
-            //httpTest();
+            //进入登录界面并，只剩登录一个活动
+            Intent intent= new Intent(MorePageActivity.this, LoginActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;startActivity(intent);
+        });
+        //跳转到github仓库
+        github_target.setOnClickListener(v->{
+            Intent intent =new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.parse("https://github.com/gaowanlu/SlagoAndroid");
+            intent.setData(uri);
+            startActivity(intent);
+        });
+        //用户条款
+        tiaokuan.setOnClickListener(v->{
+            Intent intent=new Intent(this,UserAgreementActivity.class);
+            startActivity(intent);
         });
     }
     @Override

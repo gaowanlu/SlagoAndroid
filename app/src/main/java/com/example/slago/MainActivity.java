@@ -15,6 +15,7 @@ import com.example.slago.fragment.AboutFragment;
 import com.example.slago.fragment.FindFragment;
 import com.example.slago.fragment.HomeFragment;
 import com.example.slago.http.APIData;
+import com.example.slago.http.AccountSecurity.Http_authentication;
 import com.example.slago.http.Utils;
 import com.example.slago.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,25 +38,14 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
         return true;
     });
-    //APIS
-    private String AuthenticationURL(){
-        return APIData.URL_MIP +"SlagoService_Authentication";
-    }
     //身份验证，没有身份信息或者令牌不对则，退出登录
     private void Authentication(){
         new Thread(()->{
-            OkHttpClient client=new OkHttpClient();
-            Request request= Utils.SessionRequest(AuthenticationURL());
-            try {
-                Log.e("REQUEST",AuthenticationURL());
-                Response response=client.newCall(request).execute();
-                String responseData=response.body().string();
-                //身份验证失败
-                if(!responseData.equals("{\"status\":\"200\",\"result\":\"true\"}")){
-                    //退出登录
-                    LOGOUTHANDLER.sendMessage(new Message());
-                }
-            } catch (IOException e) { }
+            if(false==Http_authentication.fetch()){
+                Message message=new Message();
+                message.what=0;
+                LOGOUTHANDLER.sendMessage(message);
+            }
         }).start();
     }
     private void initElement(){
