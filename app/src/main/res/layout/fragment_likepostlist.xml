@@ -7,8 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/likepostlist_refreshLayout"
-        app:srlPrimaryColor="#fafafa"
-        app:srlAccentColor="#0066cc"
+        app:srlPrimaryColor="#4E8BCA"
+        app:srlAccentColor="#fafafa"
         app:srlHeaderHeight="5dp"
         >
         <androidx.recyclerview.widget.RecyclerView

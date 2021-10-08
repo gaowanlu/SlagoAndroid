@@ -1,5 +1,6 @@
 package com.example.slago.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.slago.R;
 import com.example.slago.http.Post.Http_getFindPosts;
@@ -20,6 +22,7 @@ import com.example.slago.http.Post.Http_getPostData;
 import com.example.slago.json.getPostData;
 import com.example.slago.recyclerView.Adapter.Post;
 import com.example.slago.recyclerView.Adapter.PostAdapter;
+import com.example.slago.search.SearchActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -30,6 +33,7 @@ public class FindFragment extends Fragment {
     private View mview;
     private RecyclerView postlist;
     private PostAdapter postAdapter;
+    ImageView frafment_find_searchicon;
     private List<Post> postlistData=new ArrayList<>();
     private SmartRefreshLayout refreshLayout;
     private RefreshLayout refreshlayouttop;//顶部
@@ -85,6 +89,7 @@ public class FindFragment extends Fragment {
     private void initElement(View view) {
         postlist=view.findViewById(R.id.find_recyclerview);
         refreshLayout=view.findViewById(R.id.find_refreshLayout);
+        frafment_find_searchicon=view.findViewById(R.id.frafment_find_searchicon);
         bindEvent();
     }
 
@@ -159,6 +164,12 @@ public class FindFragment extends Fragment {
             this.refreshlayoutbootom=refreshlayout;
             //加载数据并处理重复项
             reloadPost(false);
+        });
+
+        //跳转到搜索
+        frafment_find_searchicon.setOnClickListener(v->{
+            Intent intent=new Intent(getContext(), SearchActivity.class);
+            getContext().startActivity(intent);
         });
     }
 

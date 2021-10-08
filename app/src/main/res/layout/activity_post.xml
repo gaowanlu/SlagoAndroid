@@ -25,7 +25,7 @@
 <!--    日期喜欢收藏-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#fafafa"
+        android:background="#ffffff"
         android:orientation="horizontal"
         android:layout_height="30dp">
         <TextView
