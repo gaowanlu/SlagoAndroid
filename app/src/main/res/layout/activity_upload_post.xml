@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".uploadpost.UploadPostActivity">
+    tools:context="site.linkway.slago.uploadpost.UploadPostActivity">
     <include layout="@layout/titlebar_uploadpost"/>
     <ScrollView
         android:layout_width="match_parent"

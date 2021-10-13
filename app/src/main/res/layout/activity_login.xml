@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0066cc"
-    tools:context=".login.LoginActivity">
+    tools:context="site.linkway.slago.login.LoginActivity">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="400dp"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/login_bt_shape"
-        android:hint="账号"
+        android:hint="账号或邮箱"
         android:gravity="center" />
     <EditText
         android:id="@+id/login_inputpwd"

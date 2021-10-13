@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.slago">
+    package="site.linkway.slago">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,33 +20,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BigWorks"
         android:usesCleartextTraffic="true">
-        <activity android:name=".login.CaptchaActivity" />
-        <activity android:name=".login.ChangePasswordActivity" />
-        <activity android:name=".login.RegisteredAccountActivity" />
-        <activity android:name=".login.ForgetPasswordActivity" />
+        <activity android:name="site.linkway.slago.search.SearchActivity"></activity>
+        <activity android:name="site.linkway.slago.more.UserAgreementActivity" />
+        <activity android:name="site.linkway.slago.login.CaptchaActivity" />
+        <activity android:name="site.linkway.slago.login.ChangePasswordActivity" />
+        <activity android:name="site.linkway.slago.login.RegisteredAccountActivity" />
+        <activity android:name="site.linkway.slago.login.ForgetPasswordActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.slago.fileProvider"
+            android:authorities="site.linkway.slago.fileProvider"
             android:exported="false"
+            tools:replace="android:authorities"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource"
+                />
         </provider>
 
-        <activity android:name=".postpage.VisitorActivity" />
-        <activity android:name=".postpage.PostActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".uploadpost.UploadPostActivity" />
-        <activity android:name=".persondata.MySexActivity" />
-        <activity android:name=".persondata.PersonalSignatureActivity" />
-        <activity android:name=".persondata.MyName" />
-        <activity android:name=".postpage.UserPeronalActivity" />
-        <activity android:name=".more.MorePageActivity" />
-        <activity android:name=".achievement.AchievementPageActivity" />
-        <activity android:name=".persondata.PersonDataPageActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="site.linkway.slago.postpage.VisitorActivity" />
+        <activity android:name="site.linkway.slago.postpage.PostActivity" />
+        <activity android:name="site.linkway.slago.login.LoginActivity" />
+        <activity android:name="site.linkway.slago.uploadpost.UploadPostActivity" />
+        <activity android:name="site.linkway.slago.persondata.MySexActivity" />
+        <activity android:name="site.linkway.slago.persondata.PersonalSignatureActivity" />
+        <activity android:name="site.linkway.slago.persondata.MyName" />
+        <activity android:name="site.linkway.slago.postpage.UserPeronalActivity" />
+        <activity android:name="site.linkway.slago.more.MorePageActivity" />
+        <activity android:name="site.linkway.slago.achievement.AchievementPageActivity" />
+        <activity android:name="site.linkway.slago.persondata.PersonDataPageActivity" />
+        <activity android:name="site.linkway.slago.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

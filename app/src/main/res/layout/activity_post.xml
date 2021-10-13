@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".postpage.PostActivity">
+    tools:context="site.linkway.slago.postpage.PostActivity">
     <include layout="@layout/titlebar_postbar"></include>
     <ScrollView
         android:fillViewport="true"
@@ -25,7 +25,7 @@
 <!--    日期喜欢收藏-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#fafafa"
+        android:background="#ffffff"
         android:orientation="horizontal"
         android:layout_height="30dp">
         <TextView

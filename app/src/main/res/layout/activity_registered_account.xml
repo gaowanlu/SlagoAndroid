@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00000000"
-    tools:context=".login.RegisteredAccountActivity">
+    tools:context="site.linkway.slago.login.RegisteredAccountActivity">
 
     <include layout="@layout/titlebar_combar" />
 
