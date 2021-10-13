@@ -24,7 +24,7 @@
     <a href="https://github.com/gaowanlu/SlagoAndroid"><strong>查看文档 »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/gaowanlu/SlagoAndroid">查看样例</a>
+    <a href="https://www.91kkz.cn/index/app/fenfa.html?fileurl=16331832805268337">下载应用</a>
     ·
     <a href="https://github.com/gaowanlu/SlagoAndroid/issues">错误</a>
     ·
