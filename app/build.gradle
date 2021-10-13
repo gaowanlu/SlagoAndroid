@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.slago"
+        applicationId "site.linkway.slago"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
