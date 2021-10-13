@@ -1,4 +1,4 @@
-package com.linkway.slago;
+package site.linkway.slago;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.bigworks", appContext.getPackageName());
+        assertEquals("site.linkway.slago", appContext.getPackageName());
     }
 }

@@ -1,18 +1,25 @@
 package site.linkway.slago.login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import site.linkway.slago.MainActivity;
 import site.linkway.slago.R;
 import site.linkway.slago.activityCollector.BaseActivity;
 import site.linkway.slago.http.AccountSecurity.Http_changePwd;
 import site.linkway.slago.http.AccountSecurity.Http_sendVerificationCode;
+import site.linkway.slago.more.MorePageActivity;
 import site.linkway.slago.utils.CountDownTimerUtils;
+
 
 import java.util.Hashtable;
 
@@ -34,6 +41,32 @@ public class ChangePasswordActivity extends BaseActivity {
     boolean result;
     String info;
     private static final int sendEmailCode = 1;
+
+    //Hander
+    private Handler handler;
+    //初始化handler
+    @SuppressLint("HandlerLeak")
+    private void initHandler(){
+        handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what){
+                    case 1:
+                        Toasty.info(ChangePasswordActivity.this, "修改成功！", Toasty.LENGTH_SHORT).show();
+                        Intent intent= new Intent(ChangePasswordActivity.this, LoginActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        Toasty.error(ChangePasswordActivity.this,"修改失败！",Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+    }
 
     private void initElement() {
         //返回按钮back=(TextView)
@@ -118,9 +151,9 @@ public class ChangePasswordActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        countDown();
         switch (resultCode) {
             case sendEmailCode:
+                countDown();
                 new Thread(){
                     @Override
                     public void run() {
@@ -146,9 +179,20 @@ public class ChangePasswordActivity extends BaseActivity {
                 result=(Boolean) changePwd.get("result");
                 info=(String) changePwd.get("info");//获得失败情况
                 System.out.println(result+" "+info);
+
+                Message message=new Message();
+                if(result){
+                    //Toast提示:修改成功
+                    message.what=1;
+                }
+                else{
+                    //Toast提示:修改失败
+                    message.what=2;
+                }
+                handler.sendMessage(message);
             }
         }.start();
-        //Toasty.info(ChangePasswordActivity.this, result+" "+info, Toasty.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -157,5 +201,6 @@ public class ChangePasswordActivity extends BaseActivity {
         setContentView(R.layout.activity_change_password);
         initElement();
         bindActionForElement();
+        initHandler();
     }
 }
