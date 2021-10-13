@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".postpage.PostActivity">
+    tools:context="site.linkway.slago.postpage.PostActivity">
     <include layout="@layout/titlebar_postbar"></include>
     <ScrollView
         android:fillViewport="true"

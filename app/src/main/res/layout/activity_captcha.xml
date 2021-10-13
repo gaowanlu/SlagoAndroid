@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".login.CaptchaActivity">
+    tools:context="site.linkway.slago.login.CaptchaActivity">
     <com.luozm.captcha.Captcha
         android:id="@+id/captCha"
         android:layout_width="match_parent"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#160A52"
-    tools:context=".more.MorePageActivity">
+    tools:context="site.linkway.slago.more.MorePageActivity">
     <include layout="@layout/titlebar_combar"/>
     <ScrollView
         android:layout_width="match_parent"
