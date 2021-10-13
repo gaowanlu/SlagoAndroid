@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#160A52"
-    tools:context=".more.MorePageActivity">
+    tools:context="site.linkway.slago.more.MorePageActivity">
     <include layout="@layout/titlebar_combar"/>
     <ScrollView
         android:layout_width="match_parent"
@@ -35,6 +35,7 @@
                 android:layout_marginTop="120dp">
             </TextView>
             <TextView
+                android:id="@+id/github_target"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:gravity="center"
@@ -43,7 +44,7 @@
                 android:textColor="#fafafa"
                 android:layout_marginTop="150dp"
                 android:layout_marginLeft="40dp"
-                android:text="开源">
+                android:text="开源仓库">
             </TextView>
             <TextView
                 android:layout_width="wrap_content"
@@ -69,6 +70,18 @@
                 android:gravity="right"
                 android:layout_marginTop="400dp"
                 android:paddingRight="80dp"
+                />
+            <TextView
+                android:id="@+id/morepage_user_tiaokuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="协议条款"
+                android:textColor="#fafafa"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_marginTop="320dp"
+                android:paddingRight="230dp"
                 />
             <ImageView
                 android:layout_width="match_parent"

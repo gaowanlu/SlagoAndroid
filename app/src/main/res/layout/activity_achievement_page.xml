@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#160A52"
-    tools:context=".achievement.AchievementPageActivity">
+    tools:context="site.linkway.slago.achievement.AchievementPageActivity">
     <include layout="@layout/titlebar_combar"/>
     <ScrollView
         android:layout_width="match_parent"

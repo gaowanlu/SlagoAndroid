@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.AboutFragment">
+    tools:context="site.linkway.slago.fragment.AboutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -47,8 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/about_refreshLayout"
-            app:srlPrimaryColor="#fafafa"
-            app:srlAccentColor="#0066cc"
+            app:srlPrimaryColor="#4E8BCA"
+            app:srlAccentColor="#fafafa"
             app:srlHeaderHeight="5dp"
             android:layout_marginTop="45dp"
             >
