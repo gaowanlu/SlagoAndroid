@@ -1,7 +1,10 @@
 package site.linkway.slago.login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,12 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import site.example.slago.MainActivity;
-import site.example.slago.R;
-import site.example.slago.http.AccountSecurity.Http_changePwd;
-import site.example.slago.http.AccountSecurity.Http_sendVerificationCode;
-import site.example.slago.more.MorePageActivity;
-import site.example.slago.utils.CountDownTimerUtils;
+import site.linkway.slago.MainActivity;
+import site.linkway.slago.R;
+import site.linkway.slago.activityCollector.BaseActivity;
+import site.linkway.slago.http.AccountSecurity.Http_changePwd;
+import site.linkway.slago.http.AccountSecurity.Http_sendVerificationCode;
+import site.linkway.slago.more.MorePageActivity;
+import site.linkway.slago.utils.CountDownTimerUtils;
 
 
 import java.util.Hashtable;
