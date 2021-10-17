@@ -111,6 +111,7 @@ public class HomeFragment extends Fragment {
         textView.setClickable(true);
         textView.setOnClickListener(v->{
                 Intent intent= new Intent(getContext(), UserPeronalActivity.class);
+                intent.putExtra("userid",UserDataUtils.getUserid());
                 startActivity(intent);
         });
     }

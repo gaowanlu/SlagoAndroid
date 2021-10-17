@@ -35,6 +35,7 @@ public class MyPostListFragment extends Fragment {
     private SmartRefreshLayout refreshLayout;
     private RefreshLayout refreshlayouttop;//顶部
     private RefreshLayout refreshlayoutbootom;//底部加载更多
+    private String userid;
 
     /*动态分页读取用户的帖子信息*/
     private int nowPage=0;
@@ -65,6 +66,13 @@ public class MyPostListFragment extends Fragment {
                              Bundle savedInstanceState) {
         if(mview==null) {
             mview= LayoutInflater.from(getContext()).inflate(R.layout.fragment_mypostlist,container,false);
+            //读取userid
+            Bundle bundle = getArguments();
+            if(bundle!=null){
+                userid = bundle.getString("userid");
+            }else{
+                userid="";
+            }
             initElement(mview);
             initList();
         }
@@ -98,7 +106,7 @@ public class MyPostListFragment extends Fragment {
         new Thread(()->{
             //获取推荐postids
             List<Post> tempPosts=new ArrayList<>();
-            getUserPosts fetchUserPosts= Http_getUserAllPost.fetch(nowPage,PAGESIZE, UserDataUtils.getUserid());
+            getUserPosts fetchUserPosts= Http_getUserAllPost.fetch(nowPage,PAGESIZE, userid);
             if(fetchUserPosts!=null&&fetchUserPosts.list!=null){//获取数据成功
                 nowPage++;//页数递增
                 //打印获取数据测试

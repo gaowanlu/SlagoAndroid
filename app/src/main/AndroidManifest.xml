@@ -38,7 +38,6 @@
                 />
         </provider>
 
-        <activity android:name="site.linkway.slago.postpage.VisitorActivity" />
         <activity android:name="site.linkway.slago.postpage.PostActivity" />
         <activity android:name="site.linkway.slago.login.LoginActivity" />
         <activity android:name="site.linkway.slago.uploadpost.UploadPostActivity" />
