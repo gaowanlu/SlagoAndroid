@@ -13,12 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import es.dmoral.toasty.Toasty;
 import site.linkway.slago.R;
 import site.linkway.slago.http.Like.Http_likelist;
 import site.linkway.slago.http.Post.Http_getPostData;
 import site.linkway.slago.json.getPostData;
 import site.linkway.slago.recyclerView.Adapter.Post;
 import site.linkway.slago.recyclerView.Adapter.PostAdapter;
+import site.linkway.slago.utils.UserDataUtils;
+
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -33,7 +36,7 @@ public class LikePostListFragment extends Fragment {
     private SmartRefreshLayout refreshLayout;
     private RefreshLayout refreshlayouttop;//顶部
     private RefreshLayout refreshlayoutbootom;//底部加载更多
-
+    private String userid;
     /*动态分页读取用户的帖子信息*/
     private int nowPage=0;
     private static final int PAGESIZE=10;
@@ -63,6 +66,13 @@ public class LikePostListFragment extends Fragment {
                              Bundle savedInstanceState) {
         if(mview==null) {
             mview= LayoutInflater.from(getContext()).inflate(R.layout.fragment_likepostlist,container,false);
+            //读取userid
+            Bundle bundle = getArguments();
+            if(bundle!=null){
+                userid = bundle.getString("userid");
+            }else{
+                userid="";
+            }
             initElement(mview);
             initList();
         }
@@ -93,6 +103,14 @@ public class LikePostListFragment extends Fragment {
     }
 
     private void loadPost(boolean clear){
+        //备注:目前不支持查看非本人所点的赞，不能看别人点赞了哪些内容
+        if(userid.equals(UserDataUtils.getUserid())==false){
+            Message message=new Message();
+            message.what=1;
+            HANDLER.sendMessage(message);
+            Toasty.info(getContext(),"暂不支持查看其他用户所点赞内容").show();
+            return;
+        }
         new Thread(()->{
             //获取推荐postids
             List<Post> tempPosts=new ArrayList<>();

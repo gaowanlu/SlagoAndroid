@@ -99,8 +99,9 @@ public class PostActivity extends BaseActivity {
         });
         //头像点击事件
         headimg.setOnClickListener(v->{
-            Intent intent= new Intent(PostActivity.this, VisitorActivity.class);
+            Intent intent= new Intent(PostActivity.this, UserPeronalActivity.class);
             intent.putExtra("postdata",postdata);
+            intent.putExtra("userid",postdata.userid);
             startActivity(intent);
         });
         //评论按钮

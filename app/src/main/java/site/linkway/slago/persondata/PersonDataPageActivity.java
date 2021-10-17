@@ -116,7 +116,7 @@ public class PersonDataPageActivity extends BaseActivity {
 
         number = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_number).findViewById(R.id.rectangles_style_public_text);
         myNumber = (TextView) findViewById(R.id.rectangles_linearlayout).findViewById(R.id.rectangles_number).findViewById(R.id.rectangles_style_personal_text);
-        number.setText("图享号");
+        number.setText("帐号");
         myNumber.setText(userData.getUserid());
         //更新账号
         new Thread(()->{
