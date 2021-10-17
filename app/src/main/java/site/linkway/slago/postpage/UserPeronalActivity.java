@@ -24,6 +24,7 @@ import site.linkway.slago.http.ImageLoad;
 import site.linkway.slago.http.UserData.Http_getLikeAboutFans;
 import site.linkway.slago.http.UserData.Http_getUserName;
 import site.linkway.slago.http.UserData.Http_getUserProfile;
+import site.linkway.slago.recyclerView.Adapter.Post;
 import site.linkway.slago.utils.UserDataUtils;
 import com.google.android.material.tabs.TabLayout;
 
@@ -40,6 +41,7 @@ public class UserPeronalActivity extends BaseActivity {
     private TextView profile;
     private TextView aboutnum;
     private TextView fansnum;
+    private String Userid;
 
 
 
@@ -50,10 +52,9 @@ public class UserPeronalActivity extends BaseActivity {
     private Fragment mypostfragment;
     private Fragment likepostfragment;
     TabLayout pagerTableLayout;
-
+    private UserData userData;
     //退出登录句柄
     Handler HANDLER=new Handler((Message msg) -> {
-        UserData userData= UserDataUtils.getAllUserData().get(0);//获取用户信息
         if(null==userData){ return false;}
         switch (msg.what){
             case 1:
@@ -69,6 +70,7 @@ public class UserPeronalActivity extends BaseActivity {
         }
         return true;
     });
+
     private void exeHandler(int i){
         Message message=new Message();
         message.what=i;
@@ -90,6 +92,12 @@ public class UserPeronalActivity extends BaseActivity {
         fragmentList=new ArrayList<>();
         mypostfragment=new MyPostListFragment();
         likepostfragment=new LikePostListFragment();
+        //需要将userid传到碎片
+        Bundle bundle = new Bundle();
+        bundle.putString("userid",Userid);
+        mypostfragment.setArguments(bundle);
+        likepostfragment.setArguments(bundle);
+        //-----------------------------------------
         fragmentList.add(mypostfragment);
         fragmentList.add(likepostfragment);
         viewPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager(),getLifecycle(),fragmentList);
@@ -99,7 +107,7 @@ public class UserPeronalActivity extends BaseActivity {
     }
     private void bindActionForElement(){
         //设置标题栏文字
-        titlebar_title.setText("帖子");
+        titlebar_title.setText("主页");
         back.setClickable(true);//设置为textview可点击的
         //绑定标题栏内的返回按钮字体，作为返回上级事件
         back.setOnClickListener(new View.OnClickListener() {
@@ -138,27 +146,45 @@ public class UserPeronalActivity extends BaseActivity {
         exeHandler(2);
         exeHandler(3);
         //加载头像
-        GlideUrl glideUrl= ImageLoad.getGlideURL(APIData.URL_MIPR+"getUserHeadImg"+"?id="+ UserDataUtils.getUserid());
+        GlideUrl glideUrl= ImageLoad.getGlideURL(APIData.URL_MIPR+"getUserHeadImg"+"?id="+ Userid);
         //更新到视图
         Glide.with(getContext()).load(glideUrl)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.headimg_loading)
                 .into(headimg);
+        //判断用户的内容是否可以从数据库中读取
+        if(true==Userid.equals(UserDataUtils.getUserid())){
+            userData=UserDataUtils.getAllUserData().get(0);
+            if(userData!=null) {
+                return;
+            }
+        }
+        userData=new UserData();
+        //否则将要网络请求获取
         //加载username
         new Thread(()->{
-            Http_getUserName.fetch(UserDataUtils.getUserid());
-            exeHandler(1);
+            String val=Http_getUserName.fetch(Userid);
+            if(val!=null) {
+                userData.setName(val);
+                exeHandler(1);
+            }
         }).start();
         //获取喜欢 关注 粉丝数量
         new Thread(()->{
-            Http_getLikeAboutFans.fetch(UserDataUtils.getUserid());
+            int[] backs=Http_getLikeAboutFans.fetch(Userid);
+            userData.setLikeNum(Integer.toString(backs[0]));
+            userData.setAboutNum(Integer.toString(backs[1]));
+            userData.setFansNum(Integer.toString(backs[2]));
             //渲染like_about_fans
             exeHandler(2);
         }).start();
         //profile
         new Thread(()->{
-            Http_getUserProfile.fetch(UserDataUtils.getUserid());
-            exeHandler(3);
+            String val=Http_getUserProfile.fetch(Userid);
+            if(val!=null) {
+                userData.setProfile(val);
+                exeHandler(3);
+            }
         }).start();
     }
 
@@ -169,6 +195,12 @@ public class UserPeronalActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_post_page);
+        //从上下文获得需要显示的用户的id
+        Userid=(String)getIntent().getStringExtra("userid");
+        if(Userid==null){
+            Post post=(Post)getIntent().getSerializableExtra("postdata");
+            Userid=post.userid;
+        }
         initElement();
         bindActionForElement();
         dataToView();

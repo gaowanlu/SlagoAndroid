@@ -20,7 +20,7 @@ import site.linkway.slago.R;
 import site.linkway.slago.http.APIData;
 import site.linkway.slago.http.ImageLoad;
 import site.linkway.slago.postpage.PostActivity;
-import site.linkway.slago.postpage.VisitorActivity;
+import site.linkway.slago.postpage.UserPeronalActivity;
 
 import java.util.List;
 
@@ -56,15 +56,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         View view= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.component_post,parent,false);
         ViewHolder holder=new ViewHolder(view);        //为头像与封面添加点击事件
+
         holder.headimg.setOnClickListener(v -> {
-            Intent intent= new Intent(holder.itemView.getContext(), VisitorActivity.class);
+            Intent intent= new Intent(holder.itemView.getContext(), UserPeronalActivity.class);
             //获取点击的下标
             int position=holder.getAdapterPosition();
             //获取数据
             Post postdata=mPostList.get(position);
             intent.putExtra("postdata",postdata);
+            intent.putExtra("userid",postdata.userid);
             holder.itemView.getContext().startActivity(intent);
         });
+
+
         holder.showImg.setOnClickListener(v->{
             Intent intent= new Intent(holder.itemView.getContext(), PostActivity.class);
             //获取点击的下标
