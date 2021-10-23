@@ -31,6 +31,7 @@ import site.linkway.slago.recyclerView.Adapter.ImageAdapter;
 import site.linkway.slago.recyclerView.Adapter.Post;
 
 import es.dmoral.toasty.Toasty;
+import site.linkway.slago.utils.UserDataUtils;
 
 public class PostActivity extends BaseActivity {
     private View back;
@@ -165,21 +166,23 @@ public class PostActivity extends BaseActivity {
         //设置PopupMenu对象的布局
         popupMenu.getMenuInflater().inflate(R.menu.post_operator, popupMenu.getMenu());
         //设置PopupMenu的点击事件
-        popupMenu.setOnMenuItemClickListener(item -> {
-            //删除操作
-            new Thread(()->{
-                boolean deleteResult= Http_deletePost.push(postdata.postid);
-                if(true==deleteResult){
-                    Message message=new Message();
-                    message.what=1;
-                    HANDLER.sendMessage(message);
-                }else{
-                    Toasty.error(this,"删除失败").show();
-                }
-            }).start();
-            return false;
-        });
-        //显示菜单
-        popupMenu.show();
+        if(postdata.userid.equals(UserDataUtils.getUserid())) {
+            popupMenu.setOnMenuItemClickListener(item -> {
+                //删除操作
+                new Thread(() -> {
+                    boolean deleteResult = Http_deletePost.push(postdata.postid);
+                    if (true == deleteResult) {
+                        Message message = new Message();
+                        message.what = 1;
+                        HANDLER.sendMessage(message);
+                    } else {
+                        Toasty.error(this, "删除失败").show();
+                    }
+                }).start();
+                return false;
+            });
+            //显示菜单
+            popupMenu.show();
+        }
     }
 }
