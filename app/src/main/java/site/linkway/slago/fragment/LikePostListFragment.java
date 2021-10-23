@@ -111,12 +111,12 @@ public class LikePostListFragment extends Fragment {
             Toasty.info(getContext(),"暂不支持查看其他用户所点赞内容").show();
             return;
         }
+        nowPage++;//页数递增
         new Thread(()->{
             //获取推荐postids
             List<Post> tempPosts=new ArrayList<>();
             List<String> ids= Http_likelist.fetch(nowPage,PAGESIZE);
             if(ids!=null&&ids.size()>0){//获取数据成功
-                nowPage++;//页数递增
                 //打印获取数据测试
                 for(int i=0;i<ids.size();i++){
                     System.out.println("Fetch User Like Posts  "+ids.get(i));

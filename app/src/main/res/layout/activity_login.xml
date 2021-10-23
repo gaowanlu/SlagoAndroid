@@ -32,14 +32,14 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/login_bt_shape"
+        android:background="@drawable/login_input_shape"
         android:hint="账号或邮箱"
         android:gravity="center" />
     <EditText
         android:id="@+id/login_inputpwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/login_bt_shape"
+        android:background="@drawable/login_input_shape"
         android:layout_marginTop="14dp"
         android:inputType="textPassword"
         android:hint="密码"
@@ -53,6 +53,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/login_bt_shape"
         android:gravity="center"
+        android:textColor="#fafafa"
         android:textStyle="bold"
         android:textSize="18sp"
         android:text="登录" />

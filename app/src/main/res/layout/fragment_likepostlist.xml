@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         android:id="@+id/likepostlist_refreshLayout"
         app:srlPrimaryColor="#4E8BCA"
+        android:background="@color/white"
         app:srlAccentColor="#fafafa"
         app:srlHeaderHeight="55dp"
         >

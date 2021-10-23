@@ -35,23 +35,39 @@
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <!--        昵称-->
-            <TextView
-                android:id="@+id/personal_post_page_name"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="username"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#707070"
-                android:paddingLeft="20dp"
-                android:paddingTop="5dp"
-                />
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/personal_post_page_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="username"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#707070"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    />
+                <Button
+                    android:gravity="center"
+                    android:id="@+id/about_button"
+                    android:textColor="#fafafa"
+                    android:layout_marginLeft="20dp"
+                    android:text="关注 +"
+                    android:textSize="10sp"
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"/>
+            </LinearLayout>
+
             <!--        个性签名-->
             <TextView
                 android:id="@+id/personal_post_page_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
+                android:gravity="center"
                 android:text="profile"
                 android:layout_marginTop="5dp"
                 android:textColor="#707070"
@@ -63,11 +79,14 @@
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:layout_marginTop="15dp"
+                android:gravity="center"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#474747"
+                    android:textSize="15sp"
+                    android:id="@+id/personal_post_page_about"
                     android:text="关注"
                     />
                 <TextView
@@ -81,9 +100,11 @@
                     android:textStyle="bold"
                     />
                 <TextView
+                    android:id="@+id/personal_post_page_fans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#474747"
+                    android:textSize="15sp"
                     android:text="粉丝"
                     android:layout_marginLeft="30dp"
                     />

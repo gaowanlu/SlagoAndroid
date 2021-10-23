@@ -103,12 +103,12 @@ public class MyPostListFragment extends Fragment {
     }
 
     private void loadPost(boolean clear){
+        nowPage++;//页数递增
         new Thread(()->{
             //获取推荐postids
             List<Post> tempPosts=new ArrayList<>();
             getUserPosts fetchUserPosts= Http_getUserAllPost.fetch(nowPage,PAGESIZE, userid);
             if(fetchUserPosts!=null&&fetchUserPosts.list!=null){//获取数据成功
-                nowPage++;//页数递增
                 //打印获取数据测试
                 for(int i=0;i<fetchUserPosts.list.size();i++){
                     System.out.println("Fetch User Posts  "+fetchUserPosts.list.get(i));

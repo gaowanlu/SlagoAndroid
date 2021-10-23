@@ -66,6 +66,7 @@
             app:srlPrimaryColor="#4E8BCA"
             app:srlAccentColor="#fafafa"
             app:srlHeaderHeight="55dp"
+            android:background="@color/white"
             android:layout_marginTop="45dp"
             >
             <com.scwang.smartrefresh.header.DropBoxHeader
