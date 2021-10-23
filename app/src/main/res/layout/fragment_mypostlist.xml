@@ -6,6 +6,7 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:id="@+id/find_refreshLayout"
         app:srlPrimaryColor="#4E8BCA"
         app:srlAccentColor="#fafafa"

@@ -26,8 +26,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="#ffffff"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_height="30dp">
+        android:layout_height="40dp">
         <TextView
             android:id="@+id/post_dateText"
             android:text="     - - "
@@ -44,12 +45,19 @@
             android:layout_width="wrap_content"
             android:gravity="center_vertical|right"
             android:layout_height="match_parent"/>
+        <ImageView
+            android:layout_marginRight="6dp"
+            android:id="@+id/post_operator_button"
+            android:src="@drawable/threedots_vertical"
+            android:layout_width="27dp"
+            android:layout_height="27dp"/>
+
     </LinearLayout>
 <!--    文字内容-->
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/post_username"
@@ -70,9 +78,11 @@
         <Button
             android:id="@+id/post_commentButton"
             android:text="查看评论"
+            android:textColor="#fafafa"
+            android:background="@drawable/login_bt_shape"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_width="200dp"
+            android:layout_height="40dp"/>
     </LinearLayout>
         </LinearLayout>
     </ScrollView>
