@@ -19,6 +19,9 @@
                     android:id="@+id/personal_post_page_tablayout"
                     app:tabSelectedTextColor="#4E8BCA"
                     app:tabTextColor="#707070"
+                    app:tabRippleColor="@color/indexColor"
+                    app:tabIndicatorColor="@color/indexColor"
+                    app:tabBackground="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.google.android.material.tabs.TabItem

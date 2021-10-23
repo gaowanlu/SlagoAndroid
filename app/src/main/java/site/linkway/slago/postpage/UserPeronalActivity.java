@@ -3,11 +3,13 @@ package site.linkway.slago.postpage;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,12 +22,16 @@ import site.linkway.slago.activityCollector.BaseActivity;
 import site.linkway.slago.fragment.LikePostListFragment;
 import site.linkway.slago.fragment.MyPostListFragment;
 import site.linkway.slago.http.APIData;
+import site.linkway.slago.http.About.Http_about;
+import site.linkway.slago.http.About.Http_checkAbouted;
+import site.linkway.slago.http.About.Http_unabout;
 import site.linkway.slago.http.ImageLoad;
 import site.linkway.slago.http.UserData.Http_getLikeAboutFans;
 import site.linkway.slago.http.UserData.Http_getUserName;
 import site.linkway.slago.http.UserData.Http_getUserProfile;
 import site.linkway.slago.recyclerView.Adapter.Post;
 import site.linkway.slago.utils.UserDataUtils;
+
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -41,7 +47,11 @@ public class UserPeronalActivity extends BaseActivity {
     private TextView profile;
     private TextView aboutnum;
     private TextView fansnum;
+    private TextView fansText;
+    private TextView aboutText;
+    private Button aboutButton;//关注按钮
     private String Userid;
+    private boolean abouted=false;//关注标志符，初始化没有关注
 
 
 
@@ -58,7 +68,9 @@ public class UserPeronalActivity extends BaseActivity {
         if(null==userData){ return false;}
         switch (msg.what){
             case 1:
-                username.setText(userData.getName());break;
+                String name=userData.getName();
+                if(name.length()>8){name=name.substring(0,7);}
+                username.setText(name);break;
             case 2:
                 aboutnum.setText(userData.getAboutNum());
                 fansnum.setText(userData.getFansNum());
@@ -66,6 +78,14 @@ public class UserPeronalActivity extends BaseActivity {
             case 3:
                 profile.setText("简介:"+userData.getProfile());
                 break;
+            case 4:
+                if(!abouted){//已经关注
+                    aboutButton.setText("未关注");
+                    aboutButton.setBackground(getResources().getDrawable(R.drawable.about_no_btn));
+                }else{//未关注
+                    aboutButton.setText("已关注");
+                    aboutButton.setBackground(getResources().getDrawable(R.drawable.about_yes_btn));
+                }
             default:;
         }
         return true;
@@ -86,6 +106,9 @@ public class UserPeronalActivity extends BaseActivity {
         profile=findViewById(R.id.personal_post_page_profile);
         aboutnum=findViewById(R.id.personal_post_page_aboutnum);
         fansnum=findViewById(R.id.personal_post_page_fansnum);
+        aboutText=findViewById(R.id.personal_post_page_about);
+        fansText=findViewById(R.id.personal_post_page_fans);
+        aboutButton=findViewById(R.id.about_button);
         //获得viewPager
         myViewPager=findViewById(R.id.personal_post_page_viewPager);
         //将需要切换的fragment放进list中
@@ -116,6 +139,62 @@ public class UserPeronalActivity extends BaseActivity {
                 finish();//结束活动
             }
         });
+        //是否显示关注按钮、如果显示则不是用户自己的主页
+        if(false==Userid.equals(UserDataUtils.getUserid())){
+            //访客模式:先标为为关注
+            exeHandler(4);
+            //发起请求检测是否已经关注:关注了则更改ui，以及关注的状态
+            new Thread(()->{
+                abouted= Http_checkAbouted.fetch(Userid);
+                //更新刷新UI
+                exeHandler(4);
+            }).start();
+            //为关注按钮绑定事件
+            aboutButton.setOnClickListener(v->{
+                if(abouted){//取消关注
+                    new Thread(()->{
+                        boolean result= Http_unabout.push(Userid);
+                        if(result){
+                            abouted=!abouted;
+                            exeHandler(4);
+                        }
+                    }).start();
+                }else{//关注此用户
+                    new Thread(()->{
+                        boolean result= Http_about.push(Userid);
+                        if(result){
+                            abouted=!abouted;
+                            exeHandler(4);
+                        }
+                    }).start();
+                }
+            });
+        }else{
+            //用户自己访问自己的主页
+            aboutButton.setVisibility(View.GONE);
+            //为关注与粉丝绑定点击事件，以便可以跳转到相应页面查看内容
+            View.OnClickListener fansClick=new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getContext(), UserListActivity.class);
+                    intent.putExtra("MODEL","FANS");
+                    startActivity(intent);
+                }
+            };
+            View.OnClickListener aboutClick=new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getContext(), UserListActivity.class);
+                    intent.putExtra("MODEL","ABOUT");
+                    startActivity(intent);
+                }
+            };
+            aboutnum.setOnClickListener(aboutClick);
+            fansnum.setOnClickListener(fansClick);
+            aboutText.setOnClickListener(aboutClick);
+            fansText.setOnClickListener(fansClick);
+
+        }
         myViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -142,9 +221,6 @@ public class UserPeronalActivity extends BaseActivity {
         });
     }
     private void dataToView(){
-        exeHandler(1);
-        exeHandler(2);
-        exeHandler(3);
         //加载头像
         GlideUrl glideUrl= ImageLoad.getGlideURL(APIData.URL_MIPR+"getUserHeadImg"+"?id="+ Userid);
         //更新到视图
@@ -156,6 +232,9 @@ public class UserPeronalActivity extends BaseActivity {
         if(true==Userid.equals(UserDataUtils.getUserid())){
             userData=UserDataUtils.getAllUserData().get(0);
             if(userData!=null) {
+                exeHandler(1);
+                exeHandler(2);
+                exeHandler(3);
                 return;
             }
         }

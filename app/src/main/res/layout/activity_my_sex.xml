@@ -32,13 +32,13 @@
                 <Button
                     android:id="@+id/bt_sex"
                     android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bt_shape"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:text="保存"
                     android:layout_marginRight="10dp"
+                    android:background="@drawable/bt_shape"
                     android:gravity="center"
-                    />
+                    android:textColor="#fafafa"
+                    android:text="保存" />
             </LinearLayout>
 
         </LinearLayout>

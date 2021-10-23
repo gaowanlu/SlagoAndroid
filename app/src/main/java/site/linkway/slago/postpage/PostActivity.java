@@ -10,6 +10,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import site.linkway.slago.R;
 import site.linkway.slago.activityCollector.BaseActivity;
 import site.linkway.slago.http.APIData;
 import site.linkway.slago.http.ImageLoad;
+import site.linkway.slago.http.Post.Http_deletePost;
 import site.linkway.slago.http.Post.Http_likePost;
 import site.linkway.slago.http.Post.Http_unlikePost;
 import site.linkway.slago.recyclerView.Adapter.ImageAdapter;
@@ -42,9 +44,11 @@ public class PostActivity extends BaseActivity {
     private  TextView userNameText;
     private TextView postContentText;
     private Button commentButton;
+    private ImageView postOperatorButton;
     Handler HANDLER=new Handler((Message msg) -> {
         switch (msg.what){
             case 1:
+                this.finish();
                 break;
             default:;
         }
@@ -71,6 +75,7 @@ public class PostActivity extends BaseActivity {
         imglist=findViewById(R.id.post_recyclerView);
         postContentText=findViewById(R.id.post_contentText);
         commentButton=findViewById(R.id.post_commentButton);
+        postOperatorButton=findViewById(R.id.post_operator_button);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
@@ -107,6 +112,10 @@ public class PostActivity extends BaseActivity {
         //评论按钮
         commentButton.setOnClickListener(v->{
             Toasty.success(this, "查看评论", Toast.LENGTH_SHORT, true).show();
+        });
+        //操作选项
+        postOperatorButton.setOnClickListener(v->{
+            myPopupMenu(v);
         });
     }
 
@@ -148,5 +157,29 @@ public class PostActivity extends BaseActivity {
         likeCollectionText.setText(postdata.likeNum+" 喜欢 "+postdata.collectionNum+" 收藏 ");
         userNameText.setText(postdata.userid);
         postContentText.setText("  "+postdata.content);
+    }
+
+    private void myPopupMenu(View v) {
+        //定义PopupMenu对象
+        PopupMenu popupMenu = new PopupMenu(this, v);
+        //设置PopupMenu对象的布局
+        popupMenu.getMenuInflater().inflate(R.menu.post_operator, popupMenu.getMenu());
+        //设置PopupMenu的点击事件
+        popupMenu.setOnMenuItemClickListener(item -> {
+            //删除操作
+            new Thread(()->{
+                boolean deleteResult= Http_deletePost.push(postdata.postid);
+                if(true==deleteResult){
+                    Message message=new Message();
+                    message.what=1;
+                    HANDLER.sendMessage(message);
+                }else{
+                    Toasty.error(this,"删除失败").show();
+                }
+            }).start();
+            return false;
+        });
+        //显示菜单
+        popupMenu.show();
     }
 }

@@ -51,9 +51,11 @@
     <Button
         android:id="@+id/upload_post_button"
         android:layout_width="80dp"
-        android:layout_height="45dp"
+        android:layout_height="38dp"
         android:layout_marginTop="5dp"
+        android:background="@drawable/login_bt_shape"
         android:text="分享"
+        android:textColor="#fafafa"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
         />
