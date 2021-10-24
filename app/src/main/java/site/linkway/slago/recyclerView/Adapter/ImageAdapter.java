@@ -1,5 +1,6 @@
 package site.linkway.slago.recyclerView.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     //constructor
     public ImageAdapter(List<String> imgids){
         this.imgids=imgids;
+        if(null!=imgids){
+            Log.e("ims","ids");
+            for(int i=0;i<imgids.size();i++){
+                Log.e(Integer.toString(i),imgids.get(i));
+            }
+        }
     }
 
     @NonNull
@@ -39,6 +46,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ImageAdapter.ViewHolder holder, int position) {
         String imgid=imgids.get(position);
+        Log.e("LOADIMG",imgid);
         if(imgid==null){return;}
         GlideUrl postimgUrl = ImageLoad.getGlideURL(APIData.URL_MIPR + "getPostImg" + "?id=" + imgid);
         Glide.with(holder.itemView.getContext()).load(postimgUrl)
