@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import site.linkway.slago.recyclerView.Adapter.ImageAdapter;
 import site.linkway.slago.recyclerView.Adapter.Post;
 
 import es.dmoral.toasty.Toasty;
+import site.linkway.slago.utils.UserDataUtils;
 
 public class PostActivity extends BaseActivity {
     private View back;
@@ -59,6 +61,12 @@ public class PostActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         postdata=(Post)getIntent().getSerializableExtra("postdata");
+        if(null!=postdata){
+            Log.e("进入帖子",postdata.postid);
+            for(int i=0;i<postdata.imgs.size();i++){
+                Log.e(Integer.toString(i),postdata.imgs.get(i));
+            }
+        }
         initElement();
         bindEvent();
         dataToView();
@@ -165,21 +173,23 @@ public class PostActivity extends BaseActivity {
         //设置PopupMenu对象的布局
         popupMenu.getMenuInflater().inflate(R.menu.post_operator, popupMenu.getMenu());
         //设置PopupMenu的点击事件
-        popupMenu.setOnMenuItemClickListener(item -> {
-            //删除操作
-            new Thread(()->{
-                boolean deleteResult= Http_deletePost.push(postdata.postid);
-                if(true==deleteResult){
-                    Message message=new Message();
-                    message.what=1;
-                    HANDLER.sendMessage(message);
-                }else{
-                    Toasty.error(this,"删除失败").show();
-                }
-            }).start();
-            return false;
-        });
-        //显示菜单
-        popupMenu.show();
+        if(postdata.userid.equals(UserDataUtils.getUserid())) {
+            popupMenu.setOnMenuItemClickListener(item -> {
+                //删除操作
+                new Thread(() -> {
+                    boolean deleteResult = Http_deletePost.push(postdata.postid);
+                    if (true == deleteResult) {
+                        Message message = new Message();
+                        message.what = 1;
+                        HANDLER.sendMessage(message);
+                    } else {
+                        Toasty.error(this, "删除失败").show();
+                    }
+                }).start();
+                return false;
+            });
+            //显示菜单
+            popupMenu.show();
+        }
     }
 }

@@ -59,7 +59,7 @@ public class UserListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_list);
         //读取UI模式:关注列表  粉丝列表
         MODEL=getIntent().getStringExtra("MODEL");
-        if(!MODEL.equals("ABOUT")||!MODEL.equals("FANS")){MODEL="ABOUT";}
+        if(!MODEL.equals("ABOUT")&&!MODEL.equals("FANS")){MODEL="ABOUT";}
         initElement();
         bindEvent();
         initList();

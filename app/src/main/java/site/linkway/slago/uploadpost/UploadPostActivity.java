@@ -177,11 +177,13 @@ public class UploadPostActivity extends BaseActivity {
                         // TODO 压缩成功后调用，返回压缩后的图片文件
                         Log.e("压缩成功"+i,"压缩成功"+file.getPath());
                         //将其图片类型及file,存储起来，按i为下标记录
-                        imgsfiles[i]=file;
-                        //通知并检查是否压缩完了
-                        if(checkMinOver()){
-                            //可以上传帖子了
-                            uploadPost();
+                        synchronized (imgsfiles) {
+                            imgsfiles[i] = file;
+                            //通知并检查是否压缩完了
+                            if (checkMinOver()) {
+                                //可以上传帖子了
+                                uploadPost();
+                            }
                         }
                     }
                     @Override
