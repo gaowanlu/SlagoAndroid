@@ -16,12 +16,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/post_recyclerView">
     </androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>
+
 <!--    日期喜欢收藏-->
     <LinearLayout
         android:layout_width="match_parent"

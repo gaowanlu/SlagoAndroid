@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,6 +61,12 @@ public class PostActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         postdata=(Post)getIntent().getSerializableExtra("postdata");
+        if(null!=postdata){
+            Log.e("进入帖子",postdata.postid);
+            for(int i=0;i<postdata.imgs.size();i++){
+                Log.e(Integer.toString(i),postdata.imgs.get(i));
+            }
+        }
         initElement();
         bindEvent();
         dataToView();
