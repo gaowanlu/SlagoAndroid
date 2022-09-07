@@ -1,0 +1,9 @@
+.IndexPage-newpostbutton{
+    width:120px;
+    height:70px;
+    border:1px #1d1d1f solid;
+    border-radius:68% 32% 52% 48% / 46% 45% 55% 54% ;
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #18191a,#212122 );  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #18191a,#212122 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

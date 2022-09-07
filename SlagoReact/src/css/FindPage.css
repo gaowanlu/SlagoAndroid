@@ -1,0 +1,192 @@
+.FindPage-container{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-grow: 1;
+}
+.FindPage-left-container{
+    width: 130px;
+    height: 100vh;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-left: 3px;
+    position: fixed;
+}
+
+/*手机左右宽度*/
+@media screen  and (max-width:500px){
+    /*左侧选择条消失*/
+    .FindPage-left-container{
+        margin-left: -100px;
+        background-color: #cc2d2d00;
+        border-right: 150px rgba(0, 0, 0, 0.027) solid;
+    }
+    .FindPage-left-container:hover{
+        margin-left: 0px;
+        background-color: #ffffff;
+        border-right: 5px rgba(197, 197, 197, 0.3) dashed;
+    }
+    /*右侧内容容器扩展*/
+    .FindPage-right-container{
+        flex-grow: 1;
+        display: flex;
+        margin-left: 10px;
+        margin-right: 10px;
+        justify-content: center;
+        background-color: #ffffff;
+        background: linear-gradient(to right, rgb(255, 152, 145), rgb(161, 250, 250));
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .FindPage-right-block{
+        background-color: #ffffff;
+        flex-grow: 1;
+        flex-shrink: 1;
+        max-width: 450px;
+        margin: 5px;
+        box-shadow: 0px 0px 5px #888888;
+        border-radius: 5px;
+    }
+    .FindPage-chooselist-container{
+        display:flex;
+        flex-wrap:wrap;
+        width:110px;
+        padding: 5px;
+        align-content: flex-start;
+    }
+}
+
+/* 电脑PC页面 */
+@media  screen and (min-width:501px) {
+    .FindPage-right-container{
+        flex-grow: 1;
+        margin-left: 130px;
+        display: flex;
+        justify-content: center;
+        background-color: #ffffff;
+        background: linear-gradient(to right, rgb(255, 212, 212),rgb(205, 247, 255) );
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-content: flex-start;
+    }
+    
+    .FindPage-right-block{
+        background-color: #fafafa;
+        flex-grow: 1;
+        flex-shrink: 1;
+        /* max-width: 350px; */
+        min-height: 100px;
+        margin: 10px;
+        box-shadow: 0px 0px 5px #888888;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .FindPage-chooselist-container{
+        display:flex;
+        flex-wrap:wrap;
+        width:105px;
+        align-content: flex-start;
+    }
+}
+
+.FindPage-left-block{
+    color: #707070;
+    background-color: #ffffff;
+    width: 100vw;
+    height: 48px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 48px;
+    border-bottom: #d1d1d1be 1px solid;
+}
+.FindPage-left-block-choosed{
+    color: #f8f8f8;
+    background-color: rgb(238, 87, 87);
+    border-radius: 3px;
+    width: 100vw;
+    height: 48px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 48px;
+    border-bottom: #d1d1d1be 1px solid;
+}
+
+.FindPage-left-block-line{
+    width: 100vw;
+    height:1px;
+    border-bottom:rgba(170, 87, 238, 0.349) 1px dashed;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+	width: 10px;
+	height: 10px;
+	background-color: rgb(255, 255, 255);
+}
+ 
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255);
+	border-radius: 5px;
+	background-color:#f8f8f8 ;
+}
+ 
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(252, 248, 248, 0.3);
+	background-color: #a7a7a7;
+}
+
+
+
+.FindPage-block-img{
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius:5px;
+    margin-bottom: 10px;
+}
+
+.FindPage-poststream-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    min-height: 100vh;
+}
+.FindPage-poststream-col{
+    flex: 1;
+    margin: 5px;
+    min-width: 280px;
+    max-width: 650px;
+    flex-grow: 1;
+    border-radius: 5px;
+    flex-shrink: 1;
+}
+
+.FindPage-postCard-content-container{
+    width:100%;
+    height:120px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius:5px;
+    font-size:14px;
+    font-weight:lighter;
+    color:#707070;
+}
+
+.FindPage-postCard-headimg{
+    width: 40px;
+    height:40px;
+    border-radius: 20px;
+    object-fit: cover;
+    margin-right: 10px;
+}

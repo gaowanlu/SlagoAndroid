@@ -1,0 +1,26 @@
+.UserDataPage-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.UserDataPage-left{
+    flex-grow: 2;
+    flex-shrink: 1;
+    height: fit-content;
+    justify-content: center;
+    padding-top: 1em;
+    display: flex;
+}
+.UserDataPage-right{
+    padding-top: 0.5em;
+    flex-grow: 5;
+    flex-shrink: 1;
+    display: flex;
+    justify-content: center;
+}
+.UserDataPage-fragment-right-text{
+    font-weight:500;
+    font-size:1.1em;
+    color: #1d1d1f;
+}

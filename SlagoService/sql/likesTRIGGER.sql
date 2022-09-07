@@ -1,0 +1,48 @@
+USE SLAGODATABASE;
+-- 点赞用户喜欢数量+1
+-- DROP TRIGGER likeautoincre;
+-- DELIMITER $$
+-- CREATE TRIGGER likeautoincre AFTER INSERT ON likes for each row
+-- BEGIN
+-- 	declare OLDNUM bigint;
+--     declare likedid bigint;
+-- 	-- 查询被点赞的帖子的发布者id
+--     SELECT(post.userid) 
+--     INTO likedid 
+--     from post
+--     where post.id=NEW.postid;
+-- 	-- 获取老的数量
+--     SELECT(user.likeNum) 
+--     INTO OLDNUM 
+--     FROM user 
+--     WHERE user.id=likedid;
+--     -- 更新被喜欢的数量
+--     UPDATE user
+--     SET likeNum=OLDNUM+1
+--     WHERE user.id=likedid;
+-- END$$
+-- DELIMITER ;
+
+-- 取消点赞用户喜欢数量-1
+-- DROP TRIGGER likeautodecre;
+-- DELIMITER $$
+-- CREATE TRIGGER likeautodecre AFTER delete ON likes for each row
+-- BEGIN
+-- 	declare OLDNUM bigint;
+--     declare likedid bigint;
+-- 	-- 查询被点赞的帖子的发布者id
+--     SELECT(post.userid) 
+--     INTO likedid 
+--     from post
+--     where post.id=OLD.postid;
+-- 	-- 获取老的数量
+--     SELECT(user.likeNum) 
+--     INTO OLDNUM 
+--     FROM user 
+--     WHERE user.id=likedid;
+--     -- 更新被喜欢的数量
+--     UPDATE user
+--     SET likeNum=OLDNUM-1
+--     WHERE user.id=likedid;
+-- END$$
+-- DELIMITER ;

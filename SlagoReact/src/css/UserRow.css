@@ -1,0 +1,16 @@
+.UserRow-container{
+    width:100%;
+    height:3.5em;
+    margin-bottom:5px;
+    display:flex;
+    align-items:center;
+    border-bottom: #70707022 1px solid;
+    flex-direction: row;
+}
+.UserRow-headimg{
+    width:2.6em;
+    height:2.6em;
+    object-fit:cover;
+    border-radius:1.3em;
+    margin-left:15px;
+}

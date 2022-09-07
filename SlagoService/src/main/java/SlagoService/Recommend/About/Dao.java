@@ -1,0 +1,38 @@
+package SlagoService.Recommend.About;
+
+import utils.JDBCUtils;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Dao implements DaoAPI{
+
+    @Override
+    public List<String> query(String userid, String size) {
+        List<String> ids=new ArrayList<>();
+        if(userid==null||size==null||userid.equals("")||size.equals("")){return ids;}
+        int sizeInt=0;
+        try{sizeInt=Integer.parseInt(size);}catch (Exception e){return ids;}
+        if(sizeInt<=0||sizeInt>10){return ids;}
+        Connection connection=null;
+        PreparedStatement statement=null;
+        ResultSet set=null;
+        try{
+            connection= JDBCUtils.getConnection();
+            String sql="SELECT id from post where userid IN (SELECT followed FROM follow where userid=?) order by rand() limit ?;";
+            statement=connection.prepareStatement(sql);
+            statement.setString(1,userid);
+            statement.setInt(2,sizeInt);
+            set=statement.executeQuery();
+            while(set.next()){
+                ids.add(set.getString("id"));
+            }
+        }finally {
+            JDBCUtils.close(set,statement,connection);
+            return ids;
+        }
+    }
+}

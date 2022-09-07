@@ -1,0 +1,25 @@
+.ChooseBar-container{
+    box-shadow: 0px 0px 1px 1px #4646461f;
+    width:100%;
+    min-height:50px;
+    margin-top:200px;
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
+    align-items: center;
+}
+.ChooseBar-block{
+    height:100%;
+    min-height: 48px;
+    display:flex;
+    align-items:center;
+    flex-grow:1;
+    justify-content:center;
+    cursor:pointer;
+    flex-grow: 1;
+}
+.ChooseBar-choosedStyle{
+    border-bottom: 3px rgb(238, 87, 87) solid;
+    /* background-color: rgb(238, 87, 87); */
+    color:#1d1d1f;
+}

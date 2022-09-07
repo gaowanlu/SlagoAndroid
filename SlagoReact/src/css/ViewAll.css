@@ -1,0 +1,26 @@
+.ViewAll-container{
+    width: 100%;
+    min-width: 280px;
+    max-width: 280px;
+    flex-grow: 1;
+    padding: 1em;
+    /* background-color: #4197ec; */
+}
+.ViewAll-headimg{
+    width: 80px;
+    height:80px;
+    border-radius: 40px;
+    object-fit: cover;
+}
+@media screen and (min-width:1000px) {
+    .ViewAll-container{
+        width: 100%;
+        min-width: 500px;
+        max-width: 900px;
+        flex-grow: 1;
+        padding: 1em;
+    }
+}
+@media screen and (max-width:400px) and (min-width:200px){
+
+}
