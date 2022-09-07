@@ -89,6 +89,10 @@
 
 首先在Android Studio加载此项目、等待一切就绪、ReBuild之后在您的模拟器上运行或者打包apk文件
 
+* SlagoAndroid 安卓
+* SlagoReact WebSite
+* SlagoService 后端服务
+
 <p align="right"><a href="#top">回到顶部</a></p>
 
 
