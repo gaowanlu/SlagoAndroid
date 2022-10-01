@@ -16,7 +16,7 @@
     <img src="https://qn-next.xuetangx.com/16336235051875.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">SlagoAndroid</h3>
+  <h3 align="center">SlagoAndroid【暂停维护更新】</h3>
 
   <p align="center">
     一个开源的图片社交安卓应用
